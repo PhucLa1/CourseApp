@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "cFZribNqD5JTv24NSVCADD7LsQr2WZoOuspxjbN8fEk=",
+  "Source": "CourseForSFIT",
+  "BasePath": "_content/CourseForSFIT",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CourseForSFIT\\wwwroot",
+      "Source": "CourseForSFIT",
+      "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
+      "BasePath": "_content/CourseForSFIT",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

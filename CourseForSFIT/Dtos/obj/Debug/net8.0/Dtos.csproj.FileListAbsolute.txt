@@ -1,0 +1,13 @@
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\bin\Debug\net8.0\Dtos.deps.json
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\bin\Debug\net8.0\Dtos.dll
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\bin\Debug\net8.0\Dtos.pdb
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.csproj.AssemblyReference.cache
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.AssemblyInfoInputs.cache
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.AssemblyInfo.cs
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.csproj.CoreCompileInputs.cache
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.sourcelink.json
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.dll
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\refint\Dtos.dll
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.pdb
+C:\Users\Hong Phuc\Desktop\Study\GraduateCDE\CourseForSFIT\Dtos\obj\Debug\net8.0\ref\Dtos.dll
