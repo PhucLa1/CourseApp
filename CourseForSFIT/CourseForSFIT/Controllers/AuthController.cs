@@ -125,36 +125,11 @@ namespace CourseForSFIT.Controllers
             }
             return Ok(await _authService.UpdatePassword(resetPassword));
         }
-        [HttpPost]
-        [Route("gen-sql")]
-        public async Task<IActionResult> GenSql()
+        [HttpGet]
+        [Route("get-current-user")]
+        public async Task<IActionResult> GetCurrentUser()
         {
-            List<string> tagNames = new List<string>()
-            {
-                "Sắp xếp",
-                "Tìm kiếm",
-                "Đệ quy",
-                "Quy hoạch động",
-                "Đồ thị",
-                "Lý thuyết số",
-                "Thuật toán tham lam",
-                "Chia để trị",
-                "Backtracking",
-                "Duyệt cây"
-            };
-            string sql = "";
-            foreach(string tag in tagNames)
-            {
-                string tagName = tag;
-                string createdAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                string updateAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                int createdBy = 1;
-                int updatedBy = 1;
-                string sqlGens = string.Format("insert into tag_exercise(tag_name, created_at,updated_at, created_by, updated_by) values('{0}', '{1}', '{2}', {3}, {4})",
-            tagName, createdAt, updateAt, createdBy, updatedBy);
-                sql += sqlGens + "\n";
-            }
-            return Ok(sql);
+            return Ok(await _authService.GetCurrentUser());
         }
         private void SetJWT(string encryptedToken)
         {

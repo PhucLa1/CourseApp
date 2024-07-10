@@ -14,5 +14,6 @@ namespace Data.Entities
         public required string Content { get; set; }
         [Column("exercise_id")]
         public int ExerciseId { get; set; }
+        public Exercise? Exercise { get; set; }
     }
 }

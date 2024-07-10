@@ -20,7 +20,10 @@ namespace Data.Entities
         public int NumberParticipants { get; set; }
         [Column("success_rate")]
         public double SuccessRate { get; set; }
-        [Column("tag")]
-        public string? Tag { get; set; }
+        public ICollection<ExerciseHasTag>? ExerciseHasTags { get; set; }
+        public ICollection<ExerciseComment>? ExerciseComments { get; set; }
+        public ICollection<ContestExercise>? ContestExercises { get; set; }
+        public ICollection<UserExercise>? UserExercises { get; set; }
+        public ICollection<TestCase>? TestCases { get; set; }
     }
 }

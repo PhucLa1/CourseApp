@@ -69,6 +69,7 @@ namespace Data.Data
         public DbSet<User> user { get; set; }
         public DbSet<UserExercise> user_exercise { get; set; }
         public DbSet<UserJoin> user_join { get; set; }
-        public DbSet<UserResult> user_result { get; set; }
+        public DbSet<ExerciseHasTag> exercise_has_tag { get; set; }
+        public DbSet<BlogHasTag> blog_has_tag { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Contest from '@/app/(study)/_components/Contest';
 import CoursePrepare from './_components/CoursePrepare';
 import Course from './_components/Course';
@@ -34,7 +34,7 @@ const CoursePrepareData = [
   }
 ];
 export default function HomePage() {
-  
+
   return (
     <div className='pb-12' style={{ minWidth: 'auto', boxSizing: 'border-box', margin: '0 auto', paddingRight: '20px', paddingLeft: '20px', maxWidth: '1240px' }}>
       <section className='section-prepare'>

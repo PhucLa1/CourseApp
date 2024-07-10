@@ -18,3 +18,8 @@ export type VerifyVerificationCodeRequest = {
 export type ResetPassword = UserLogin & {
     rePassword: string
 }
+
+export type UserCurrent = {
+    fullName: string,
+    avatar: string
+}

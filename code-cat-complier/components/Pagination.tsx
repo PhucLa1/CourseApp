@@ -12,6 +12,7 @@ import {
 
 export default function Paginations ({ pagedResult, onClickPaginate }: { pagedResult: PagedResult | undefined, onClickPaginate:(page:number)=> void }) {
     if(!pagedResult) return <></>
+    if(pagedResult.totalItemCount == 0) return <></>
     let numberPagesArray = [];
 
     for (let i = 0; i < pagedResult.pageCount; i++) {
@@ -64,7 +65,7 @@ export default function Paginations ({ pagedResult, onClickPaginate }: { pagedRe
                         })
                     }
                     {
-                        pagedResult.hasNextPage && <PaginationItem onClick={() => onClickPaginate(pagedResult.pageNumber + 1)}>
+                        pagedResult.hasNextPage  && <PaginationItem onClick={() => onClickPaginate(pagedResult.pageNumber + 1)}>
                             <PaginationNext href="#" />
                         </PaginationItem>
                     }

@@ -15,5 +15,6 @@ namespace Repositories.Repositories.Repo
         public TagExerciseRepository(CourseForSFITContext context) : base(context)
         {
         }
+
     }
 }

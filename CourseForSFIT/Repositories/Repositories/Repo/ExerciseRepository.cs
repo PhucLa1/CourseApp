@@ -1,5 +1,6 @@
 ﻿using Data.Data;
 using Data.Entities;
+using Dtos.Results;
 using Repositories.Repositories.Base;
 using Repositories.Repositories.IRepo;
 using System;
@@ -15,5 +16,7 @@ namespace Repositories.Repositories.Repo
         public ExerciseRepository(CourseForSFITContext context) : base(context)
         {
         }
+
+        
     }
 }

@@ -18,5 +18,7 @@ namespace Data.Entities
         public required string ContentCode { get; set; }
         [Column("is_success")]
         public bool IsSuccess { get; set; }
+        public User? User { get; set; }
+        public Exercise? Exercise { get; set; }
     }
 }

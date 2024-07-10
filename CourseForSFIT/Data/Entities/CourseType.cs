@@ -12,5 +12,6 @@ namespace Data.Entities
     {
         [Column("type_name")]
         public required string TypeName { get; set; }
+        public ICollection<Course>? Courses { get; set; }
     }
 }

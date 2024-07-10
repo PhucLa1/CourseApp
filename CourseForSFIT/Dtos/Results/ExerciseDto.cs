@@ -14,5 +14,6 @@ namespace Dtos.Results
         public int DifficultLevel { get; set; }
         public int NumberParticipants { get; set; }
         public double SuccessRate { get; set; }
+        //public string? Tag { get; set; }
     }
 }

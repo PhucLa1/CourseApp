@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/model/ApiResponse";
-import { ResetPassword, UserLogin, UserSignUp, VerifyVerificationCodeRequest } from "@/model/User";
+import { ResetPassword, UserCurrent, UserLogin, UserSignUp, VerifyVerificationCodeRequest } from "@/model/User";
 import http from "@/util/http";
 
 export const SignUp = (userSignUp: UserSignUp) => http.post<ApiResponse<string>>('/Auth/sign-up', userSignUp)
@@ -13,3 +13,5 @@ export const VerifyCode = (verifyVerificationCodeRequest: VerifyVerificationCode
 export const ChangePassword = (resetPassword: ResetPassword) => http.post<ApiResponse<boolean>>('/Auth/change-password', resetPassword)
 
 export const SignOut = () => http.delete<{}>('/Auth/log-out')
+
+export const GetCurrentUser = () => http.get<ApiResponse<UserCurrent>>('/Auth/get-current-user')

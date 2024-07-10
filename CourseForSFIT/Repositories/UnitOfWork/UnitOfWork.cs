@@ -13,7 +13,11 @@ namespace authen_service.UnitOfWork
         private IUserRepository? userRepository;
         private ITagExerciseRepository? tagExerciseRepository;
         private IExerciseRepository? exerciseRepository;
+        private IExerciseCommentRepository? exerciseCommentRepository;
+        private ITestCaseRepository? testCaseRepository;
+        private IUserExerciseRepository? userExerciseRepository;
 
+        private IExerciseHasTagRepository? exerciseHasTagRepository;
         public UnitOfWork(CourseForSFITContext context)
         {
             _context = context;
@@ -28,6 +32,57 @@ namespace authen_service.UnitOfWork
                 }
 
                 return userRepository;
+            }
+        }
+        public IExerciseHasTagRepository ExerciseHasTagRepository
+        {
+            get
+            {
+                if (exerciseHasTagRepository == null)
+                {
+                    exerciseHasTagRepository = new ExerciseHasTagRepository(_context);
+                }
+
+                return exerciseHasTagRepository;
+            }
+        }
+        
+        public IUserExerciseRepository UserExerciseRepository
+        {
+            get
+            {
+                if (userExerciseRepository == null)
+                {
+                    userExerciseRepository = new UserExerciseRepository(_context);
+                }
+
+                return userExerciseRepository;
+            }
+        }
+        public ITestCaseRepository TestCaseRepository
+        {
+            get
+            {
+                if (testCaseRepository == null)
+                {
+                    testCaseRepository = new TestCaseRepository(_context);
+                }
+
+                return testCaseRepository;
+            }
+        }
+
+
+        public IExerciseCommentRepository ExerciseCommentRepository
+        {
+            get
+            {
+                if (exerciseCommentRepository == null)
+                {
+                    exerciseCommentRepository = new ExerciseCommentRepository(_context);
+                }
+
+                return exerciseCommentRepository;
             }
         }
         public ITagExerciseRepository TagExerciseRepository 
