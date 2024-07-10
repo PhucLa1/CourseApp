@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Dtos.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Exercises;
@@ -9,24 +10,30 @@ namespace CourseForSFIT.Controllers
     [Authorize]
     public class ExercisesController : ControllerBase
     {
-        private readonly ITagExerciseService _tagExerciseService;
+        
         private readonly IExerciseService _exerciseService;
         public ExercisesController(ITagExerciseService tagExerciseService, IExerciseService exerciseService)
         {
-            _tagExerciseService = tagExerciseService;
             _exerciseService = exerciseService;
         }
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetAllTagExercises()
+
+        [HttpPost]
+        [Route("get-exercises-by-options")]
+        public async Task<IActionResult> GetPaginatedExercisesByOptions([FromBody]ExerciseRequest exerciseRequest, int pageNumber = 1, int pageSize = 10)
         {
-            return Ok(await _tagExerciseService.GetAllTagExercise());
+            return Ok(await _exerciseService.GetExerciseByOptionsPaginated(exerciseRequest,pageNumber, pageSize));
         }
         [HttpGet]
-        [Route("get-exercises")]
-        public async Task<IActionResult> GetPaginatedExercises(int pageNumber = 1, int pageSize = 10)
+        [Route("{id}")]
+        public async Task<IActionResult> GetTopicExerciseById(int id)
         {
-            return Ok(await _exerciseService.GetExercisesPaginated(pageNumber,pageSize));
+            return Ok(await _exerciseService.GetTopicExercise(id));
+        }
+        [HttpGet]
+        [Route("test")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok(await _exerciseService.Test());
         }
     }
 }

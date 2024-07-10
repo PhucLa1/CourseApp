@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VwNMNuUbfKU=",
+  "dgSpecHash": "eCaBX54oQCw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Dtos\\Dtos.csproj",
+  "projectFilePath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Dtos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

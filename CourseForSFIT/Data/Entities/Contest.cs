@@ -14,5 +14,7 @@ namespace Data.Entities
         public required string ContestName { get; set; }
         [Column("description")]
         public required string Description { get; set; }
+        public ICollection<ContestExercise>? ContestExercises { get; set; }
+        public ICollection<UserJoin>? UserJoins { get; set; }
     }
 }

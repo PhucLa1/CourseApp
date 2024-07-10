@@ -1183,11 +1183,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Shared\\Shared.csproj",
+      "projectUniqueName": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Shared\\Shared.csproj",
       "projectName": "Shared",
-      "projectPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Shared\\Shared.csproj",
+      "projectPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Shared\\Shared.csproj",
       "packagesPath": "C:\\Users\\Hong Phuc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Shared\\obj\\",
+      "outputPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1209,8 +1209,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Dtos\\Dtos.csproj": {
-              "projectPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Dtos\\Dtos.csproj"
+            "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Dtos.csproj": {
+              "projectPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Dtos.csproj"
             }
           }
         }

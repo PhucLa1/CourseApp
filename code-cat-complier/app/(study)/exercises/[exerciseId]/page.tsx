@@ -13,19 +13,21 @@ import { selectedLanguageOptionProps } from '@/model/selectedLanguageOptionProps
 import { compileCode } from '@/actions/complie'
 import toast from 'react-hot-toast'
 import { TestCaseData } from '@/config/testcasedata'
-import { log } from 'console'
 import { testCase } from '@/model/testCase'
-import { products } from '@/config/productdata'
 import { ModeToggleBtn } from '@/components/mode-toggle-btn';
 import SelectLanguages from './_components/SelectLanguages';
 import MenuBar from './_components/MenuBar';
-import Topic from '@/components/Topic';
-import TextEditor from './_components/Comment';
+import Topic from '@/app/(study)/exercises/[exerciseId]/_components/Topic';
 import { ListSubmission } from './_components/ListSubmission';
 import { Button } from '@/components/ui/button';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { GetCommentExercise, GetTopicExercise } from '@/apis/exercises.api';
+import Loading from '@/components/Loading';
+import Comments from './_components/Comments';
 
 
-export default function page() {
+
+export default function page({ params }: { params: { exerciseId: number } }) {
     const { theme } = useTheme()
     const [sourceCode, setSourceCode] = useState(codeSnippets["javascript"])
     const editorRef = useRef(null);
@@ -36,8 +38,7 @@ export default function page() {
     const [output, setOutput] = useState<String[] | any>(null)
     const [testCase, setTestCase] = useState<testCase>(TestCaseData[0])
     const [contentIndex, setContentIndex] = useState(1)
-
-
+    const [addComment, setAddComment] = useState<number>(0)
 
 
     function handleEditorDidMount(editor: any) {
@@ -61,11 +62,6 @@ export default function page() {
     const handleSelectContent = (content: number) => {
         setContentIndex(content);
     };
-
-
-
-
-
     async function executeCode() {
         setLoading(true)
         const requestData = {
@@ -76,10 +72,10 @@ export default function page() {
                     "content": sourceCode
                 }
             ],
+            "stdin": "3\n4\n"
         }
         try {
             const result = await compileCode(requestData)
-
             setOutput(result.run.output)
             console.log(result.run)
             console.log(testCase.expectOutput.split("\n"))
@@ -93,15 +89,28 @@ export default function page() {
             setLoading(false)
         }
     }
-
+    const onAddComment = () => {
+        setAddComment(addComment + 1)
+    }
     const getSize = (event: any) => {
         console.log('event', event.target)
         const output = document.getElementById('output');
-        console.log('output', output)
+        //console.log('output', output)
 
     }
+
+    //Gọi API
+    const { data: dataTopic, isLoading: isLoadingTopic } = useQuery({
+        queryKey: ['topic-exercises', params.exerciseId],
+        queryFn: () => GetTopicExercise(params.exerciseId)
+    })
+    const { data: dataComment, isLoading: isLoadingComment } = useQuery({
+        queryKey: ['comment-exercises', params.exerciseId, addComment],
+        queryFn: () => GetCommentExercise(params.exerciseId)
+    })
     return (
         <div className='min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8'>
+            {isLoadingTopic || isLoadingComment ? <Loading /> : <></>}
             <div className="flex items-center justify-between pb-3">
                 <h2 className='scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0'>UTC - SFIT</h2>
                 <div className="flex items-center space-x-2">
@@ -118,8 +127,8 @@ export default function page() {
                 >
                     <ResizablePanel className='' defaultSize={40} minSize={35}>
                         <MenuBar onSelectContent={handleSelectContent} />
-                        {contentIndex == 1 && <Topic />}
-                        {contentIndex == 2 && <TextEditor />}
+                        {contentIndex == 1 && <Topic content={dataTopic?.data.metadata ?? "Xin chao"} />}
+                        {contentIndex == 2 && <Comments onAddComment={onAddComment} commentExercise={dataComment?.data.metadata} exerciseId={params.exerciseId} />}
                         {contentIndex == 3 && <ListSubmission />}
                         {contentIndex == 4 && 4}
                     </ResizablePanel>
@@ -148,11 +157,11 @@ export default function page() {
                                             <span>Running please wait ...</span>
                                         </Button>) : (<Button onClick={executeCode} size={"sm"} className='dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900'>
                                             <Play className='w-4 h-4 mr-2'></Play>
-                                            <span>Run</span>
+                                            <span>Chạy thử</span>
                                         </Button>)}
                                         <Button size={"sm"} className='dark:bg-green-600 dark:hover:bg-green-700 text-slate-100 bg-slate-800 hover:bg-slate-900 ml-1'>
                                             <Play className='w-4 h-4 mr-2'></Play>
-                                            <span>Submit Code</span>
+                                            <span>Nộp bài</span>
                                         </Button>
                                     </div>
                                 </div>
@@ -169,23 +178,13 @@ export default function page() {
                                                         <Button variant="outline">
                                                             <img src={item.isLock ? '/logo/lock.png' : '/logo/unlock.png'} className="mr-2 h-4 w-4" />
                                                             Kiểm thử {index + 1}
-                                                            {output != null && <img src={output == testCase.expectOutput ? 'logo/correct.png' : 'logo/cross.png'} className="ml-2 h-4 w-4" />}
+                                                            {output != null && <img src={output == testCase.expectOutput ? '/logo/correct.png' : '/logo/cross.png'} className="ml-2 h-4 w-4" />}
                                                         </Button>
                                                     </li>
                                                 )
                                             })}
                                         </ul>
                                         <div className='border-b border-gray-300 rounded-md px-6 space-y-2 divide-y-2 w-4/5 h-[85%] mr-4 overflow-y-auto'>
-                                            {/* {error ? (
-                                                <div className='flex items-center space-x-2 text-red-500 border border-red-600 px-6 py-6'>
-                                                    <TriangleAlert className='w-5 h-5 mr-2 flex-shrink-0' />
-                                                    <p className='text-xs'>Failed to compile code</p>
-                                                </div>
-                                            ) : (output.map((item) => {
-                                                return (
-                                                    <p className='text-sm' key={item}>{item}</p>
-                                                )
-                                            }))} */}
                                             <p className='text-sm text-center pt-1'>Đầu vào : {testCase?.input}</p>
                                             <p className='text-sm text-center pt-1'>Đẩu ra mong muốn : {testCase?.expectOutput}</p>
                                             <p className='text-sm text-center pt-1'>Đẩu ra thực tế : {!error ? output?.split("\n").join(" ") : 'Lỗi'}</p>

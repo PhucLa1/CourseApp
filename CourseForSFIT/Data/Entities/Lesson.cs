@@ -15,5 +15,9 @@ namespace Data.Entities
         public bool IsLock { get; set; }
         [Column("chapter_id")]
         public int ChapterId { get; set; }
+        public Chapter? Chapter { get; set; }
+        public ICollection<LessonCourse>? LessonCourses { get; set; }
+        public ICollection<LessonComment>? LessonComments { get; set; }
+
     }
 }

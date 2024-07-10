@@ -27,6 +27,7 @@ namespace Services.Users
         Task<ApiResponse<bool>> UpdatePassword(ResetPassword resetPassword);
         Task<ApiResponse<bool>> GenerateVerificationCode(string email);
         Task<ApiResponse<bool>> VerifyVerificationCode(VerifyVerificationCodeRequest verifyVerificationCodeRequest);
+        Task<ApiResponse<UserDto>> GetCurrentUser();
     }
     public class AuthService : IAuthService
     {
@@ -36,6 +37,7 @@ namespace Services.Users
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
         private readonly IEmailSender _emailSender;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
         public AuthService(IUnitOfWork unitOfWork,
@@ -52,6 +54,7 @@ namespace Services.Users
             _configuration = configuration;
             _httpClient = httpClient;
             _emailSender = emailSender;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ApiResponse<string>> SignUp(UserSignUpDto userSignup)
@@ -83,7 +86,18 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
+        public async Task<ApiResponse<UserDto>> GetCurrentUser()
+        {
+            try
+            {
+                int currentUserId = _httpContextAccessor.HttpContext.Items["UserId"] == null ? 0 : int.Parse(_httpContextAccessor.HttpContext.Items["UserId"] as string);
+                return new ApiResponse<UserDto> { IsSuccess = true, Metadata = _mapper.Map<UserDto>(await _unitOfWork.UserRepository.GetByIdAsync(currentUserId)) };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public async Task<ApiResponse<string>> FacebookLogin(string credential)
         {
             try
@@ -96,7 +110,7 @@ namespace Services.Users
 
                 if (!userOBJK.Data.IsValid)
                 {
-                    return new ApiResponse<string> { Message = ["Dữ liệu đầu vào không chính xác"]};
+                    return new ApiResponse<string> { Message = ["Dữ liệu đầu vào không chính xác"] };
                 }
                 HttpResponseMessage meResponse = await _httpClient.GetAsync($"https://graph.facebook.com/me?fields=first_name,last_name,picture,email&access_token={credential}");
                 var userContent = await meResponse.Content.ReadAsStringAsync();
@@ -112,7 +126,7 @@ namespace Services.Users
                 }
                 User? userAdd = await userRepository.FindUserByEmail(user.Email);
                 string token = await JWTGenerator(userAdd);
-                return new ApiResponse<string> { IsSuccess = true, Metadata = token};
+                return new ApiResponse<string> { IsSuccess = true, Metadata = token };
             }
             catch (Exception ex)
             {
@@ -147,7 +161,7 @@ namespace Services.Users
                 }
                 User? userAdd = await userRepository.FindUserByEmail(user.Email);
                 string token = await JWTGenerator(userAdd);
-                return new ApiResponse<string> { Metadata = token, IsSuccess = true};
+                return new ApiResponse<string> { Metadata = token, IsSuccess = true };
             }
             catch (Exception ex)
             {
@@ -228,7 +242,7 @@ namespace Services.Users
         {
             try
             {
-                if(resetPassword.Password != resetPassword.RePassword)
+                if (resetPassword.Password != resetPassword.RePassword)
                 {
                     return new ApiResponse<bool> { Message = ["Mật khẩu và mật khẩu nhập lại không đúng"] };
                 }
@@ -265,7 +279,7 @@ namespace Services.Users
                     };
                     await _emailSender.SendEmail(emailSend);
                     await _unitOfWork.SaveAsync();
-                    return new ApiResponse<bool> { IsSuccess = true};
+                    return new ApiResponse<bool> { IsSuccess = true };
                 }
 
                 return new ApiResponse<bool> { Message = ["Không tồn tại email nào như thế cả"] };
@@ -285,7 +299,7 @@ namespace Services.Users
                 {
                     return new ApiResponse<bool> { Message = ["Mã code được gửi đi bị sai"] };
                 }
-                else if (userEmail.ExpiredTime < DateTime.UtcNow) 
+                else if (userEmail.ExpiredTime < DateTime.UtcNow)
                 {
                     return new ApiResponse<bool> { Message = ["Mã code đã hết hạn"] };
                 }

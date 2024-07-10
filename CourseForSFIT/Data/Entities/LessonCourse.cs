@@ -16,5 +16,7 @@ namespace Data.Entities
         public int LessonId { get; set; }
         [Column("complete_level")]
         public double CompleLevel { get; set; }
+        public User? User { get; set; }
+        public Lesson? Lesson { get; set; }
     }
 }

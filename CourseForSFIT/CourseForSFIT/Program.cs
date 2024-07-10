@@ -13,6 +13,7 @@ using Services.Users;
 using Data.Mapping;
 using Services.Exercises;
 using Data.MappingProfile;
+using Services.TestCases;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,15 +44,23 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITagExerciseRepository, TagExerciseRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddScoped<IExerciseCommentRepository, ExerciseCommentRepository>();
+builder.Services.AddScoped<ITestCaseRepository, TestCaseRepository>();
+builder.Services.AddScoped<IUserExerciseRepository, UserExerciseRepository>();
 
 //Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ITagExerciseService, TagExerciseService>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
+builder.Services.AddScoped<IExerciseCommentService, ExerciseCommentService>();
+builder.Services.AddScoped<ITestCaseService, TestCaseService>();
+builder.Services.AddScoped<ISolveTestCaseService, SolveTestCaseService>();
 
+//Mapper
 builder.Services.AddAutoMapper(typeof(UserMapper));
 builder.Services.AddAutoMapper(typeof(ExerciseMapper));
+builder.Services.AddAutoMapper(typeof(TestCaseMapper));
 
 
 builder.Services.AddHttpContextAccessor();
@@ -84,7 +93,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Role", policy => policy.RequireClaim("Role", "2")); //1: User, 2: Admin
+    options.AddPolicy("Role", policy => policy.RequireClaim("Role", "1")); //1: User, 2: Admin
 });
 
 builder.Services.AddControllers();

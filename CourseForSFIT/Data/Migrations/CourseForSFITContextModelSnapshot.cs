@@ -101,6 +101,48 @@ namespace Data.Migrations
                     b.ToTable("blog_comment");
                 });
 
+            modelBuilder.Entity("Data.Entities.BlogHasTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int")
+                        .HasColumnName("blog_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("created_by");
+
+                    b.Property<int>("TagBlogId")
+                        .HasColumnType("int")
+                        .HasColumnName("tag_blog_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("TagBlogId");
+
+                    b.ToTable("blog_has_tag");
+                });
+
             modelBuilder.Entity("Data.Entities.Chapter", b =>
                 {
                     b.Property<int>("Id")
@@ -136,6 +178,8 @@ namespace Data.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("chapter");
                 });
@@ -215,6 +259,10 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContestId");
+
+                    b.HasIndex("ExerciseId");
+
                     b.ToTable("contest_exercise");
                 });
 
@@ -254,6 +302,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseTypeId");
+
                     b.ToTable("course");
                 });
 
@@ -292,6 +342,8 @@ namespace Data.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("course_comment");
                 });
@@ -370,6 +422,10 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("course_user");
                 });
 
@@ -411,10 +467,6 @@ namespace Data.Migrations
                     b.Property<double>("SuccessRate")
                         .HasColumnType("float")
                         .HasColumnName("success_rate");
-
-                    b.Property<string>("Tag")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("tag");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
@@ -465,7 +517,100 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExerciseId");
+
                     b.ToTable("exercise_comment");
+                });
+
+            modelBuilder.Entity("Data.Entities.ExerciseHasTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("created_by");
+
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int")
+                        .HasColumnName("exercise_id");
+
+                    b.Property<int>("TagExerciseId")
+                        .HasColumnType("int")
+                        .HasColumnName("tag_exercise_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("TagExerciseId");
+
+                    b.ToTable("exercise_has_tag");
+                });
+
+            modelBuilder.Entity("Data.Entities.Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int")
+                        .HasColumnName("chapter_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("created_by");
+
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_lock");
+
+                    b.Property<string>("LessonName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("lesson_name");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.ToTable("Lesson");
                 });
 
             modelBuilder.Entity("Data.Entities.LessonComment", b =>
@@ -503,6 +648,8 @@ namespace Data.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
 
                     b.ToTable("lesson_comment");
                 });
@@ -545,6 +692,10 @@ namespace Data.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("lesson_course");
                 });
@@ -649,6 +800,10 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("input_data");
 
+                    b.Property<bool>("IsLock")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_lock");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("updated_at");
@@ -658,6 +813,8 @@ namespace Data.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
 
                     b.ToTable("test_case");
                 });
@@ -792,6 +949,10 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("user_exercise");
                 });
 
@@ -830,49 +991,293 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContestId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("user_join");
                 });
 
-            modelBuilder.Entity("Data.Entities.UserResult", b =>
+            modelBuilder.Entity("Data.Entities.BlogHasTag", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
+                    b.HasOne("Data.Entities.Blog", "Blog")
+                        .WithMany("BlogHasTags")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.HasOne("Data.Entities.TagBlog", "TagBlog")
+                        .WithMany("BlogHasTags")
+                        .HasForeignKey("TagBlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
+                    b.Navigation("Blog");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int")
-                        .HasColumnName("created_by");
+                    b.Navigation("TagBlog");
+                });
 
-                    b.Property<bool>("IsPass")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_pass");
+            modelBuilder.Entity("Data.Entities.Chapter", b =>
+                {
+                    b.HasOne("Data.Entities.Course", "Course")
+                        .WithMany("Chapters")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("TestCaseId")
-                        .HasColumnType("int")
-                        .HasColumnName("test_case_id");
+                    b.Navigation("Course");
+                });
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
+            modelBuilder.Entity("Data.Entities.ContestExercise", b =>
+                {
+                    b.HasOne("Data.Entities.Contest", "Contest")
+                        .WithMany("ContestExercises")
+                        .HasForeignKey("ContestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("int")
-                        .HasColumnName("updated_by");
+                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                        .WithMany("ContestExercises")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("UserExerciseId")
-                        .HasColumnType("int")
-                        .HasColumnName("user_exercise_id");
+                    b.Navigation("Contest");
 
-                    b.HasKey("Id");
+                    b.Navigation("Exercise");
+                });
 
-                    b.ToTable("user_result");
+            modelBuilder.Entity("Data.Entities.Course", b =>
+                {
+                    b.HasOne("Data.Entities.CourseType", "CourseType")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseType");
+                });
+
+            modelBuilder.Entity("Data.Entities.CourseComment", b =>
+                {
+                    b.HasOne("Data.Entities.Course", "Course")
+                        .WithMany("CourseComments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Data.Entities.CourseUser", b =>
+                {
+                    b.HasOne("Data.Entities.Course", "Course")
+                        .WithMany("CourseUsers")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.User", "User")
+                        .WithMany("CourseUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Data.Entities.ExerciseComment", b =>
+                {
+                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                        .WithMany("ExerciseComments")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+                });
+
+            modelBuilder.Entity("Data.Entities.ExerciseHasTag", b =>
+                {
+                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                        .WithMany("ExerciseHasTags")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.TagExercise", "TagExercise")
+                        .WithMany("ExerciseHasTags")
+                        .HasForeignKey("TagExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("TagExercise");
+                });
+
+            modelBuilder.Entity("Data.Entities.Lesson", b =>
+                {
+                    b.HasOne("Data.Entities.Chapter", "Chapter")
+                        .WithMany("Lessons")
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+                });
+
+            modelBuilder.Entity("Data.Entities.LessonComment", b =>
+                {
+                    b.HasOne("Data.Entities.Lesson", "Lesson")
+                        .WithMany("LessonComments")
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lesson");
+                });
+
+            modelBuilder.Entity("Data.Entities.LessonCourse", b =>
+                {
+                    b.HasOne("Data.Entities.Lesson", "Lesson")
+                        .WithMany("LessonCourses")
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.User", "User")
+                        .WithMany("LessonCourses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lesson");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Data.Entities.TestCase", b =>
+                {
+                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                        .WithMany("TestCases")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+                });
+
+            modelBuilder.Entity("Data.Entities.UserExercise", b =>
+                {
+                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                        .WithMany("UserExercises")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.User", "User")
+                        .WithMany("UserExercises")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Data.Entities.UserJoin", b =>
+                {
+                    b.HasOne("Data.Entities.Contest", "Contest")
+                        .WithMany("UserJoins")
+                        .HasForeignKey("ContestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.User", "User")
+                        .WithMany("UserJoins")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contest");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Data.Entities.Blog", b =>
+                {
+                    b.Navigation("BlogHasTags");
+                });
+
+            modelBuilder.Entity("Data.Entities.Chapter", b =>
+                {
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("Data.Entities.Contest", b =>
+                {
+                    b.Navigation("ContestExercises");
+
+                    b.Navigation("UserJoins");
+                });
+
+            modelBuilder.Entity("Data.Entities.Course", b =>
+                {
+                    b.Navigation("Chapters");
+
+                    b.Navigation("CourseComments");
+
+                    b.Navigation("CourseUsers");
+                });
+
+            modelBuilder.Entity("Data.Entities.CourseType", b =>
+                {
+                    b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("Data.Entities.Exercise", b =>
+                {
+                    b.Navigation("ContestExercises");
+
+                    b.Navigation("ExerciseComments");
+
+                    b.Navigation("ExerciseHasTags");
+
+                    b.Navigation("TestCases");
+
+                    b.Navigation("UserExercises");
+                });
+
+            modelBuilder.Entity("Data.Entities.Lesson", b =>
+                {
+                    b.Navigation("LessonComments");
+
+                    b.Navigation("LessonCourses");
+                });
+
+            modelBuilder.Entity("Data.Entities.TagBlog", b =>
+                {
+                    b.Navigation("BlogHasTags");
+                });
+
+            modelBuilder.Entity("Data.Entities.TagExercise", b =>
+                {
+                    b.Navigation("ExerciseHasTags");
+                });
+
+            modelBuilder.Entity("Data.Entities.User", b =>
+                {
+                    b.Navigation("CourseUsers");
+
+                    b.Navigation("LessonCourses");
+
+                    b.Navigation("UserExercises");
+
+                    b.Navigation("UserJoins");
                 });
 #pragma warning restore 612, 618
         }

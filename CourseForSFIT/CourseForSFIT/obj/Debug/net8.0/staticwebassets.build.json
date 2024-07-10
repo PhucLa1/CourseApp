@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cFZribNqD5JTv24NSVCADD7LsQr2WZoOuspxjbN8fEk=",
+  "Hash": "oMxCXfnYFwuwNWvaOdRYOnfLrmXq8rOxiUxxWlOQdaA=",
   "Source": "CourseForSFIT",
   "BasePath": "_content/CourseForSFIT",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "CourseForSFIT\\wwwroot",
       "Source": "CourseForSFIT",
-      "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
       "BasePath": "_content/CourseForSFIT",
       "Pattern": "**"
     }

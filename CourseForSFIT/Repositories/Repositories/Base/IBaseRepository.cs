@@ -1,4 +1,6 @@
-﻿namespace Repositories.Repositories.Base
+﻿using System.Linq.Expressions;
+
+namespace Repositories.Repositories.Base
 {
     public interface IBaseRepository<T>
         where T : class
@@ -16,5 +18,7 @@
         Task<int> GetTotalCountAsync();
 
         IEnumerable<T> GetAll();
+        IQueryable<T> GetAllQueryAble();
+        Task<TField> GetFieldByIdAsync<TField>(int id, Expression<Func<T, TField>> selector);
     }
 }

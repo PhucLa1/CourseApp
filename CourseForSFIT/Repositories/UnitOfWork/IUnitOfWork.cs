@@ -9,6 +9,11 @@ namespace Repositories.unitOfWork
         IUserRepository UserRepository { get; }
         ITagExerciseRepository TagExerciseRepository { get; }
         IExerciseRepository ExerciseRepository { get; }
+        IExerciseCommentRepository ExerciseCommentRepository { get; }
+        ITestCaseRepository TestCaseRepository { get; }
+        IUserExerciseRepository UserExerciseRepository { get; }
+
+        IExerciseHasTagRepository ExerciseHasTagRepository { get; }
         Task SaveAsync();
     }
 }

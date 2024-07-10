@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d7hOOqmtlWw=",
+  "dgSpecHash": "kPqB80ZUG2s=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\GraduateCDE\\CourseForSFIT\\Shared\\Shared.csproj",
+  "projectFilePath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Shared\\Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

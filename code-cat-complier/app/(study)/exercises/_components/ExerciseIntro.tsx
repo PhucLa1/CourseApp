@@ -105,7 +105,7 @@ export default function ExerciseIntro({exercise} : {exercise : ExerciseDto}) {
                         </span>
                     </div>
                     <Link
-                        href="/exercises/1"
+                        href={`/exercises/${exercise.id}`}
                         className="hover:bg-[#7bc043] bg-transparent"
                         style={{
                             gridArea: 'cta',

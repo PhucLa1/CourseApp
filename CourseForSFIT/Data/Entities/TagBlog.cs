@@ -14,5 +14,6 @@ namespace Data.Entities
         [Column("tag_name")]
         [Unique]
         public required string TagName { get; set; }
+        public ICollection<BlogHasTag>? BlogHasTags { get; set; }
     }
 }

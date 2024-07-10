@@ -14,5 +14,7 @@ namespace Data.Entities
         public int ExerciseId { get; set; }
         [Column("contest_id")]
         public int ContestId { get; set; }
+        public Exercise? Exercise { get; set; }
+        public Contest? Contest { get; set; }
     }
 }

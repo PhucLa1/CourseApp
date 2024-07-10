@@ -14,5 +14,6 @@ namespace Data.Entities
         public required string Title { get; set; }
         [Column("content_blog")]
         public required string ContentBlog { get; set; }
+        public ICollection<BlogHasTag>? BlogHasTags { get; set; }
     }
 }

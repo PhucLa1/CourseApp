@@ -1,6 +1,9 @@
 ﻿using Data.Data;
+using MathNet.Numerics.Statistics.Mcmc;
 using Microsoft.EntityFrameworkCore;
-
+using System.Linq;
+using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
 namespace Repositories.Repositories.Base
 {
     public class BaseRepository<T> : IBaseRepository<T>
@@ -56,6 +59,16 @@ namespace Repositories.Repositories.Base
             {
                 _dbSet.Remove(res);
             }
+        }
+        public async Task<TField> GetFieldByIdAsync<TField>(int id, Expression<Func<T, TField>> selector)
+        {
+            var res = await _dbSet.Where($"Id == @0", id).Select(selector).FirstOrDefaultAsync();
+            return res;
+        }
+
+        public IQueryable<T> GetAllQueryAble()
+        {
+            return _dbSet;
         }
 
         public async Task UpdateAsync(int id, T entity)

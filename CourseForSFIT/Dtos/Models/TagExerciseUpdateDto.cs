@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dtos.Results
+namespace Dtos.Models
 {
-    public class TagExerciseDto
+    public class TagExerciseUpdateDto
     {
-        public int Id { get; set; }
-        public string? TagName { get; set; }
+        public required string TagName { get; set; }
     }
 }
