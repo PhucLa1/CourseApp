@@ -1,5 +1,5 @@
 ﻿using Data.Entities;
-using Dtos.Models;
+using Dtos.Models.AuthModels;
 using Repositories.Repositories.Base;
 
 

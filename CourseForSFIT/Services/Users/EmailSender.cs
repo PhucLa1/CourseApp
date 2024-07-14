@@ -3,7 +3,7 @@ using MimeKit.Text;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
-using Dtos.Models;
+using Dtos.Models.EmailModels;
 
 namespace Services.Users
 {

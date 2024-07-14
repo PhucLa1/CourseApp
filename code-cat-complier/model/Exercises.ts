@@ -22,9 +22,18 @@ export type Exercise = {
     numberParticipants:number
     successRate: number
 }
+export type AdminExercise = {
+    id: number,
+    exerciseName:string,
+    difficultLevel:number
+    numberParticipants:number
+    successRate: number,
+    tags: string[]
+}
+
 export type ExerciseRequest = {
     difficultLevel?: number[];
-    tagId?: string[];
+    tagId?: number[];
     status?: number;
     name?: string
 }

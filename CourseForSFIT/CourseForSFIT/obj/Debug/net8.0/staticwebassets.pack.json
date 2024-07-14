@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638564774916882037.inInputs",
+      "PackagePath": "staticwebassets\\Inputs\\638564774916882037.inInputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638564775293607811.inInputs",
+      "PackagePath": "staticwebassets\\Inputs\\638564775293607811.inInputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638564775293622980.inInputs",
+      "PackagePath": "staticwebassets\\Inputs\\638564775293622980.inInputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638564775293638465.inInputs",
+      "PackagePath": "staticwebassets\\Inputs\\638564775293638465.inInputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638564774916827344.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638564774916827344.outOutputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638564775293598870.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638564775293598870.outOutputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638564775293612896.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638564775293612896.outOutputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638564775293632579.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638564775293632579.outOutputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638565851508349293.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638565851508349293.outOutputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638565861947256606.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638565861947256606.outOutputs"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Apis.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Apis.props",
+      "PackagePath": "build\\Apis.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Apis.props",
+      "PackagePath": "buildMultiTargeting\\Apis.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Apis.props",
+      "PackagePath": "buildTransitive\\Apis.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

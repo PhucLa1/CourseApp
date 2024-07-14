@@ -14,7 +14,5 @@ namespace Data.Entities
         public int TagBlogId { get; set; }
         [Column("blog_id")]
         public int BlogId { get; set; }
-        public TagBlog? TagBlog { get; set; }
-        public Blog? Blog { get; set; }
     }
 }

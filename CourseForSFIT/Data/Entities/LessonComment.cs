@@ -9,6 +9,6 @@ namespace Data.Entities
         public required string Content { get; set; }
         [Column("lesson_id")]
         public int LessonId { get; set; }
-        public Lesson? Lesson { get; set; }
+
     }
 }

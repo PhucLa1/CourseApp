@@ -16,9 +16,10 @@ namespace Data.Entities
         public int ExerciseId { get; set; }
         [Column("content_code")]
         public required string ContentCode { get; set; }
+        [Column("success_rate")]
+        public string? SuccessRate { get; set; }
         [Column("is_success")]
         public bool IsSuccess { get; set; }
-        public User? User { get; set; }
-        public Exercise? Exercise { get; set; }
+
     }
 }

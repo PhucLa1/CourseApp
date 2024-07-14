@@ -20,5 +20,6 @@ namespace Repositories.Repositories.Base
         IEnumerable<T> GetAll();
         IQueryable<T> GetAllQueryAble();
         Task<TField> GetFieldByIdAsync<TField>(int id, Expression<Func<T, TField>> selector);
+        Task AddManyAsync(IEnumerable<T> entities);
     }
 }

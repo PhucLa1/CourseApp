@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Dtos.Models;
-using Dtos.Results;
+using Dtos.Models.AuthModels;
+using Dtos.Results.AuthResults;
 
 
 namespace Data.Mapping

@@ -80,5 +80,10 @@ namespace Repositories.Repositories.Base
                 _dbSet.Update(res);
             }
         }
+
+        public async Task AddManyAsync(IEnumerable<T> entities)
+        {
+            await _dbSet.AddRangeAsync(entities);
+        }
     }
 }

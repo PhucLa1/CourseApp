@@ -18,6 +18,6 @@ namespace Data.Entities
         public required string ExpectedOutput { get; set; }
         [Column("is_lock")]
         public bool IsLock { get; set; }
-        public Exercise? Exercise { get; set; }
+
     }
 }

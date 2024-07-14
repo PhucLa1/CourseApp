@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Dtos.Models;
-using Dtos.Results;
-using Dtos.Results.TagExerciseResults;
+using Dtos.Models.ExerciseModels;
+using Dtos.Results.ExerciseResults;
+
 
 
 namespace Data.MappingProfile
@@ -19,10 +19,10 @@ namespace Data.MappingProfile
                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
             CreateMap<TagExerciseAddDto, TagExercise>()
                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
-            CreateMap<Exercise, ExerciseAdminDto>()
+            CreateMap<ExerciseAddDto, Exercise>()
                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
-            
-
+            CreateMap<ExerciseHasTagAddDto, ExerciseHasTag>()
+                .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
         }
     }
 }

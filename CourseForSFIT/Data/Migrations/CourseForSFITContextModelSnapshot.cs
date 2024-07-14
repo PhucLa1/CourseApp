@@ -98,6 +98,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BlogId");
+
                     b.ToTable("blog_comment");
                 });
 
@@ -935,6 +937,10 @@ namespace Data.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("is_success");
 
+                    b.Property<string>("SuccessRate")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("success_rate");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("updated_at");
@@ -998,218 +1004,187 @@ namespace Data.Migrations
                     b.ToTable("user_join");
                 });
 
+            modelBuilder.Entity("Data.Entities.BlogComment", b =>
+                {
+                    b.HasOne("Data.Entities.Blog", null)
+                        .WithMany("BlogComments")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Data.Entities.BlogHasTag", b =>
                 {
-                    b.HasOne("Data.Entities.Blog", "Blog")
+                    b.HasOne("Data.Entities.Blog", null)
                         .WithMany("BlogHasTags")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.TagBlog", "TagBlog")
+                    b.HasOne("Data.Entities.TagBlog", null)
                         .WithMany("BlogHasTags")
                         .HasForeignKey("TagBlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("TagBlog");
                 });
 
             modelBuilder.Entity("Data.Entities.Chapter", b =>
                 {
-                    b.HasOne("Data.Entities.Course", "Course")
+                    b.HasOne("Data.Entities.Course", null)
                         .WithMany("Chapters")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Data.Entities.ContestExercise", b =>
                 {
-                    b.HasOne("Data.Entities.Contest", "Contest")
+                    b.HasOne("Data.Entities.Contest", null)
                         .WithMany("ContestExercises")
                         .HasForeignKey("ContestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                    b.HasOne("Data.Entities.Exercise", null)
                         .WithMany("ContestExercises")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Contest");
-
-                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("Data.Entities.Course", b =>
                 {
-                    b.HasOne("Data.Entities.CourseType", "CourseType")
+                    b.HasOne("Data.Entities.CourseType", null)
                         .WithMany("Courses")
                         .HasForeignKey("CourseTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CourseType");
                 });
 
             modelBuilder.Entity("Data.Entities.CourseComment", b =>
                 {
-                    b.HasOne("Data.Entities.Course", "Course")
+                    b.HasOne("Data.Entities.Course", null)
                         .WithMany("CourseComments")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Data.Entities.CourseUser", b =>
                 {
-                    b.HasOne("Data.Entities.Course", "Course")
+                    b.HasOne("Data.Entities.Course", null)
                         .WithMany("CourseUsers")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.User", "User")
+                    b.HasOne("Data.Entities.User", null)
                         .WithMany("CourseUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.ExerciseComment", b =>
                 {
-                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                    b.HasOne("Data.Entities.Exercise", null)
                         .WithMany("ExerciseComments")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("Data.Entities.ExerciseHasTag", b =>
                 {
-                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                    b.HasOne("Data.Entities.Exercise", null)
                         .WithMany("ExerciseHasTags")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.TagExercise", "TagExercise")
+                    b.HasOne("Data.Entities.TagExercise", null)
                         .WithMany("ExerciseHasTags")
                         .HasForeignKey("TagExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exercise");
-
-                    b.Navigation("TagExercise");
                 });
 
             modelBuilder.Entity("Data.Entities.Lesson", b =>
                 {
-                    b.HasOne("Data.Entities.Chapter", "Chapter")
+                    b.HasOne("Data.Entities.Chapter", null)
                         .WithMany("Lessons")
                         .HasForeignKey("ChapterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Chapter");
                 });
 
             modelBuilder.Entity("Data.Entities.LessonComment", b =>
                 {
-                    b.HasOne("Data.Entities.Lesson", "Lesson")
+                    b.HasOne("Data.Entities.Lesson", null)
                         .WithMany("LessonComments")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Lesson");
                 });
 
             modelBuilder.Entity("Data.Entities.LessonCourse", b =>
                 {
-                    b.HasOne("Data.Entities.Lesson", "Lesson")
+                    b.HasOne("Data.Entities.Lesson", null)
                         .WithMany("LessonCourses")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.User", "User")
+                    b.HasOne("Data.Entities.User", null)
                         .WithMany("LessonCourses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Lesson");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.TestCase", b =>
                 {
-                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                    b.HasOne("Data.Entities.Exercise", null)
                         .WithMany("TestCases")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("Data.Entities.UserExercise", b =>
                 {
-                    b.HasOne("Data.Entities.Exercise", "Exercise")
+                    b.HasOne("Data.Entities.Exercise", null)
                         .WithMany("UserExercises")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.User", "User")
+                    b.HasOne("Data.Entities.User", null)
                         .WithMany("UserExercises")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Exercise");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.UserJoin", b =>
                 {
-                    b.HasOne("Data.Entities.Contest", "Contest")
+                    b.HasOne("Data.Entities.Contest", null)
                         .WithMany("UserJoins")
                         .HasForeignKey("ContestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.User", "User")
+                    b.HasOne("Data.Entities.User", null)
                         .WithMany("UserJoins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Contest");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.Blog", b =>
                 {
+                    b.Navigation("BlogComments");
+
                     b.Navigation("BlogHasTags");
                 });
 
