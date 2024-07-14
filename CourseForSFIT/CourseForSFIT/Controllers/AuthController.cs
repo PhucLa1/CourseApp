@@ -1,4 +1,4 @@
-﻿using Dtos.Models;
+﻿using Dtos.Models.AuthModels;
 using Dtos.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Dtos.Models;
+using Dtos.Models.ExerciseModels;
 using Dtos.Results;
-using Dtos.Results.TagExerciseResults;
+using Dtos.Results.ExerciseResults;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.unitOfWork;
 using System;

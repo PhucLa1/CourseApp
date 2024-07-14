@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Dtos.Models;
+using Dtos.Models.TestCaseModels;
 using Dtos.Results;
 using Dtos.Results.TestCaseResults;
 using Microsoft.EntityFrameworkCore;

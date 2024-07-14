@@ -16,7 +16,6 @@ namespace Data.Entities
         public int CourseId { get; set; }
         [Column("complete")]
         public double Complete { get; set; }
-        public User? User { get; set; }
-        public Course? Course { get; set; }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using Dtos.Models;
+﻿using Dtos.Models.ExerciseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Dtos.Models;
+using Dtos.Models.ExerciseModels;
 using Dtos.Results;
 using System;
 using System.Collections.Generic;

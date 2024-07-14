@@ -9,10 +9,12 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Dtos.Results;
-using Dtos.Models;
 using Google.Apis.Auth;
 using Newtonsoft.Json;
 using Shared;
+using Dtos.Models.AuthModels;
+using Dtos.Models.EmailModels;
+using Dtos.Results.AuthResults;
 
 
 namespace Services.Users

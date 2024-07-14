@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Dtos.Models;
+using Dtos.Models.ExerciseModels;
+using Dtos.Models.TestCaseModels;
 using Dtos.Results.TestCaseResults;
 using System;
 using System.Collections.Generic;

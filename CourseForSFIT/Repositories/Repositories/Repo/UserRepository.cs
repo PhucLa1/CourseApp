@@ -1,6 +1,6 @@
 ﻿using Data.Data;
 using Data.Entities;
-using Dtos.Models;
+using Dtos.Models.AuthModels;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Repositories.Base;
 using Repositories.Repositories.IRepo;

@@ -14,7 +14,6 @@ namespace Data.Entities
         public required string ChapterName { get; set; }
         [Column("course_id")]
         public int CourseId { get; set; }
-        public Course? Course { get; set; }
         public ICollection<Lesson>? Lessons { get; set; }
     }
 }

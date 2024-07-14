@@ -1,4 +1,4 @@
-﻿using Dtos.Models;
+﻿using Dtos.Models.TestCaseModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Repositories.IRepo;

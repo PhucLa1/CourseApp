@@ -81,7 +81,7 @@ export default function TagFilter({ tagExercises, onChooseFilter, isChecked, onF
                         {
                             tagExercises.map((item, index) => {
                                 return <div key={index} className="flex items-center space-x-2 mt-4">
-                                    <Checkbox checked={isChecked[status.length + difficultLevel.length + index] || false} onCheckedChange={() => onChooseFilter(2, item.id.toString(), status.length + difficultLevel.length + index)} id="terms" />
+                                    <Checkbox checked={isChecked[status.length + difficultLevel.length + index] || false} onCheckedChange={() => onChooseFilter(2, item.id, status.length + difficultLevel.length + index)} id="terms" />
                                     <label
                                         htmlFor="terms"
                                         className={`text-2sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}>
