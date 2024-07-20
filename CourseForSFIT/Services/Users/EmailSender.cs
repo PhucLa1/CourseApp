@@ -4,6 +4,8 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using Dtos.Models.EmailModels;
+using Shared.Configs;
+using Microsoft.Extensions.Options;
 
 namespace Services.Users
 {
@@ -14,25 +16,25 @@ namespace Services.Users
     public class EmailSender : IEmailSender
     {
 
-        private readonly IConfiguration _config;
+        private readonly EmailSetting _serverMailSetting;
 
-        public EmailSender(IConfiguration config)
+        public EmailSender(IOptions<EmailSetting> serverMailSetting)
         {
-            _config = config;
+            _serverMailSetting = serverMailSetting.Value;
         }
         public async Task SendEmail(Email request)
         {
             try
             {
                 var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse(_config.GetValue<string>("Email:EmailUsername")));
+                email.From.Add(MailboxAddress.Parse(_serverMailSetting.EmailUsername));
                 email.To.Add(MailboxAddress.Parse(request.To));
                 email.Subject = request.Subject;
                 email.Body = new TextPart(TextFormat.Html) { Text = request.Body };
 
                 using var smtp = new SmtpClient();
-                smtp.Connect(_config.GetValue<string>("Email:EmailHost"), 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate(_config.GetValue<string>("Email:EmailUsername"), _config.GetValue<string>("Email:EmailPassword"));
+                smtp.Connect(_serverMailSetting.EmailHost, 587, SecureSocketOptions.StartTls);
+                smtp.Authenticate(_serverMailSetting.EmailUsername, _serverMailSetting.EmailPassword);
                 smtp.Send(email);
                 smtp.Disconnect(true);
             }

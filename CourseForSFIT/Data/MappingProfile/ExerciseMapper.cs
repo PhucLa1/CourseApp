@@ -23,6 +23,8 @@ namespace Data.MappingProfile
                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
             CreateMap<ExerciseHasTagAddDto, ExerciseHasTag>()
                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
+            CreateMap<UserExercise, ContentCodes>()
+                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
         }
     }
 }

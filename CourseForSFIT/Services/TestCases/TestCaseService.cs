@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Dtos.Models.ExerciseModels;
 using Dtos.Models.TestCaseModels;
 using Dtos.Results;
 using Dtos.Results.TestCaseResults;
 using Microsoft.EntityFrameworkCore;
-using Repositories.unitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Repositories.Repositories.Base;
+using Shared;
 
 namespace Services.TestCases
 {
@@ -17,51 +14,72 @@ namespace Services.TestCases
     {
         Task<ApiResponse<TestCaseReturnDto>> GetAllTestCaseNotLockByExerciseId(int exerciseId);
         Task<ApiResponse<List<TestCaseDto>>> GetAllTestCaseByExerciseId(int exerciseId);
-        Task<ApiResponse<bool>> AddTestCase(TestCaseAddDto testCaseAddDto);
         Task<ApiResponse<bool>> DeleteTestCase(int id);
-        Task<ApiResponse<bool>> UpdateTestCase(int id, TestCaseUpdateDto testCaseUpdateDto);
+        Task<ApiResponse<int>> AddTestCase(int exerciseId, TestCaseExerciseAddDto testCaseExerciseAddDto);
+        Task<ApiResponse<bool>> UpdateTestCase(int id, TestCaseExerciseUpdateDto testCaseExerciseUpdateDto);
     }
     public class TestCaseService : ITestCaseService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBaseRepository<TestCase> _testCaseRepository;
         private readonly IMapper _mapper;
-        public TestCaseService(IUnitOfWork unitOfWork, IMapper mapper)
+        public TestCaseService(IBaseRepository<TestCase> testCaseRepository, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
+            _testCaseRepository = testCaseRepository;
             _mapper = mapper;
+        }
+        public async Task<ApiResponse<int>> AddTestCase(int exerciseId, TestCaseExerciseAddDto testCaseExerciseAddDto)
+        {
+            try
+            {
+                TestCase testCase = _mapper.Map<TestCase>(new TestCaseAddDto()
+                {
+                    ExerciseId = exerciseId,
+                    ExpectedOutput = await HandleFile.Upload("Outputs", testCaseExerciseAddDto.ExpectedOutput),
+                    InputData = await HandleFile.Upload("Inputs", testCaseExerciseAddDto.InputData),
+                    IsLock = testCaseExerciseAddDto.IsLock
+                });
+                await _testCaseRepository.AddAsync(testCase);
+                await _testCaseRepository.SaveChangeAsync();
+                return new ApiResponse<int> { IsSuccess = true, Metadata = testCase.Id };
+            }
+            catch (Exception ex)
+            {
+                var innerException = ex.InnerException?.Message ?? ex.Message;
+                // Log the exception details here
+                Console.WriteLine($"Error: {innerException}");
+                throw new Exception($"An error occurred while saving the entity changes: {innerException}");
+            }
         }
         public async Task<ApiResponse<TestCaseReturnDto>> GetAllTestCaseNotLockByExerciseId(int exerciseId)
         {
             try
             {
-                return new ApiResponse<TestCaseReturnDto> { IsSuccess = true , Metadata = new TestCaseReturnDto 
-                { 
-                    testCaseDtos = _mapper.Map<List<TestCaseDto>>(await _unitOfWork.TestCaseRepository.GetAllTestCaseNotLockByExerciseId(exerciseId)),
-                    totalTestCaseCount = await _unitOfWork.TestCaseRepository.GetAllTestCaseByExerciseId(exerciseId).CountAsync()
-                }};
-            }catch (Exception ex)
+                int testCaseLocksNumber = await _testCaseRepository.GetAllQueryAble().Where(e => e.ExerciseId == exerciseId && e.IsLock == true).CountAsync();
+
+                string[] testCaseLocks = new string[testCaseLocksNumber];
+                return new ApiResponse<TestCaseReturnDto>
+                {
+                    IsSuccess = true,
+                    Metadata = new TestCaseReturnDto
+                    {
+                        testCaseDtos = _mapper.Map<List<TestCaseDto>>(await _testCaseRepository.GetAllQueryAble().Where(e => e.ExerciseId == exerciseId && e.IsLock == false).ToListAsync()),
+                        totalTestCaseLockCounts = testCaseLocks
+                    }
+                };
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<ApiResponse<bool>> AddTestCase(TestCaseAddDto testCaseAddDto)
-        {
-            try
-            {
-                await _unitOfWork.TestCaseRepository.AddAsync(_mapper.Map<TestCase>(testCaseAddDto));
-                await _unitOfWork.SaveAsync();
-                return new ApiResponse<bool> { IsSuccess = true };
-            }catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+
         public async Task<ApiResponse<List<TestCaseDto>>> GetAllTestCaseByExerciseId(int exerciseId)
         {
             try
             {
-                return new ApiResponse<List<TestCaseDto>> { IsSuccess = true, Metadata = _mapper.Map<List<TestCaseDto>>(await _unitOfWork.TestCaseRepository.GetAllTestCaseByExerciseId(exerciseId).ToListAsync()) };
-            }catch (Exception ex)
+                return new ApiResponse<List<TestCaseDto>> { IsSuccess = true, Metadata = _mapper.Map<List<TestCaseDto>>(await _testCaseRepository.GetAllQueryAble().Where(e => e.ExerciseId == exerciseId).ToListAsync()) };
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -70,8 +88,8 @@ namespace Services.TestCases
         {
             try
             {
-                await _unitOfWork.TestCaseRepository.RemoveAsync(id);
-                await _unitOfWork.SaveAsync();
+                await _testCaseRepository.RemoveAsync(id);
+                await _testCaseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
             }
             catch (Exception ex)
@@ -79,14 +97,27 @@ namespace Services.TestCases
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<ApiResponse<bool>> UpdateTestCase(int id,TestCaseUpdateDto testCaseUpdateDto)
+
+        public async Task<ApiResponse<bool>> UpdateTestCase(int id, TestCaseExerciseUpdateDto testCaseExerciseUpdateDto)
         {
             try
             {
-                await _unitOfWork.TestCaseRepository.UpdateAsync(id, _mapper.Map<TestCase>(testCaseUpdateDto));
-                await _unitOfWork.SaveAsync();
+                var testCaseInDb = await _testCaseRepository.GetByIdAsync(id);
+                if (testCaseExerciseUpdateDto.InputData != null)
+                {
+                    testCaseInDb.InputData = await HandleFile.Upload("Inputs", testCaseExerciseUpdateDto.InputData);
+                }
+                if (testCaseExerciseUpdateDto.ExpectedOutput != null)
+                {
+                    testCaseInDb.ExpectedOutput = await HandleFile.Upload("Outputs", testCaseExerciseUpdateDto.ExpectedOutput);
+                }
+
+                testCaseInDb.IsLock = testCaseExerciseUpdateDto.IsLock;
+                _testCaseRepository.Update(testCaseInDb);
+                await _testCaseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

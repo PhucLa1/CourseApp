@@ -4,12 +4,7 @@ using Dtos.Models.ExerciseModels;
 using Dtos.Results;
 using Dtos.Results.ExerciseResults;
 using Microsoft.EntityFrameworkCore;
-using Repositories.unitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Repositories.Repositories.Base;
 
 namespace Services.Exercises
 {
@@ -20,19 +15,21 @@ namespace Services.Exercises
     }
     public class ExerciseCommentService : IExerciseCommentService
     {
-        private IUnitOfWork _unitOfWork;
+        private IBaseRepository<ExerciseComment> _exerciseCommentRepository;
+        private IBaseRepository<User> _userRepository;
         private readonly IMapper _mapper;
-        public ExerciseCommentService(IUnitOfWork unitOfWork, IMapper mapper)
+        public ExerciseCommentService(IBaseRepository<ExerciseComment> exerciseCommentRepository, IBaseRepository<User> userRepository, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
+            _exerciseCommentRepository = exerciseCommentRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
         public async Task<ApiResponse<List<CommentExerciseDto>>> GetExerciseComment(int exerciseId)
         {
             try
             {
-                var query = from ec in _unitOfWork.ExerciseCommentRepository.GetByExerciseId(exerciseId)
-                            join u in _unitOfWork.UserRepository.GetAllQueryAble()
+                var query = from ec in _exerciseCommentRepository.GetAllQueryAble().Where(e => e.ExerciseId == exerciseId)
+                            join u in _userRepository.GetAllQueryAble()
                             on ec.CreatedBy equals u.Id
                             orderby ec.CreatedAt descending
                             select new CommentExerciseDto
@@ -53,8 +50,8 @@ namespace Services.Exercises
         {
             try
             {
-                await _unitOfWork.ExerciseCommentRepository.AddAsync(_mapper.Map<ExerciseComment>(commentAddDto));
-                await _unitOfWork.SaveAsync();
+                await _exerciseCommentRepository.AddAsync(_mapper.Map<ExerciseComment>(commentAddDto));
+                await _exerciseCommentRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
             }
             catch (Exception ex)

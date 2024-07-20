@@ -57,5 +57,17 @@ namespace CourseForSFIT.Controllers
         {
             return Ok(await _tagExerciseService.AddTagExercise(tagExerciseAddDto));
         }
+        [HttpPost]
+        [Route("add-data-sample")]
+        public async Task<IActionResult> AddDataSample()
+        {
+            return Ok(await _tagExerciseService.AddDataSample());
+        }
+        [HttpGet]
+        [Route("get-tags-exericse-by-exercise-id/{exerciseId}")]
+        public async Task<IActionResult> GetTagExercisesByExerciseId(int exerciseId)
+        {
+            return Ok(await _tagExerciseService.GetTagExercisesByExerciseId(exerciseId));
+        }
     }
 }

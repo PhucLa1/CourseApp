@@ -13,7 +13,7 @@ namespace Dtos.Results.ExerciseResults
         public string? Description { get; set; }
 
         [JsonProperty("constraints")]
-        public string Constraints { get; set; }
+        public string? Constraints { get; set; }
 
         [JsonProperty("input_format")]
         public string? InputFormat { get; set; }

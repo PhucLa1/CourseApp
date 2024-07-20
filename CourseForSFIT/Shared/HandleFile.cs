@@ -21,7 +21,7 @@ namespace Shared
                 var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
                 fileName = DateTime.Now.Ticks.ToString() + extension + folder;
 
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), folder);
 
                 // Tạo thư mục nếu chưa tồn tại
                 if (!Directory.Exists(filePath))

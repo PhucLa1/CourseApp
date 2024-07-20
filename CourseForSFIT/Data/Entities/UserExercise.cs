@@ -18,8 +18,15 @@ namespace Data.Entities
         public required string ContentCode { get; set; }
         [Column("success_rate")]
         public string? SuccessRate { get; set; }
+
         [Column("is_success")]
         public bool IsSuccess { get; set; }
+        [Column("language")]
+        public string? Language { get; set; }
+        [Column("version")]
+        public string? Version { get; set; }
+        [Column("avatar")]
+        public string? Avatar { get; set; }
 
     }
 }

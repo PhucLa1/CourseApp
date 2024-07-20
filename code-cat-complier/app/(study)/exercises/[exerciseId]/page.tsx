@@ -21,15 +21,16 @@ import Topic from '@/app/(study)/exercises/[exerciseId]/_components/Topic';
 import { ListSubmission } from './_components/ListSubmission';
 import { Button } from '@/components/ui/button';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { GetCommentExercise, GetTopicExercise } from '@/apis/exercises.api';
+import { GetCommentExercise, GetContentCodes, GetTestCaseExerciseNotLock, GetTopicExercise, GetUserSubmision, SolveTestCase } from '@/apis/exercises.api';
 import Loading from '@/components/Loading';
 import Comments from './_components/Comments';
 
 
 
+
 export default function page({ params }: { params: { exerciseId: number } }) {
     const { theme } = useTheme()
-    const [sourceCode, setSourceCode] = useState(codeSnippets["javascript"])
+    const [sourceCode, setSourceCode] = useState<string>("")
     const editorRef = useRef(null);
     const [languageOption, setLanguageOption] = useState(languageOptions[0])
     //const language = languageOption.language
@@ -39,6 +40,10 @@ export default function page({ params }: { params: { exerciseId: number } }) {
     const [testCase, setTestCase] = useState<testCase>(TestCaseData[0])
     const [contentIndex, setContentIndex] = useState(1)
     const [addComment, setAddComment] = useState<number>(0)
+    const [runOutput, setRunOutput] = useState<boolean[]>([])
+    const [currentPage, setCurrentPage] = useState<number>(1)
+    const [solve, setSolve] = useState<number>(0)
+    const [check, setCheck] = useState<number>(0)
 
 
     function handleEditorDidMount(editor: any) {
@@ -50,7 +55,7 @@ export default function page({ params }: { params: { exerciseId: number } }) {
             setSourceCode(value)
         }
     }
-    function onSelect(value: selectedLanguageOptionProps) {
+    function onSelect(value: selectedLanguageOptionProps | any) {
         setLanguageOption(value)
         setSourceCode(codeSnippets[value.language])
     }
@@ -98,6 +103,12 @@ export default function page({ params }: { params: { exerciseId: number } }) {
         //console.log('output', output)
 
     }
+    const onClickPaginate = (page: number) => {
+        setCurrentPage(page)
+    }
+    const onCheck = () => {
+        setCheck(check == 1 ? 0 : 1)
+    }
 
     //Gọi API
     const { data: dataTopic, isLoading: isLoadingTopic } = useQuery({
@@ -108,9 +119,52 @@ export default function page({ params }: { params: { exerciseId: number } }) {
         queryKey: ['comment-exercises', params.exerciseId, addComment],
         queryFn: () => GetCommentExercise(params.exerciseId)
     })
+    const { data: dataTestCase, isLoading: isLoadingTestCase } = useQuery({
+        queryKey: ['test-cases', params.exerciseId],
+        queryFn: () => GetTestCaseExerciseNotLock(params.exerciseId)
+    })
+    const { data: dataContentCodes, isLoading: isLoadingContentCodes, isSuccess } = useQuery({
+        queryKey: ['content-codes', params.exerciseId],
+        queryFn: () => GetContentCodes(params.exerciseId)
+    })
+    const { data: dataSubmission, isLoading: isLoadingSubmission } = useQuery({
+        queryKey: ['data-submission', solve, check, currentPage],
+        queryFn: () => GetUserSubmision(params.exerciseId, check, currentPage)
+    })
+    const { mutate: mutateRun, isPending: isPendingRun } = useMutation({
+        mutationFn: () => {
+            return SolveTestCase({
+                exerciseId: params.exerciseId,
+                contentCode: sourceCode,
+                language: languageOption.language,
+                version: languageOption.version,
+                avatar: languageOption.avatar
+            })
+        },
+        onSuccess(data) {
+            if (data.data.isSuccess == true) {
+                toast.success("Đã vượt qua tất cả các test case")
+            }
+            setRunOutput(data.data.metadata)
+            setSolve(solve + 1)
+        },
+    })
+    useEffect(() => {
+        if (dataContentCodes) {
+            setSourceCode(dataContentCodes.data.metadata.contentCode ?? codeSnippets['javascript']);
+            setLanguageOption({
+                language: dataContentCodes.data.metadata.language ?? languageOptions[0].language,
+                version: dataContentCodes.data.metadata.version ?? languageOptions[0].version,
+                avatar: dataContentCodes.data.metadata.avatar ?? languageOptions[0].avatar,
+                aliases: [],
+                runtime: ""
+            });
+
+        }
+    }, [dataContentCodes]);
     return (
         <div className='min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8'>
-            {isLoadingTopic || isLoadingComment ? <Loading /> : <></>}
+            {isLoadingTopic || isLoadingComment || isLoadingTestCase || isLoadingContentCodes ? <Loading /> : <></>}
             <div className="flex items-center justify-between pb-3">
                 <h2 className='scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0'>UTC - SFIT</h2>
                 <div className="flex items-center space-x-2">
@@ -127,9 +181,17 @@ export default function page({ params }: { params: { exerciseId: number } }) {
                 >
                     <ResizablePanel className='' defaultSize={40} minSize={35}>
                         <MenuBar onSelectContent={handleSelectContent} />
-                        {contentIndex == 1 && <Topic content={dataTopic?.data.metadata ?? "Xin chao"} />}
+                        {contentIndex == 1 && <Topic content={dataTopic?.data.metadata ?? {
+                            description: '',
+                            constraints: '',
+                            inputFormat: '',
+                            outputFormat: '',
+                            input: [],
+                            output: [],
+                            explaintation: ''
+                        }} />}
                         {contentIndex == 2 && <Comments onAddComment={onAddComment} commentExercise={dataComment?.data.metadata} exerciseId={params.exerciseId} />}
-                        {contentIndex == 3 && <ListSubmission />}
+                        {dataSubmission?.data.metadata && contentIndex == 3 && <ListSubmission checked={check} onCheck={onCheck} data={dataSubmission?.data.metadata} onClickPaginate={onClickPaginate} />}
                         {contentIndex == 4 && 4}
                     </ResizablePanel>
                     <ResizableHandle withHandle />
@@ -159,10 +221,13 @@ export default function page({ params }: { params: { exerciseId: number } }) {
                                             <Play className='w-4 h-4 mr-2'></Play>
                                             <span>Chạy thử</span>
                                         </Button>)}
-                                        <Button size={"sm"} className='dark:bg-green-600 dark:hover:bg-green-700 text-slate-100 bg-slate-800 hover:bg-slate-900 ml-1'>
+                                        {isPendingRun ? (<Button disabled size={"sm"} className='dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900'>
+                                            <Loader className='w-4 h-4 mr-2 animate-spin'></Loader>
+                                            <span>Running please wait ...</span>
+                                        </Button>) : <Button onClick={() => mutateRun()} size={"sm"} className='dark:bg-green-600 dark:hover:bg-green-700 text-slate-100 bg-slate-800 hover:bg-slate-900 ml-1'>
                                             <Play className='w-4 h-4 mr-2'></Play>
                                             <span>Nộp bài</span>
-                                        </Button>
+                                        </Button>}
                                     </div>
                                 </div>
                                 <div className="flex-1 flex flex-col">
@@ -172,13 +237,26 @@ export default function page({ params }: { params: { exerciseId: number } }) {
                                     <span className='text-sm'>Vui lòng chạy thử code của bạn trước</span>
                                     <div className="flex-1 flex items-center justify-center h-full">
                                         <ul className='w-1/5 overflow-y-auto  h-[90%] overflow-x-hidden'>
-                                            {TestCaseData.map((item, index) => {
+                                            {dataTestCase?.data.metadata.testCaseDtos.map((item, index) => {
                                                 return (
-                                                    <li key={item.id} onClick={() => handleChangeContent(index)} className='mx-2 my-1 w-full text-sm text-clip'>
+                                                    <li key={index} onClick={() => handleChangeContent(index)} className='mx-2 my-1 w-full text-sm text-clip'>
                                                         <Button variant="outline">
-                                                            <img src={item.isLock ? '/logo/lock.png' : '/logo/unlock.png'} className="mr-2 h-4 w-4" />
+                                                            <img src='/logo/unlock.png' className="mr-2 h-4 w-4" />
                                                             Kiểm thử {index + 1}
-                                                            {output != null && <img src={output == testCase.expectOutput ? '/logo/correct.png' : '/logo/cross.png'} className="ml-2 h-4 w-4" />}
+                                                            {runOutput[index] != null && <img src={runOutput[index] == true ? '/logo/correct.png' : '/logo/cross.png'} className="ml-2 h-4 w-4" />}
+                                                        </Button>
+                                                    </li>
+                                                )
+                                            })}
+                                            {dataTestCase?.data.metadata.totalTestCaseLockCounts.map((item, index) => {
+                                                const length = dataTestCase?.data.metadata.testCaseDtos.length
+                                                console.log(runOutput[index + length], index + length)
+                                                return (
+                                                    <li key={index} onClick={() => handleChangeContent(index)} className='mx-2 my-1 w-full text-sm text-clip'>
+                                                        <Button variant="outline">
+                                                            <img src='/logo/lock.png' className="mr-2 h-4 w-4" />
+                                                            Kiểm thử {index + 1}
+                                                            {runOutput[index + length] != null && <img src={runOutput[index + length] == true ? '/logo/correct.png' : '/logo/cross.png'} className="ml-2 h-4 w-4" />}
                                                         </Button>
                                                     </li>
                                                 )

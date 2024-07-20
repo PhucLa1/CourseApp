@@ -39,9 +39,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Provider>
-            {/* <CurrentUserProvider> */}
+            <CurrentUserProvider>
               {children}
-            {/* </CurrentUserProvider> */}
+            </CurrentUserProvider>
           </Provider>
         </ThemeProvider>
       </body>

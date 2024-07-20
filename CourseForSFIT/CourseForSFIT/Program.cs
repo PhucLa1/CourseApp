@@ -1,19 +1,17 @@
 ﻿using Data.Data;
+using Data.Jwt;
+using Data.Mapping;
+using Data.MappingProfile;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Data.Jwt;
-using authen_service.UnitOfWork;
 using Repositories.Repositories.Base;
-using Repositories.Repositories.IRepo;
-using Repositories.Repositories.Repo;
-using Repositories.unitOfWork;
-using Services.Users;
-using Data.Mapping;
 using Services.Exercises;
-using Data.MappingProfile;
 using Services.TestCases;
+using Services.Users;
+using Shared.Configs;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +21,8 @@ builder.Services.AddDbContext<CourseForSFITContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CourseForSFITContext")));
 
 builder.Services.AddHttpClient();
-
+var provider = new FileExtensionContentTypeProvider();
+provider.Mappings[".outOutputs"] = "application/octet-stream";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
@@ -36,17 +35,12 @@ builder.Services.AddCors(options =>
 });
 
 
-//Unit Of Work
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 //Repositories
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITagExerciseRepository, TagExerciseRepository>();
-builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
-builder.Services.AddScoped<IExerciseCommentRepository, ExerciseCommentRepository>();
-builder.Services.AddScoped<ITestCaseRepository, TestCaseRepository>();
-builder.Services.AddScoped<IUserExerciseRepository, UserExerciseRepository>();
+builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
 
 //Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -56,12 +50,16 @@ builder.Services.AddScoped<IExerciseService, ExerciseService>();
 builder.Services.AddScoped<IExerciseCommentService, ExerciseCommentService>();
 builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<ISolveTestCaseService, SolveTestCaseService>();
+builder.Services.AddScoped<IUserExerciseService, UserExerciseService>();
 
 //Mapper
 builder.Services.AddAutoMapper(typeof(UserMapper));
 builder.Services.AddAutoMapper(typeof(ExerciseMapper));
 builder.Services.AddAutoMapper(typeof(TestCaseMapper));
 
+
+//Setting
+builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("Email"));
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -109,9 +107,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseJwtMiddleware();
 app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
+app.UseJwtMiddleware();
 app.UseCors("AllowOrigin");
 app.UseAuthentication();
 app.UseAuthorization();

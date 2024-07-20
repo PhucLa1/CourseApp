@@ -53,13 +53,14 @@ type Value = {
     label: any,
     value: any
 }
-export default function ReactSelect({ value, onHandleTagIds }: { value: Value[], onHandleTagIds: (data: number[]) => void }) {
+export default function ReactSelect({ value, onHandleTagIds, defaultValue }: { value: Value[], onHandleTagIds: (data: number[]) => void, defaultValue: Value[] }) {
     const HandleTagIds = (newValue: Value[]) => {
         const dataReturn: number[] = newValue.map((item) => item.value);
         onHandleTagIds(dataReturn) // Kiểm tra xem giá trị đã chuyển đổi thành số chưa
     };
     return (
         <Select
+            defaultValue={defaultValue}
             onChange={(e) => HandleTagIds(e)}
             closeMenuOnSelect={false}
             components={animatedComponents}

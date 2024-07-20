@@ -916,6 +916,10 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("avatar");
+
                     b.Property<string>("ContentCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -937,6 +941,10 @@ namespace Data.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("is_success");
 
+                    b.Property<string>("Language")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("language");
+
                     b.Property<string>("SuccessRate")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("success_rate");
@@ -952,6 +960,10 @@ namespace Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("user_id");
+
+                    b.Property<string>("Version")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("version");
 
                     b.HasKey("Id");
 

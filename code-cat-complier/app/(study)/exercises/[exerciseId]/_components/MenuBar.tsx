@@ -31,16 +31,13 @@ export default function MenuBar({ onSelectContent }: Props) {
     return (
         <Menubar className="">
             <MenubarMenu>
-                <MenubarTrigger onClick={() => handleClick(1)} className="menubar w-1/4 text-center bg-gray-700">Đề bài</MenubarTrigger>
+                <MenubarTrigger onClick={() => handleClick(1)} className="menubar w-1/3 text-center bg-gray-700">Đề bài</MenubarTrigger>
             </MenubarMenu>
             <MenubarMenu>
-                <MenubarTrigger onClick={() => handleClick(2)} className="menubar w-1/4 text-center">Bình luận</MenubarTrigger>
+                <MenubarTrigger onClick={() => handleClick(2)} className="menubar w-1/3 text-center">Bình luận</MenubarTrigger>
             </MenubarMenu>
             <MenubarMenu>
-                <MenubarTrigger onClick={() => handleClick(3)} className="menubar w-1/4 text-center">Danh sách</MenubarTrigger>
-            </MenubarMenu>
-            <MenubarMenu>
-                <MenubarTrigger onClick={() => handleClick(4)} className="menubar w-1/4 text-center">Các lần giải</MenubarTrigger>
+                <MenubarTrigger onClick={() => handleClick(3)} className="menubar w-1/3 text-center">Danh sách</MenubarTrigger>
             </MenubarMenu>
         </Menubar>
     )
