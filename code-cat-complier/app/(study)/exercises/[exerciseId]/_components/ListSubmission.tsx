@@ -20,366 +20,60 @@ import {
 } from "@/components/ui/pagination"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../../../../../components/ui/select"
 import { useState } from "react"
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV008",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV009",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV010",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV011",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV012",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV013",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV014",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV015",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV016",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV017",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV018",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV019",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV020",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV021",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV022",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV023",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV024",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV025",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV026",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV027",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV028",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV029",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV030",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV031",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV032",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV033",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV034",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV035",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV036",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV037",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV038",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV039",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV040",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV041",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV042",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
+import { Checkbox } from "@/components/ui/checkbox"
+import Paginations from "@/components/Pagination"
+import { useQuery } from "@tanstack/react-query"
+import { GetUserSubmision } from "@/apis/exercises.api"
+import { PagedResult } from "@/model/PagedResult"
+import { Check } from "lucide-react"
+import moment from "moment"
 
 
-export function ListSubmission() {
-    const [currentPage, setCurrentPage] = useState(1)
-    const [rows, setRows] = useState(5)
-    const totalRecords = invoices.length
-    let numberPages = Math.ceil(totalRecords / rows)
-    console.log(totalRecords, numberPages)
-    let numberPagesArray = [];
-
-    for (let i = 0; i < numberPages; i++) {
-        numberPagesArray.push(i + 1);
-    }
-
-    let firstPage = currentPage < numberPages - 3 ? currentPage - 1 : numberPages - 5
-    let thirdPage = currentPage < numberPages - 3 ? currentPage + 2 : numberPages - 2
-
+type Props = {
+    data: PagedResult,
+    onClickPaginate: (page: number) => void,
+    onCheck: () => void,
+    checked: number
+}
+moment.locale('vi');
+export function ListSubmission({ data, onClickPaginate, onCheck,checked }: Props) {
     return (
         <div>
-            <Select defaultValue="5" onValueChange={(value) => {
-                setRows(Number(value))
-                setCurrentPage(1)
-            }}>
-                <SelectTrigger className="w-[90px] h-[40px] mt-4 ml-2">
-                    <SelectValue placeholder="Dòng" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectGroup>
-                        <SelectLabel>Số dòng</SelectLabel>
-                        <SelectItem value="5">5</SelectItem>
-                        <SelectItem value="10">10</SelectItem>
-                        <SelectItem value="25">25</SelectItem>
-                        <SelectItem value="50">50</SelectItem>
-                        <SelectItem value="100">100</SelectItem>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
-            <Table className="mt-2 border border-gray rounded-md overflow-auto h-[350px]">
+            <div className="mt-10">
+                <h2 className="text-[18px] font-bold text-center">Danh sách giải bài tập</h2>
+            </div>
+            <div className="flex items-center space-x-2 mt-4 ml-4">
+                <Checkbox checked={checked == 1 ? true : false} id="terms" onCheckedChange={() => onCheck()} />
+                <label
+                    htmlFor="terms"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    Chỉ hiển thị bài làm của tôi
+                </label>
+            </div>
+            <Table className="mt-4 border border-gray rounded-md ">
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[100px]">STT</TableHead>
+                        <TableHead></TableHead>
                         <TableHead>Tên</TableHead>
-                        <TableHead>Lớp</TableHead>
+                        <TableHead>Thời gian nộp</TableHead>
                         <TableHead className="text-right">Điểm</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {invoices.slice((currentPage - 1) * rows, currentPage * rows).map((invoice) => (
-                        <TableRow key={invoice.invoice}>
-                            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                            <TableCell>{invoice.paymentStatus}</TableCell>
-                            <TableCell>{invoice.paymentMethod}</TableCell>
-                            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+                    {data.items?.map((item: any, index) => (
+                        <TableRow key={index}>
+                            <TableCell className="font-medium">{index + 1}</TableCell>
+                            <TableCell>{item.avatar}</TableCell>
+                            <TableCell>{item.fullName}</TableCell>
+                            <TableCell>{moment(item.createdAt).format('dddd, DD-MM-YYYY HH:mm:ss')}</TableCell>
+                            <TableCell className={`text-[${item.isSuccess == true ? "#7bc043" : "#faa05e"}] text-right`}>{item.successRate}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-            <Pagination className="rounded-md w-2/3 ml-28 mt-2">
-                <PaginationContent>
-                    {
-                        currentPage > 1 &&  < PaginationItem onClick={() => setCurrentPage(currentPage - 1)}>
-                            <PaginationPrevious href="#" />
-                        </PaginationItem>
-                    }
-                    {
-                        numberPagesArray.slice(firstPage, thirdPage).map((page) => {
-                            if (currentPage == page) {
-                                return <PaginationItem onClick={() => setCurrentPage(page)} key={page}>
-                                    <PaginationLink isActive href="#">{page}</PaginationLink>
-                                </PaginationItem>
-                            }
-                            else {
-                                return <PaginationItem onClick={() => setCurrentPage(page)} key={page}>
-                                    <PaginationLink href="#">{page}</PaginationLink>
-                                </PaginationItem>
-                            }
-                        })
-
-                    }
-
-                    {
-                        numberPages > 3 && currentPage < numberPages - 4 && <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                    }
-                    {
-                        numberPagesArray.slice(numberPages - 2, numberPages + 1).map((page) => {
-                            if (currentPage == page) {
-                                return <PaginationItem onClick={() => setCurrentPage(page)} key={page}>
-                                    <PaginationLink isActive href="#">{page}</PaginationLink>
-                                </PaginationItem>
-                            }
-                            else {
-                                return <PaginationItem onClick={() => setCurrentPage(page)} key={page}>
-                                    <PaginationLink href="#">{page}</PaginationLink>
-                                </PaginationItem>
-                            }
-                        })
-                    }
-                    {
-                        currentPage != numberPages && invoices.length != 0 && <PaginationItem onClick={() => setCurrentPage(currentPage + 1)}>
-                            <PaginationNext href="#" />
-                        </PaginationItem>
-                    }
-                </PaginationContent>
-            </Pagination>
+            <Paginations onClickPaginate={onClickPaginate} pagedResult={data} />
         </div >
 
 

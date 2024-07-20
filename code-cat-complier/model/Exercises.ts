@@ -1,6 +1,6 @@
 export type TagExercise = {
     id: number,
-    tagName:string
+    tagName: string
 }
 
 export type AdminTagExercise = TagExercise & {
@@ -17,16 +17,16 @@ export type TagExerciseAdd = {
 
 export type Exercise = {
     id: number,
-    exerciseName:string,
-    difficultLevel:number
-    numberParticipants:number
+    exerciseName: string,
+    difficultLevel: number
+    numberParticipants: number
     successRate: number
 }
 export type AdminExercise = {
     id: number,
-    exerciseName:string,
-    difficultLevel:number
-    numberParticipants:number
+    exerciseName: string,
+    difficultLevel: number
+    numberParticipants: number
     successRate: number,
     tags: string[]
 }
@@ -38,14 +38,63 @@ export type ExerciseRequest = {
     name?: string
 }
 export type CommentExercise = {
-    content:string,
-    userName:string,
+    content: string,
+    userName: string,
     userAvatar: string
 }
 export type CommentExerciseAdd = {
-    content:string,
+    content: string,
     exerciseId: number
 }
+
+export type ContentExercise = {
+    description: string;
+    constraints: string;
+    inputFormat: string;
+    outputFormat: string;
+    input: string[];
+    output: string[];
+    explaintation: string;
+}
+
+
+export type TestCase = {
+    id:number;
+    inputData?: string;
+    exerciseId: number;
+    expectedOutput: string;
+    isLock: boolean
+};
+export type TestCaseNotLock = {
+    testCaseDtos: TestCase[]
+    totalTestCaseLockCounts: string[]
+}
+
+export type ExerciseCode = {
+    exerciseId: number;
+    contentCode: string;
+    language: string;
+    version: string;
+    avatar:string
+};
+
+export type ContentCodes = {
+    contentCode?: string;
+    language?: string;
+    version?: string;
+    avatar?: string;
+}
+
+export type TopicExercise =  {
+    topicExercise: ContentExercise
+    exerciseName: string,
+    difficult: number
+}
+
+export type ExerciseUpdate = TopicExercise & {
+    tagIds?: number[]
+}
+
 
 export type ExerciseDto = Exercise
 

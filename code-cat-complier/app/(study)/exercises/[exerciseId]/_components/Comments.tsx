@@ -20,10 +20,16 @@ export default function Comments({ commentExercise, exerciseId, onAddComment }: 
     const [value, setValue] = useState<string>('');
     const [isComment, setIsComment] = useState<boolean>(false)
     const { mutate, isPending } = useMutation({
-        mutationFn: () => PostCommentExercise({
-            content: value,
-            exerciseId: exerciseId
-        }),
+        mutationFn: () => {
+            console.log({
+                content: value,
+                exerciseId: exerciseId
+            })
+            return PostCommentExercise({
+                content: value,
+                exerciseId: exerciseId
+            })
+        },
         onSuccess: (data) => {
             if (data.data.isSuccess) {
                 toast.success("Thêm bình luận thành công")

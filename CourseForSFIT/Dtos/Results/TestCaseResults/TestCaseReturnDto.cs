@@ -9,6 +9,6 @@ namespace Dtos.Results.TestCaseResults
     public class TestCaseReturnDto
     {
         public List<TestCaseDto>? testCaseDtos { get; set; }
-        public int totalTestCaseCount { get; set; }
+        public string[]? totalTestCaseLockCounts { get; set; }
     }
 }

@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Dtos.Models.AuthModels;
+using Dtos.Models.EmailModels;
+using Dtos.Results;
+using Dtos.Results.AuthResults;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Repositories.Repositories.IRepo;
-using Repositories.unitOfWork;
+using Newtonsoft.Json;
+using Repositories.Repositories.Base;
+using Shared;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using Dtos.Results;
-using Google.Apis.Auth;
-using Newtonsoft.Json;
-using Shared;
-using Dtos.Models.AuthModels;
-using Dtos.Models.EmailModels;
-using Dtos.Results.AuthResults;
 
 
 namespace Services.Users
@@ -33,8 +33,7 @@ namespace Services.Users
     }
     public class AuthService : IAuthService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserRepository userRepository;
+        private readonly IBaseRepository<User> _userRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
@@ -42,7 +41,8 @@ namespace Services.Users
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public AuthService(IUnitOfWork unitOfWork,
+        public AuthService(
+            IBaseRepository<User> userRepository,
             IMapper mapper,
             IConfiguration configuration,
             HttpClient httpClient,
@@ -50,8 +50,7 @@ namespace Services.Users
             IHttpContextAccessor httpContextAccessor
             )
         {
-            _unitOfWork = unitOfWork;
-            userRepository = unitOfWork.UserRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
             _configuration = configuration;
             _httpClient = httpClient;
@@ -63,7 +62,7 @@ namespace Services.Users
         {
             try
             {
-                User? userEmail = await userRepository.FindUserByEmail(userSignup.Email);
+                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == userSignup.Email).FirstOrDefaultAsync();
                 if (userSignup.RePassword != userSignup.Password)
                 {
                     return new ApiResponse<string> { Message = ["Mật khẩu và nhập lại mật khẩu không giống nhau"] };
@@ -77,10 +76,9 @@ namespace Services.Users
                 user.Password = BCrypt.Net.BCrypt.HashPassword(userSignup.Password);
                 user.Role = 1;
                 user.JoinDate = DateTime.UtcNow;
-                await userRepository.AddAsync(user);
-                await _unitOfWork.SaveAsync();
-                User? userAdd = await userRepository.FindUserByEmail(userSignup.Email);
-                string token = await JWTGenerator(userAdd);
+                await _userRepository.AddAsync(user);
+                await _userRepository.SaveChangeAsync();
+                string token = await JWTGenerator(user);
                 return new ApiResponse<string> { Metadata = token, IsSuccess = true };
             }
             catch (Exception ex)
@@ -93,7 +91,7 @@ namespace Services.Users
             try
             {
                 int currentUserId = _httpContextAccessor.HttpContext.Items["UserId"] == null ? 0 : int.Parse(_httpContextAccessor.HttpContext.Items["UserId"] as string);
-                return new ApiResponse<UserDto> { IsSuccess = true, Metadata = _mapper.Map<UserDto>(await _unitOfWork.UserRepository.GetByIdAsync(currentUserId)) };
+                return new ApiResponse<UserDto> { IsSuccess = true, Metadata = _mapper.Map<UserDto>(await _userRepository.GetByIdAsync(currentUserId)) };
             }
             catch (Exception ex)
             {
@@ -118,16 +116,15 @@ namespace Services.Users
                 var userContent = await meResponse.Content.ReadAsStringAsync();
                 var userContentObj = JsonConvert.DeserializeObject<FacebookUserInfoResult>(userContent);
 
-                User? userEmail = await userRepository.FindUserByEmail(userContentObj.Email);
+                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == userContentObj.Email).FirstOrDefaultAsync();
                 User user = _mapper.Map<User>(userContentObj);
                 if (userEmail == null)
                 {
                     user.Password = BCrypt.Net.BCrypt.HashPassword(user.Email + DateTime.UtcNow.ToString());
-                    await userRepository.AddAsync(user);
+                    await _userRepository.AddAsync(user);
                     await SendEmail(user.Email);
                 }
-                User? userAdd = await userRepository.FindUserByEmail(user.Email);
-                string token = await JWTGenerator(userAdd);
+                string token = await JWTGenerator(user);
                 return new ApiResponse<string> { IsSuccess = true, Metadata = token };
             }
             catch (Exception ex)
@@ -145,7 +142,7 @@ namespace Services.Users
                     Audience = new List<string> { _configuration["Google:ClientID"] }
                 };
                 var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
-                User? userEmail = await userRepository.FindUserByEmail(payload.Email);
+                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == payload.Email).FirstOrDefaultAsync();
                 User user = new User()
                 {
                     Email = payload.Email,
@@ -158,11 +155,10 @@ namespace Services.Users
                 };
                 if (userEmail == null)
                 {
-                    await userRepository.AddAsync(user);
+                    await _userRepository.AddAsync(user);
                     await SendEmail(user.Email);
                 }
-                User? userAdd = await userRepository.FindUserByEmail(user.Email);
-                string token = await JWTGenerator(userAdd);
+                string token = await JWTGenerator(user);
                 return new ApiResponse<string> { Metadata = token, IsSuccess = true };
             }
             catch (Exception ex)
@@ -220,7 +216,7 @@ namespace Services.Users
         {
             try
             {
-                User? user = await userRepository.FindUserByEmail(userLoginDto.Email);
+                User? user = await _userRepository.GetAllQueryAble().Where(user => user.Email == userLoginDto.Email).FirstOrDefaultAsync();
                 if (user == null)
                 {
                     return new ApiResponse<string> { Message = ["Email không tồn tại"] };
@@ -248,8 +244,10 @@ namespace Services.Users
                 {
                     return new ApiResponse<bool> { Message = ["Mật khẩu và mật khẩu nhập lại không đúng"] };
                 }
-                await userRepository.ChangePassword(resetPassword);
-                await _unitOfWork.SaveAsync();
+                User? user = await _userRepository.GetAllQueryAble().Where(user => user.Email == resetPassword.Email).FirstOrDefaultAsync();
+                user.Password = BCrypt.Net.BCrypt.HashPassword(resetPassword.Password);
+                _userRepository.Update(user);
+                await _userRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
             }
             catch (Exception ex)
@@ -270,7 +268,15 @@ namespace Services.Users
                     Email = email,
                     Code = code
                 };
-                bool isSendEmail = await userRepository.UpdateCodeAndTimeSend(verifyVerificationCodeRequest);
+                bool isSendEmail = true;
+                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == email).FirstOrDefaultAsync();
+                if (userEmail == null)
+                {
+                    isSendEmail = false;
+                }
+                userEmail.Code = verifyVerificationCodeRequest.Code;
+                userEmail.ExpiredTime = DateTime.UtcNow.AddMinutes(15);
+                _userRepository.Update(userEmail);
                 if (isSendEmail)
                 {
                     Email emailSend = new Email()
@@ -280,7 +286,7 @@ namespace Services.Users
                         Body = verifyVerificationCodeRequest.Code,
                     };
                     await _emailSender.SendEmail(emailSend);
-                    await _unitOfWork.SaveAsync();
+                    await _userRepository.SaveChangeAsync();
                     return new ApiResponse<bool> { IsSuccess = true };
                 }
 
@@ -296,7 +302,7 @@ namespace Services.Users
         {
             try
             {
-                User? userEmail = await userRepository.FindUserByEmail(verifyVerificationCodeRequest.Email);
+                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == verifyVerificationCodeRequest.Email).FirstOrDefaultAsync();
                 if (userEmail.Code != verifyVerificationCodeRequest.Code)
                 {
                     return new ApiResponse<bool> { Message = ["Mã code được gửi đi bị sai"] };

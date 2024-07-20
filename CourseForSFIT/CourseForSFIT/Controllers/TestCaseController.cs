@@ -1,7 +1,6 @@
-﻿using Dtos.Models.TestCaseModels;
-using Microsoft.AspNetCore.Http;
+﻿using Dtos.Models.ExerciseModels;
+using Dtos.Models.TestCaseModels;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Repositories.IRepo;
 using Services.TestCases;
 
 namespace CourseForSFIT.Controllers
@@ -29,32 +28,14 @@ namespace CourseForSFIT.Controllers
         {
             return Ok(await _testCaseService.GetAllTestCaseByExerciseId(exerciseId));
         }
-        [HttpPost]
-        [Route("")]
-        public async Task<IActionResult> AddTestCase([FromBody]TestCaseAddDto testCaseAddDto)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            return Ok(await _testCaseService.AddTestCase(testCaseAddDto));
-        }
+ 
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteTestCase(int id)
         {
             return Ok(await _testCaseService.DeleteTestCase(id));
         }
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> UpdateTestCase(int id, [FromBody]TestCaseUpdateDto testCaseUpdateDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            return Ok(await _testCaseService.UpdateTestCase(id, testCaseUpdateDto));
-        }
+
 
         [HttpPost]
         [Route("solve-test-case")]
@@ -65,6 +46,17 @@ namespace CourseForSFIT.Controllers
                 return BadRequest(ModelState);
             }
             return Ok(await _solveTestCaseService.SolveExerciseProblem(testCaseSolve));
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateTestCase(int id, [FromForm] TestCaseExerciseUpdateDto testCaseExerciseUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(await _testCaseService.UpdateTestCase(id, testCaseExerciseUpdateDto));
         }
     }
 }

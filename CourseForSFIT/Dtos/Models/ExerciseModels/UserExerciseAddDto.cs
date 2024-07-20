@@ -14,6 +14,9 @@ namespace Dtos.Models.ExerciseModels
         public required string ContentCode { get; set; }
         public string? SuccessRate { get; set; }
         public bool IsSuccess { get; set; }
+        public string? Avatar { get; set; }
+        public string Language { get; set; }
+        public string Version { get; set; }
 
     }
 }

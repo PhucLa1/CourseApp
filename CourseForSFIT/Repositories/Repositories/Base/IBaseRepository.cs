@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Repositories.Repositories.Base
 {
@@ -6,20 +7,20 @@ namespace Repositories.Repositories.Base
         where T : class
     {
         Task AddAsync(T entity);
-
         Task RemoveAsync(int id);
-
         Task UpdateAsync(int id, T entity);
-
         Task<T> GetByIdAsync(int id);
-
+        void Update(T entity);
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> GetPaginatedAsync(int pageNumber, int pageSize);
         Task<int> GetTotalCountAsync();
-
         IEnumerable<T> GetAll();
         IQueryable<T> GetAllQueryAble();
         Task<TField> GetFieldByIdAsync<TField>(int id, Expression<Func<T, TField>> selector);
         Task AddManyAsync(IEnumerable<T> entities);
+        void UpdateMany(IEnumerable<T> entities);
+        Task<int> SaveChangeAsync();
+        void SaveChange();
+        DbSet<T> GetDbSet();
     }
 }

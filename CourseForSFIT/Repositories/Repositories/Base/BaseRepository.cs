@@ -60,6 +60,12 @@ namespace Repositories.Repositories.Base
                 _dbSet.Remove(res);
             }
         }
+
+        public DbSet<T> GetDbSet()
+        {
+            return _dbSet;
+        }
+
         public async Task<TField> GetFieldByIdAsync<TField>(int id, Expression<Func<T, TField>> selector)
         {
             var res = await _dbSet.Where($"Id == @0", id).Select(selector).FirstOrDefaultAsync();
@@ -80,10 +86,28 @@ namespace Repositories.Repositories.Base
                 _dbSet.Update(res);
             }
         }
+        public void Update(T entity)
+        {
+            _dbSet.Update(entity);
+        }
 
         public async Task AddManyAsync(IEnumerable<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+        }
+
+        public async Task<int> SaveChangeAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
+        public void SaveChange()
+        {
+            _context.SaveChanges();
+        }
+        public void UpdateMany(IEnumerable<T> entities)
+        {
+            _dbSet.UpdateRange(entities);
         }
     }
 }

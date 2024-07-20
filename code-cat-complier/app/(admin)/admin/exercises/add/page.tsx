@@ -21,15 +21,7 @@ import { AddExercise, GetAllTagExercises, } from '@/apis/exercises.api';
 import Loading from '@/components/Loading';
 import toast from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
-type ContentExercise = {
-    description: string,
-    constraints: string,
-    input_format: string,
-    output_format: string,
-    input: string[],
-    output: string[],
-    explaintation: string
-}
+import { ContentExercise } from '@/model/Exercises';
 type TestCase = {
     input: File | null,
     output: File | null,
@@ -39,8 +31,8 @@ export default function page() {
     const [value, setValue] = useState<ContentExercise>({
         description: '',
         constraints: '',
-        input_format: '',
-        output_format: '',
+        inputFormat: '',
+        outputFormat: '',
         input: [],
         output: [],
         explaintation: ''
@@ -144,42 +136,49 @@ export default function page() {
                     reject(new Error("Test case không được để trống"));
                     return;
                 }
-    
+
                 const formData = new FormData();
                 formData.append("exerciseName", exerciseName)
                 formData.append("difficultLevel", difficult.toString())
                 formData.append("contentExercise", JSON.stringify(value))
-    
+
                 tagIds.forEach((item, index) => {
                     formData.append(`tagIds[${index}]`, item.toString());
                 });
-    
+
                 let indexTestCase = 0;
-                testCase.forEach((item) => {
-                    if (item.input !== null) {
+                let canAdd = false;
+                testCase.forEach((item) => {                   
+                    if (item.output !== null && item.input !== null) {
                         formData.append(`testCaseAddDtos[${indexTestCase}].inputData`, item.input);
-                    }
-                    if (item.output !== null) {
                         formData.append(`testCaseAddDtos[${indexTestCase}].expectedOutput`, item.output);
+                        formData.append(`testCaseAddDtos[${indexTestCase}].isLock`, item.isLock.toString());
+                        canAdd = true;
                     }
-                    formData.append(`testCaseAddDtos[${indexTestCase}].isLock`, item.isLock.toString());
                     indexTestCase++;
                 });
-    
                 console.log(formData);
-                resolve(AddExercise(formData));
+                if(canAdd){
+                    resolve(AddExercise(formData));
+                }else{
+                    reject(new Error("Test case không được để trống"));
+                    toast.error("Phải có đầy đủ cả đầu vào và đầu ra, và test case không được để trống")
+                }
+                
             });
         },
         onSuccess(data) {
             toast.success("Thêm bài tập thành công")
             setValue(
-                {description: '',
-                constraints: '',
-                input_format: '',
-                output_format: '',
-                input: [],
-                output: [],
-                explaintation: ''}
+                {
+                    description: '',
+                    constraints: '',
+                    inputFormat: '',
+                    outputFormat: '',
+                    input: [],
+                    output: [],
+                    explaintation: ''
+                }
             )
             setExerciseName("")
             setDifficult(undefined)
@@ -187,7 +186,7 @@ export default function page() {
             setTestCase([])
             setTagIds([])
         },
-        
+
     });
     return (
         <div>
@@ -220,7 +219,7 @@ export default function page() {
                     </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5 ml-4">
                         <Label className='ml-2 mb-2' htmlFor="picture">Lựa chọn nhãn dán</Label>
-                        <ReactSelect onHandleTagIds={HandleTagIds} value={data?.data.metadata.map((tag) => ({
+                        <ReactSelect defaultValue={[]} onHandleTagIds={HandleTagIds} value={data?.data.metadata.map((tag) => ({
                             label: tag.tagName,
                             value: tag.id
                         })) ?? []} />
@@ -245,14 +244,14 @@ export default function page() {
                         <h2 className='text-[16px] text-slate-50 font-bold ml-4'>Định dạng đầu vào</h2>
                         <FontAwesomeIcon onClick={() => updateIsOpen(2, !isOpen[2])} icon={!isOpen[2] ? faAdd : faMinus} className='hover:text-slate-50 cursor-pointer text-[18px] mr-2' />
                     </div>
-                    {isOpen[2] && <ReactQuill value={value.input_format} onChange={(event) => handleChange('input_format', event.toString())} theme="snow" className='w-full  mt-6 rounded-md text-slate-50 text-[14px] ' />}
+                    {isOpen[2] && <ReactQuill value={value.inputFormat} onChange={(event) => handleChange('inputFormat', event.toString())} theme="snow" className='w-full  mt-6 rounded-md text-slate-50 text-[14px] ' />}
                 </div>
                 <div className='output_format border-t  border-gray-500 rounded-md  bg-card mt-4 px-2 py-4 transition-all hover:-translate-y-1.5 hover:shadow-lg'>
                     <div className='flex items-center justify-between'>
                         <h2 className='text-[16px] text-slate-50 font-bold ml-4'>Định dạng đầu ra</h2>
                         <FontAwesomeIcon onClick={() => updateIsOpen(3, !isOpen[3])} icon={!isOpen[3] ? faAdd : faMinus} className='hover:text-slate-50 cursor-pointer text-[18px] mr-2 ' />
                     </div>
-                    {isOpen[3] && <ReactQuill value={value.output_format} onChange={(event) => handleChange('output_format', event.toString())} theme="snow" className='w-full  mt-6 rounded-md text-slate-50 text-[14px]' />}
+                    {isOpen[3] && <ReactQuill value={value.outputFormat} onChange={(event) => handleChange('outputFormat', event.toString())} theme="snow" className='w-full  mt-6 rounded-md text-slate-50 text-[14px]' />}
                 </div>
                 <div className='output border-t  border-gray-500 rounded-md bg-card mt-4 px-2 py-4 transition-all hover:-translate-y-1.5 hover:shadow-lg'>
                     <div className='flex items-center justify-between'>
@@ -317,7 +316,7 @@ export default function page() {
                 </div>
                 <Button variant='default' className='mt-4' onClick={() => mutate()}>Thêm bài tập</Button>
             </div>
-            
+
         </div>
     )
 

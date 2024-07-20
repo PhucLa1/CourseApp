@@ -9,7 +9,7 @@ namespace Dtos.Models.ExerciseModels
 {
     public class TestCaseExerciseAddDto
     {
-        public IFormFile? InputData { get; set; }
+        public required IFormFile InputData { get; set; }
         public required IFormFile ExpectedOutput { get; set; }
         public bool IsLock { get; set; }
     }

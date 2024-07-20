@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
+using CacheManager.Core.Logging;
 using Data.Entities;
-using Dtos.Models.AuthModels;
 using Dtos.Models.ExerciseModels;
 using Dtos.Models.TestCaseModels;
 using Dtos.Results;
 using Dtos.Results.ExerciseResults;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Repositories.unitOfWork;
+using NPOI.SS.Formula.Functions;
+using Repositories.Repositories.Base;
 using Shared;
 
 namespace Services.Exercises
@@ -17,29 +19,72 @@ namespace Services.Exercises
         Task<ApiResponse<PagedResult<ExerciseDto>>> GetExerciseByOptionsPaginated(ExerciseRequest exerciseRequest, int pageNumber = 1, int pageSize = 10);
         Task<ApiResponse<PagedResult<ExerciseAdminDto>>> GetAdminExerciseByOptionsPaginated(ExerciseRequest exerciseRequest, int pageNumber = 1, int pageSize = 10);
         Task<ApiResponse<TopicExercise>> GetTopicExercise(int id);
-        Task<object> Test();
+        Task<ApiResponse<ContentExercise>> GetExerciseInfo(int id);
         Task<ApiResponse<bool>> AddExercise(ExerciseAddDto exerciseAddDto);
         Task<ApiResponse<bool>> DeleteExercise(int id);
+        Task<ApiResponse<bool>> UpdateExercise(int id, ExerciseUpdateDto exerciseUpdateDto);
     }
     public class ExerciseService : IExerciseService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBaseRepository<Exercise> _exerciseRepository;
+        private readonly IBaseRepository<TagExercise> _tagExerciseRepository;
+        private readonly IBaseRepository<ExerciseHasTag> _exerciseHasTagRepository;
+        private readonly IBaseRepository<TestCase> _testCaseRepository;
         private readonly IMapper _mapper;
-        public ExerciseService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ExerciseService(
+            IBaseRepository<Exercise> exerciseRepository,
+            IBaseRepository<TagExercise> tagExerciseRepository,
+            IBaseRepository<ExerciseHasTag> exerciseHasTagRepository,
+            IBaseRepository<TestCase> testCaseRepository,
+            IMapper mapper,
+            IHttpContextAccessor httpContextAccessor)
         {
-            _unitOfWork = unitOfWork;
+            _exerciseRepository = exerciseRepository;
+            _tagExerciseRepository = tagExerciseRepository;
+            _exerciseHasTagRepository = exerciseHasTagRepository;
+            _testCaseRepository = testCaseRepository;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
+        public async Task<ApiResponse<bool>> UpdateExercise(int id, ExerciseUpdateDto exerciseUpdateDto)
+        {
+            try
+            {
+                var exerciseInDb = await _exerciseRepository.GetAllQueryAble().Where(e => e.Id == id).FirstAsync();
+                exerciseInDb.ExerciseName = exerciseUpdateDto.ExerciseName;
+                exerciseInDb.DifficultLevel = exerciseUpdateDto.Difficult;
+                exerciseInDb.ContentExercise = JsonConvert.SerializeObject(exerciseUpdateDto.topicExercise);
+                _exerciseRepository.Update(exerciseInDb);
+                var exerciseHasTagsRemove = await _exerciseHasTagRepository.GetAllQueryAble().Where(e => e.ExerciseId == exerciseInDb.Id).ToListAsync();
+                _exerciseHasTagRepository.GetDbSet().RemoveRange(exerciseHasTagsRemove);
+                if (exerciseUpdateDto.TagIds != null && exerciseUpdateDto.TagIds.Any())
+                {
+                    List<ExerciseHasTagAddDto> exerciseHasTagAddDtos = new List<ExerciseHasTagAddDto>();
+                    foreach (int tagId in exerciseUpdateDto.TagIds)
+                    {
+                        exerciseHasTagAddDtos.Add(new ExerciseHasTagAddDto() { ExerciseId = exerciseInDb.Id, TagExerciseId = tagId });
+                    }
+                    await _exerciseHasTagRepository.AddManyAsync(_mapper.Map<List<ExerciseHasTag>>(exerciseHasTagAddDtos));
+                }
+                await _exerciseRepository.SaveChangeAsync();
+                return new ApiResponse<bool> { IsSuccess = true };
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public async Task<ApiResponse<PagedResult<ExerciseDto>>> GetExerciseByOptionsPaginated(ExerciseRequest exerciseRequest, int pageNumber = 1, int pageSize = 10)
         {
             try
             {
-                IQueryable<Exercise> exercises = _unitOfWork.ExerciseRepository.GetAllQueryAble().Include(e => e.ExerciseHasTags);
+                IQueryable<Exercise> exercises = _exerciseRepository.GetAllQueryAble().Include(e => e.ExerciseHasTags);
                 if (exerciseRequest.TagId != null && exerciseRequest.TagId.Any())
                 {
-                    exercises = exercises.Where(e => e.ExerciseHasTags.Select(e => e.Id).ToList().Intersect(exerciseRequest.TagId).Any());
+                    exercises = exercises.Where(e => e.ExerciseHasTags != null && e.ExerciseHasTags.Select(e => e.TagExerciseId).ToList().Intersect(exerciseRequest.TagId).Any());
                 }
                 if (exerciseRequest.DifficultLevel != null && exerciseRequest.DifficultLevel.Any())
                 {
@@ -64,10 +109,11 @@ namespace Services.Exercises
         {
             try
             {
-                await _unitOfWork.ExerciseRepository.RemoveAsync(id);
-                await _unitOfWork.SaveAsync();
+                await _exerciseRepository.RemoveAsync(id);
+                await _exerciseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -76,19 +122,24 @@ namespace Services.Exercises
         {
             try
             {
-                IQueryable<Exercise> exercises = _unitOfWork.ExerciseRepository.GetAllQueryAble().Include(e => e.ExerciseHasTags);
+                //int userId = _httpContextAccessor.HttpContext.Items["UserId"] == null ? 0 : int.Parse(_httpContextAccessor.HttpContext.Items["UserId"] as string);
+                IQueryable<Exercise> exercises = _exerciseRepository.GetAllQueryAble().Include(e => e.ExerciseHasTags);              
                 if (exerciseRequest.TagId != null && exerciseRequest.TagId.Any())
                 {
-                    exercises = exercises.Where(e => e.ExerciseHasTags.Select(e => e.Id).ToList().Intersect(exerciseRequest.TagId).Any());
+                    exercises = exercises.Where(e => e.ExerciseHasTags != null && e.ExerciseHasTags.Select(e => e.TagExerciseId).AsQueryable().Intersect(exerciseRequest.TagId).Any());
                 }
                 if (exerciseRequest.DifficultLevel != null && exerciseRequest.DifficultLevel.Any())
                 {
                     exercises = exercises.Where(e => exerciseRequest.DifficultLevel.Contains(e.DifficultLevel));
                 }
-                if (1 == 1) //Cái này dành cho phần status sẽ xây dựng sauu
+                /*
+                if (exerciseRequest.Status != null && exerciseRequest.Status.Any()) //Cái này dành cho phần status sẽ xây dựng sauu
                 {
-
-                }
+                    if (exerciseRequest.Status.Contains(1)) //Đã giải
+                    {
+                        exercises = exercises.Where(e => e.UserExercises != null && e.UserExercises.Any(ue => ue.UserId == userId) && e.UserExercises.Where(ue => ue.SuccessRate));
+                    }
+                }*/
                 if (exerciseRequest.Name != null)
                 {
                     exercises = exercises.Where(e => e.ExerciseName.Contains(exerciseRequest.Name));
@@ -100,11 +151,12 @@ namespace Services.Exercises
                     DifficultLevel = e.DifficultLevel,
                     NumberParticipants = e.NumberParticipants,
                     SuccessRate = e.SuccessRate,
-                    Tags = _unitOfWork.TagExerciseRepository.GetAllQueryAble().Where(c => e.ExerciseHasTags.Select(e => e.Id).ToList().Contains(c.Id)).Select(e => e.TagName).ToList()
+                    Tags = e.ExerciseHasTags != null ?_tagExerciseRepository.GetAllQueryAble().Where(c => e.ExerciseHasTags.Select(e => e.TagExerciseId).ToList().Contains(c.Id)).Select(e => e.TagName).ToList() : null
                 }).Skip((pageNumber - 1) * pageSize).Take(pageSize);
-                return new ApiResponse<PagedResult<ExerciseAdminDto>> {
-                    IsSuccess = true, 
-                    Metadata = HandlePagination<ExerciseAdminDto>.PageList(pageNumber, exercises.Count(), pageSize, exerciseAdminDtos) 
+                return new ApiResponse<PagedResult<ExerciseAdminDto>>
+                {
+                    IsSuccess = true,
+                    Metadata = HandlePagination<ExerciseAdminDto>.PageList(pageNumber, exercises.Count(), pageSize, exerciseAdminDtos)
                 };
             }
             catch (Exception ex)
@@ -112,49 +164,43 @@ namespace Services.Exercises
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<object> Test()
-        {
-            return _unitOfWork.ExerciseRepository.GetAllQueryAble().Include(e => e.ExerciseHasTags).Select(e => new
-            {
-                c = e.SuccessRate,
-                m = _unitOfWork.TagExerciseRepository.GetAllQueryAble().Where(c => e.ExerciseHasTags.Select(e => e.Id).ToList().Contains(c.Id)).Select(e => e.TagName).ToList(), 
-            }).ToList();
-        }
         public async Task<ApiResponse<bool>> AddExercise(ExerciseAddDto exerciseAddDto)
         {
             try
             {
                 Exercise exercise = _mapper.Map<Exercise>(exerciseAddDto);
-                await _unitOfWork.ExerciseRepository.AddAsync(exercise);
-                await _unitOfWork.SaveAsync();
-                
+                await _exerciseRepository.AddAsync(exercise);
+                await _exerciseRepository.SaveChangeAsync();
+
                 List<ExerciseHasTagAddDto> exerciseHasTagAddDtos = new List<ExerciseHasTagAddDto>();
                 List<TestCaseAddDto> testCases = new List<TestCaseAddDto>();
-                if(exerciseAddDto.TagIds != null && exerciseAddDto.TagIds.Any())
+                if (exerciseAddDto.TagIds != null && exerciseAddDto.TagIds.Any())
                 {
-                    foreach(int tagId in exerciseAddDto.TagIds)
+                    foreach (int tagId in exerciseAddDto.TagIds)
                     {
                         exerciseHasTagAddDtos.Add(new ExerciseHasTagAddDto() { ExerciseId = exercise.Id, TagExerciseId = tagId });
                     }
-                    await _unitOfWork.ExerciseHasTagRepository.AddManyAsync(_mapper.Map<List<ExerciseHasTag>>(exerciseHasTagAddDtos));
-                    
+                    await _exerciseHasTagRepository.AddManyAsync(_mapper.Map<List<ExerciseHasTag>>(exerciseHasTagAddDtos));
+
                 }
-                if(exerciseAddDto.TestCaseAddDtos != null && exerciseAddDto.TestCaseAddDtos.Any())
+                if (exerciseAddDto.TestCaseAddDtos != null && exerciseAddDto.TestCaseAddDtos.Any())
                 {
                     foreach (TestCaseExerciseAddDto testCaseAddDto in exerciseAddDto.TestCaseAddDtos)
                     {
-                        testCases.Add(new TestCaseAddDto() { 
+                        testCases.Add(new TestCaseAddDto()
+                        {
                             ExerciseId = exercise.Id,
-                            ExpectedOutput = await HandleFile.Upload("Outputs",testCaseAddDto.ExpectedOutput), 
-                            InputData = await HandleFile.Upload("Inputs",testCaseAddDto.InputData), 
-                            IsLock = testCaseAddDto.IsLock 
+                            ExpectedOutput = await HandleFile.Upload("Outputs", testCaseAddDto.ExpectedOutput),
+                            InputData = await HandleFile.Upload("Inputs", testCaseAddDto.InputData),
+                            IsLock = testCaseAddDto.IsLock
                         });
                     }
-                    await _unitOfWork.TestCaseRepository.AddManyAsync(_mapper.Map<List<TestCase>>(testCases));
+                    await _testCaseRepository.AddManyAsync(_mapper.Map<List<TestCase>>(testCases));
                 }
-                await _unitOfWork.SaveAsync();
+                await _testCaseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 var innerException = ex.InnerException?.Message ?? ex.Message;
                 throw new Exception($"An error occurred while saving the entity changes: {innerException}");
@@ -166,9 +212,22 @@ namespace Services.Exercises
         {
             try
             {
-                string topicExercise = await _unitOfWork.ExerciseRepository.GetFieldByIdAsync(id, e => e.ContentExercise);
+                string topicExercise = await _exerciseRepository.GetFieldByIdAsync(id, e => e.ContentExercise);
                 var contentExercise = JsonConvert.DeserializeObject<TopicExercise>(topicExercise);
                 return new ApiResponse<TopicExercise> { IsSuccess = true, Metadata = contentExercise };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public async Task<ApiResponse<ContentExercise>> GetExerciseInfo(int id)
+        {
+            try
+            {
+                var result = await _exerciseRepository.GetAllQueryAble().Where(e => e.Id == id).FirstOrDefaultAsync();
+                var contentExercise = JsonConvert.DeserializeObject<TopicExercise>(result.ContentExercise);
+                return new ApiResponse<ContentExercise> { IsSuccess = true, Metadata = new ContentExercise { ExerciseName = result.ExerciseName, Difficult = result.DifficultLevel, topicExercise = contentExercise } };
             }
             catch (Exception ex)
             {
