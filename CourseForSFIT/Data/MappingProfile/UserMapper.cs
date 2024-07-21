@@ -2,6 +2,7 @@
 using Data.Entities;
 using Dtos.Models.AuthModels;
 using Dtos.Results.AuthResults;
+using Dtos.Results.UserResults;
 
 
 namespace Data.Mapping
@@ -10,6 +11,8 @@ namespace Data.Mapping
     {
         public UserMapper()
         {
+            CreateMap<User, UserInfoDto>()
+                .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
             CreateMap<UserSignUpDto, User>()
                 .ForAllMembers(opt => opt.Condition((src, destination, srcMember) => srcMember != null));
             CreateMap<FacebookUserInfoResult, User>()

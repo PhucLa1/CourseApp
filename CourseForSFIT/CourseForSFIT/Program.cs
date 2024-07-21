@@ -52,10 +52,12 @@ builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<ISolveTestCaseService, SolveTestCaseService>();
 builder.Services.AddScoped<IUserExerciseService, UserExerciseService>();
 
+
 //Mapper
 builder.Services.AddAutoMapper(typeof(UserMapper));
 builder.Services.AddAutoMapper(typeof(ExerciseMapper));
 builder.Services.AddAutoMapper(typeof(TestCaseMapper));
+
 
 
 //Setting

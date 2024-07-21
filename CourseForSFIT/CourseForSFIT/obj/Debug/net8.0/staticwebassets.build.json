@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6qHoaJcZXmDvS0Z/pd3TlREq/k0AGsRXfuqS6r5BeOU=",
+  "Hash": "PG9fkUdD3mSh0ojLVWnC7vcI1s+gF5QX23xUi8Y4Dp4=",
   "Source": "Apis",
   "BasePath": "_content/Apis",
   "Mode": "Default",
@@ -74,12 +74,12 @@
       "OriginalItemSpec": "wwwroot\\Inputs\\638570706800117176.inInputs"
     },
     {
-      "Identity": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638571776211535171.inInputs",
+      "Identity": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638571779345840819.inInputs",
       "SourceId": "Apis",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
       "BasePath": "_content/Apis",
-      "RelativePath": "Inputs/638571776211535171.inInputs",
+      "RelativePath": "Inputs/638571779345840819.inInputs",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,7 +90,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Inputs\\638571776211535171.inInputs"
+      "OriginalItemSpec": "wwwroot\\Inputs\\638571779345840819.inInputs"
     },
     {
       "Identity": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638568564750420745.outOutputs",
