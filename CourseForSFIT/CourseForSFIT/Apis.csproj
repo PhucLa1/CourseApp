@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Inputs\" />
-    <Folder Include="wwwroot\Outputs\" />
   </ItemGroup>
 
 </Project>
