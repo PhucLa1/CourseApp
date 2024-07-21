@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Dtos.Models.TestCaseModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Shared
 {
     public static class HandleFile
     {
-        public static async Task<string> Upload(string folder,IFormFile? file)
+        public static async Task<string> Upload(string folder, IFormFile? file)
         {
             string fileName = "";
             if (file == null)
@@ -47,7 +48,7 @@ namespace Shared
             if (fileName == null)
             {
                 return content;
-            }     
+            }
             try
             {
                 // Đường dẫn chính xác đến tệp
@@ -71,5 +72,33 @@ namespace Shared
             }
             return content;
         }
+
+        public static async Task<bool> DeleteFile(string folder, string fileName)
+        {
+            try
+            {
+                // Kết hợp đường dẫn thư mục và tên file để có đường dẫn chính xác
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder, fileName);
+
+                // Kiểm tra nếu file tồn tại
+                if (File.Exists(filePath))
+                {
+                    // Xóa file
+                    File.Delete(filePath);
+                    return true;
+                }
+                else
+                {
+                    // Nếu file không tồn tại, bạn có thể ném ra ngoại lệ hoặc xử lý logic khác tùy nhu cầu
+                    throw new FileNotFoundException("File not found.", fileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

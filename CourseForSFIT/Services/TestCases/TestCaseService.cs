@@ -88,6 +88,9 @@ namespace Services.TestCases
         {
             try
             {
+                var testCase = await _testCaseRepository.GetAllQueryAble().Where(e => e.Id == id).FirstAsync();
+                await HandleFile.DeleteFile("Inputs", testCase.InputData);
+                await HandleFile.DeleteFile("Outputs", testCase.ExpectedOutput);
                 await _testCaseRepository.RemoveAsync(id);
                 await _testCaseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
@@ -105,13 +108,14 @@ namespace Services.TestCases
                 var testCaseInDb = await _testCaseRepository.GetByIdAsync(id);
                 if (testCaseExerciseUpdateDto.InputData != null)
                 {
+                    await HandleFile.DeleteFile("Inputs", testCaseInDb.InputData);
                     testCaseInDb.InputData = await HandleFile.Upload("Inputs", testCaseExerciseUpdateDto.InputData);
                 }
                 if (testCaseExerciseUpdateDto.ExpectedOutput != null)
                 {
+                    await HandleFile.DeleteFile("Outputs", testCaseInDb.ExpectedOutput);
                     testCaseInDb.ExpectedOutput = await HandleFile.Upload("Outputs", testCaseExerciseUpdateDto.ExpectedOutput);
                 }
-
                 testCaseInDb.IsLock = testCaseExerciseUpdateDto.IsLock;
                 _testCaseRepository.Update(testCaseInDb);
                 await _testCaseRepository.SaveChangeAsync();

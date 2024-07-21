@@ -186,7 +186,7 @@ export default function TestCase({ exerciseId }: { exerciseId: number }) {
             if (testCase[index].input != null && testCase[index].output != null && testCase[index].isLock != null) {
                 console.log(testCase[index].input)
                 formData.append(`inputData`, testCase[index].input)
-                formData.append(`expectedOutput`, testCase[index].input)
+                formData.append(`expectedOutput`, testCase[index].output)
                 formData.append(`isLock`, testCase[index].isLock == true ? "true" : "false")
                 mutateAdd({
                     testCaseAdd: formData,
