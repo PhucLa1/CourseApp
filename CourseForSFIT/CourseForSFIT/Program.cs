@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Repositories.Repositories.Base;
+using Services.Courses;
 using Services.Exercises;
 using Services.TestCases;
 using Services.Users;
@@ -52,6 +53,7 @@ builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<ISolveTestCaseService, SolveTestCaseService>();
 builder.Services.AddScoped<IUserExerciseService, UserExerciseService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICourseTypeService, CourseTypeService>();
 
 
 //Mapper
