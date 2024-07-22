@@ -2,9 +2,10 @@
 import React from 'react'
 import Footer from './_components/Footer/Footer'
 import Header from './_components/Header/Header'
+import Provider from '@/util/Provider'
 
 
-export default function layout({children}:{children: React.ReactNode}) {
+export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className='dark:bg-slate-800 bg-slate-300'>
       <Header />

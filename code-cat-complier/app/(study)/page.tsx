@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import Exercise from './_components/Exercise';
 import Blog from './_components/Blog';
+import { GetCurrentUserInfo } from '@/apis/user.api';
+import { useQuery } from '@tanstack/react-query';
 const CoursePrepareData = [
   {
     id: 1,
@@ -34,7 +36,6 @@ const CoursePrepareData = [
   }
 ];
 export default function HomePage() {
-
   return (
     <div className='pb-12' style={{ minWidth: 'auto', boxSizing: 'border-box', margin: '0 auto', paddingRight: '20px', paddingLeft: '20px', maxWidth: '1240px' }}>
       <section className='section-prepare'>

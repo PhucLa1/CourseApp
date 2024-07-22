@@ -36,6 +36,8 @@ namespace Data.Entities
         public DateTime? ExpiredTime { get; set; }
         [Column("achivements")]
         public string? Achivements { get; set; }
+        [NotMapped]
+        public ICollection<string>? AchivementsDeserialize { get; set; } = new List<string>();
         public ICollection<UserJoin>? UserJoins { get; set; }
         public ICollection<UserExercise>? UserExercises { get; set; }
         public ICollection<CourseUser>? CourseUsers { get; set; }

@@ -13,8 +13,8 @@
       "PackagePath": "staticwebassets\\Inputs\\638570706800117176.inInputs"
     },
     {
-      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638571776211535171.inInputs",
-      "PackagePath": "staticwebassets\\Inputs\\638571776211535171.inInputs"
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638571779345840819.inInputs",
+      "PackagePath": "staticwebassets\\Inputs\\638571779345840819.inInputs"
     },
     {
       "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638568564750420745.outOutputs",
@@ -31,6 +31,10 @@
     {
       "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638571776211526944.outOutputs",
       "PackagePath": "staticwebassets\\Outputs\\638571776211526944.outOutputs"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638572599233876476.png",
+      "PackagePath": "staticwebassets\\Uploads\\638572599233876476.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Apis.Microsoft.AspNetCore.StaticWebAssets.props",
