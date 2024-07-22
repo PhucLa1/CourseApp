@@ -19,8 +19,9 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import Loading from '@/components/Loading'
 import AlertDialogs from '@/components/AlertDialogs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 export default function page() {
   const [IsChecked, setIsChecked] = useState<boolean[]>([])
   const [exerciseRequest, setExerciseRequest] = useState<ExerciseRequest>({})
@@ -124,7 +125,7 @@ export default function page() {
                   <TableCell className={`text-[${item.difficultLevel == 1 ? "#7bc043" : item.difficultLevel == 2 ? "#faa05e" : "#e64f4a"}]`}>{item.difficultLevel == 1 ? "Dễ" : item.difficultLevel == 2 ? "Trung bình" : "Khó"}</TableCell>
                   <TableCell>{item.numberParticipants}</TableCell>
                   <TableCell>%{item.successRate}</TableCell>
-                  <TableCell className='text-left'><div className='flex-wrap h-[25px] overflow-hidden justify-center flex gap-1 text-xs text-[#333]'>
+                  <TableCell><div className='flex-wrap h-[25px] overflow-hidden justify-center flex gap-1 text-xs text-[#333]'>
                     {item.tags.map((tag: any) => {
                       return <div className='bg-[#F5F6F7] px-[2px] h-[25px] flex items-center rounded-md'>{tag}</div>
                     })}
@@ -132,6 +133,7 @@ export default function page() {
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center pl-2'>
+                      <Link href={`exercises/${item.id}`}><FontAwesomeIcon className='ml-6 cursor-pointer hover:text-slate-50' icon={faPen} /></Link>
                       <AlertDialogs
                         trigger={<FontAwesomeIcon className='ml-6 cursor-pointer hover:text-slate-50' icon={faTrash} />}
                         title="Bạn có chắc chắn muốn xóa nhãn dán này không"

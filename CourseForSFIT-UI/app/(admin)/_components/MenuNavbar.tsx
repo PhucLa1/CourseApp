@@ -5,6 +5,22 @@ import './MenuNavbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FactoryIcon } from 'lucide-react'
 import { faBook, faFaceAngry, faTag, faTurnDown } from '@fortawesome/free-solid-svg-icons'
+import { title } from 'process'
+const navBarMenu = [
+  {
+    title: "Quản lí bài tập",
+    content: [
+      { title: "Nhãn dán", link: "/admin/tag-exercise" },
+      { title: "Bài tập", link: "/admin/exercises" },
+    ]
+  },
+  {
+    title: "Quản lí khóa học",
+    content: [
+      { title: "Loại khóa học", link: "/admin/course-type" },
+    ]
+  }
+]
 export default function MenuNavbar() {
   return (
     <aside style={{ width: '270px', borderRight: '1px solid #333f55', flexShrink: 0, background: '#202936', zIndex: 99, transition: '.2s ease-in', position: 'fixed', left: 0, right: 0, height: '100%', display: 'block' }}>
@@ -26,26 +42,24 @@ export default function MenuNavbar() {
                 <div className='simplebar-content-wrapper'>
                   <div className='simplebar-content'>
                     <ul id='sibarnav'>
-                      <li className='nav-small-cap'>
-                        <i className='ti'></i>
-                        <span>Quản lí bài tập</span>
-                      </li>
-                      <li className='side-bar-item hover:text-slate-50'>
-                        <Link className='sidebar-link' href='#'>
-                          <span>
-                            <FontAwesomeIcon icon={faTag} />
-                          </span>
-                          <span>Nhãn dán</span>
-                        </Link>
-                      </li>
-                      <li className='side-bar-item hover:text-slate-50'>
-                        <Link className='sidebar-link' href='#'>
-                          <span>
-                            <FontAwesomeIcon icon={faBook} />
-                          </span>
-                          <span>Bài tập</span>
-                        </Link>
-                      </li>
+                      {navBarMenu.map((item, index) => {
+                        return <div key={index}>
+                          <li className='nav-small-cap'>
+                            <i className='ti'></i>
+                            <span>{item.title}</span>
+                          </li>
+                          {item.content.map((subItem, subIndex) => {
+                            return <li key={subIndex} className='side-bar-item hover:text-slate-50'>
+                              <Link className='sidebar-link' href={subItem.link}>
+                                <span>
+                                  <FontAwesomeIcon icon={faTag} />
+                                </span>
+                                <span>{subItem.title}</span>
+                              </Link>
+                            </li>
+                          })}
+                        </div>
+                      })}
                     </ul>
                   </div>
                 </div>
@@ -60,7 +74,7 @@ export default function MenuNavbar() {
             <div className='simplebar-scrollbar' style={{ height: '77px', transform: 'translate3d(0px, 0px, 0px)', display: 'block' }}></div>
           </div>
         </nav>
-        <div style={{position:'fixed', borderRadius: '7px', backgroundColor: 'rgba(73, 190, 255, 0.1)' }} className='p-3 mb-2 mt-3 mx-4 '>
+        <div style={{ position: 'fixed', borderRadius: '7px', backgroundColor: 'rgba(73, 190, 255, 0.1)' }} className='p-3 mb-2 mt-3 mx-4 '>
           <div className='gap-3 hstack'>
             <div className=''>
               <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-1.jpg" className='rounded-md' width="40" height="40" alt="modernize-img"
@@ -70,8 +84,8 @@ export default function MenuNavbar() {
               <h6 className='mb-0 text-slate-50' style={{ fontSize: '1rem', fontWeight: '600' }}>Mathew</h6>
               <span className='' style={{ fontSize: '0.75rem' }}>Designer</span>
             </div>
-            <button style={{ marginLeft:'4.5rem',backgroundClip:'transparent',border:0 }}>
-              <FontAwesomeIcon icon={faTurnDown}/>
+            <button style={{ marginLeft: '4.5rem', backgroundClip: 'transparent', border: 0 }}>
+              <FontAwesomeIcon icon={faTurnDown} />
             </button>
           </div>
         </div>
