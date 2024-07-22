@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PG9fkUdD3mSh0ojLVWnC7vcI1s+gF5QX23xUi8Y4Dp4=",
+  "Hash": "de+FbL064S1/3HfuyOtIItvR947jU4krpsBnRICDRGM=",
   "Source": "Apis",
   "BasePath": "_content/Apis",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Outputs\\638571776211526944.outOutputs"
+    },
+    {
+      "Identity": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638572599233876476.png",
+      "SourceId": "Apis",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
+      "BasePath": "_content/Apis",
+      "RelativePath": "Uploads/638572599233876476.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\638572599233876476.png"
     }
   ]
 }

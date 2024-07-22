@@ -19,7 +19,7 @@ import CoursePrepare from '../../_components/CoursePrepare'
 export default function CourseProgress() {
     return (
         <div >
-            <Carousel style={{ border: '1px solid #3a3a40', borderRadius: '1rem', background: '#121418', padding: '1.5rem', minWidth: 'auto', maxWidth: '790px', width: '100%', margin: '0px', boxSizing: 'border-box', marginBottom: '30px' }} className="w-full max-w-sm">
+            <Carousel style={{ border: '1px solid #3a3a40', borderRadius: '1rem', background: '#121418', padding: '1.5rem', minWidth: 'auto', maxWidth: '1000px', width: '100%', margin: '0px', boxSizing: 'border-box', marginBottom: '30px' }} className="w-full max-w-sm">
                 <div className='flex items-center justify-between mb-2'>
                     <h3 className='my-0' style={{ fontSize: '18px', lineHeight: 1.4, fontWeight: 700 }}>Các khóa học </h3>
                     <div>

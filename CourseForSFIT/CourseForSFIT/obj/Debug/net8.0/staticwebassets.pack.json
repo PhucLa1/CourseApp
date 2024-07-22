@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\Outputs\\638571776211526944.outOutputs"
     },
     {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638572599233876476.png",
+      "PackagePath": "staticwebassets\\Uploads\\638572599233876476.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Apis.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

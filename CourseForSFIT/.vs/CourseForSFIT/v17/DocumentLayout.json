@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\data\\mappingprofile\\usermapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|solutionrelative:data\\mappingprofile\\usermapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\courseforsfit\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|solutionrelative:courseforsfit\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\users\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\users\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F723F213-54DE-4B7C-B83F-71512EA842EE}|Dtos\\Dtos.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\dtos\\dtos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F723F213-54DE-4B7C-B83F-71512EA842EE}|Dtos\\Dtos.csproj|solutionrelative:dtos\\dtos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\courseforsfit\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|solutionrelative:courseforsfit\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\exercises\\exerciseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\exercises\\exerciseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\data\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|solutionrelative:data\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F723F213-54DE-4B7C-B83F-71512EA842EE}|Dtos\\Dtos.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\dtos\\results\\userresults\\userinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F723F213-54DE-4B7C-B83F-71512EA842EE}|Dtos\\Dtos.csproj|solutionrelative:dtos\\results\\userresults\\userinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F723F213-54DE-4B7C-B83F-71512EA842EE}|Dtos\\Dtos.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\dtos\\models\\usermodels\\userupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F723F213-54DE-4B7C-B83F-71512EA842EE}|Dtos\\Dtos.csproj|solutionrelative:dtos\\models\\usermodels\\userupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,97 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserMapper.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\MappingProfile\\UserMapper.cs",
-              "RelativeDocumentMoniker": "Data\\MappingProfile\\UserMapper.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\MappingProfile\\UserMapper.cs",
-              "RelativeToolTip": "Data\\MappingProfile\\UserMapper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T11:26:50.707Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Users\\AuthService.cs",
-              "RelativeDocumentMoniker": "Services\\Users\\AuthService.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Users\\AuthService.cs",
-              "RelativeToolTip": "Services\\Users\\AuthService.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAkwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T11:23:40.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Program.cs",
-              "RelativeDocumentMoniker": "CourseForSFIT\\Program.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Program.cs",
-              "RelativeToolTip": "CourseForSFIT\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T10:39:33.658Z",
+              "Title": "Dtos",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Dtos.csproj",
+              "RelativeDocumentMoniker": "Dtos\\Dtos.csproj",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Dtos.csproj",
+              "RelativeToolTip": "Dtos\\Dtos.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-22T10:41:36.587Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "ExerciseService.cs",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Exercises\\ExerciseService.cs",
+              "RelativeDocumentMoniker": "Services\\Exercises\\ExerciseService.cs",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Exercises\\ExerciseService.cs",
+              "RelativeToolTip": "Services\\Exercises\\ExerciseService.cs",
+              "ViewState": "AQIAAF8AAAAAAAAAAAAcwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T10:36:46.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Models\\UserModels\\UserUpdateDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Models\\UserModels\\UserUpdateDto.cs",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Models\\UserModels\\UserUpdateDto.cs",
+              "RelativeToolTip": "Dtos\\Models\\UserModels\\UserUpdateDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T07:49:39.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "CourseForSFIT\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Controllers\\UsersController.cs",
               "RelativeToolTip": "CourseForSFIT\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAWAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwCEAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-21T10:31:05.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Users\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\Users\\UserService.cs",
               "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Users\\UserService.cs",
               "RelativeToolTip": "Services\\Users\\UserService.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAWwBIAAAAgAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAB5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-21T10:15:57.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserInfoDto.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Results\\UserResults\\UserInfoDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Results\\UserResults\\UserInfoDto.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Dtos\\Results\\UserResults\\UserInfoDto.cs",
-              "RelativeToolTip": "Dtos\\Results\\UserResults\\UserInfoDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBMAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T10:11:54.463Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Data\\Entities\\User.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\Entities\\User.cs",
-              "RelativeToolTip": "Data\\Entities\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T10:10:00.025Z",
               "EditorCaption": ""
             }
           ]

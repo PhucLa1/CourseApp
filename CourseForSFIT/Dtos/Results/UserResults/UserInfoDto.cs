@@ -17,6 +17,6 @@ namespace Dtos.Results.UserResults
         public int? SchoolYear { get; set; }
         public string? Class { get; set; }
         public DateTime CreatedAt { get; set; }
-        public ICollection<string>? AchivementsDeserialize { get; set; }
+        public ICollection<string>? AchivementsDeserialize { get; set; } = new List<string>();
     }
 }
