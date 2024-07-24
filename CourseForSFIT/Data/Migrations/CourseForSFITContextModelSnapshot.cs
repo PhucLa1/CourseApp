@@ -294,6 +294,27 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("created_by");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("LearnAbout")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("learn_about");
+
+                    b.Property<string>("Prepared")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("prepared");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("thumbnail");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("updated_at");

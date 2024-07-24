@@ -37,6 +37,14 @@
       "PackagePath": "staticwebassets\\Uploads\\638572599233876476.png"
     },
     {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638574342839842880.pngUploads",
+      "PackagePath": "staticwebassets\\Uploads\\638574342839842880.pngUploads"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638574377654821490.png",
+      "PackagePath": "staticwebassets\\Uploads\\638574377654821490.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Apis.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

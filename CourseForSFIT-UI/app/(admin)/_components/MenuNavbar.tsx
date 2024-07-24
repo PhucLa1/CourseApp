@@ -18,6 +18,7 @@ const navBarMenu = [
     title: "Quản lí khóa học",
     content: [
       { title: "Loại khóa học", link: "/admin/course-type" },
+      { title: "Thêm mới khóa học", link: "/admin/course/add" },
     ]
   }
 ]

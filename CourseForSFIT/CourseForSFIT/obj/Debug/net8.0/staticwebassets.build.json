@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "de+FbL064S1/3HfuyOtIItvR947jU4krpsBnRICDRGM=",
+  "Hash": "mqWB9473pwaEOawnyeOxLzqBSspOk4eaLnFgZzieMtE=",
   "Source": "Apis",
   "BasePath": "_content/Apis",
   "Mode": "Default",
@@ -186,6 +186,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\638572599233876476.png"
+    },
+    {
+      "Identity": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638574342839842880.pngUploads",
+      "SourceId": "Apis",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
+      "BasePath": "_content/Apis",
+      "RelativePath": "Uploads/638574342839842880.pngUploads",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\638574342839842880.pngUploads"
+    },
+    {
+      "Identity": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638574377654821490.png",
+      "SourceId": "Apis",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\",
+      "BasePath": "_content/Apis",
+      "RelativePath": "Uploads/638574377654821490.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\638574377654821490.png"
     }
   ]
 }
