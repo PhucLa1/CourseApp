@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dtos.Models.CourseModels
+{
+    public class CourseAdminDto
+    {
+        public int Id { get; set; }
+        public string? Thumbnail { get; set; }
+        public required string CourseName { get; set; }
+        public string? CreatedByPerson { get; set; }
+    }
+}

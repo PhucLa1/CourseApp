@@ -54,6 +54,7 @@ builder.Services.AddScoped<ISolveTestCaseService, SolveTestCaseService>();
 builder.Services.AddScoped<IUserExerciseService, UserExerciseService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICourseTypeService, CourseTypeService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 
 //Mapper
