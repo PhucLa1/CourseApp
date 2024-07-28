@@ -213,7 +213,6 @@ export default function TestCase({ exerciseId }: { exerciseId: number }) {
             })
         }
     }
-    console.log(testCase)
     return (
         <div className='test-case mt-4 rounded-md'>
             {isPendingDelete || isPendingAdd || isPendingUpdate ? <Loading /> : <></>}

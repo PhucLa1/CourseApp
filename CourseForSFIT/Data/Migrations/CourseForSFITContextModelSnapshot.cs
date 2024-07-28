@@ -31,10 +31,10 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContentBlog")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("content_blog");
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
@@ -154,11 +154,6 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ChapterName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("chapter_name");
-
                     b.Property<int>("CourseId")
                         .HasColumnType("int")
                         .HasColumnName("course_id");
@@ -170,6 +165,11 @@ namespace Data.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int")
                         .HasColumnName("created_by");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
@@ -195,11 +195,6 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContestName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("contest_name");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("created_at");
@@ -212,6 +207,11 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
@@ -277,11 +277,6 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CourseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("course_name");
-
                     b.Property<int>("CourseTypeId")
                         .HasColumnType("int")
                         .HasColumnName("course_type_id");
@@ -302,6 +297,11 @@ namespace Data.Migrations
                     b.Property<string>("LearnAbout")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("learn_about");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Prepared")
                         .HasColumnType("nvarchar(max)")
@@ -388,10 +388,10 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("created_by");
 
-                    b.Property<string>("TypeName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("type_name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
@@ -461,10 +461,10 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContentExercise")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("content_exercise");
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
@@ -478,10 +478,10 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("difficult_level");
 
-                    b.Property<string>("ExerciseName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("exercise_name");
+                        .HasColumnName("name");
 
                     b.Property<int>("NumberParticipants")
                         .HasColumnType("int")
@@ -600,6 +600,14 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("chapter_id");
 
+                    b.Property<int>("ChunkIndex")
+                        .HasColumnType("int")
+                        .HasColumnName("chunk_index");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("content_lesson");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("created_at");
@@ -608,14 +616,22 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("created_by");
 
-                    b.Property<bool>("IsLock")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_lock");
-
-                    b.Property<string>("LessonName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("lesson_name");
+                        .HasColumnName("name");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasColumnName("status");
+
+                    b.Property<int>("StatusUpload")
+                        .HasColumnType("int")
+                        .HasColumnName("status_upload");
+
+                    b.Property<int>("TotalChunk")
+                        .HasColumnType("int")
+                        .HasColumnName("total_chunk");
 
                     b.Property<int>("Type")
                         .HasColumnType("int")
@@ -740,10 +756,10 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("created_by");
 
-                    b.Property<string>("TagName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("tag_name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
@@ -775,10 +791,10 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("created_by");
 
-                    b.Property<string>("TagName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("tag_name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")

@@ -4,6 +4,7 @@ using Dtos.Models.ExerciseModels;
 using Dtos.Models.TestCaseModels;
 using Dtos.Results;
 using Dtos.Results.TestCaseResults;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -23,20 +24,32 @@ namespace Services.TestCases
         private readonly IBaseRepository<TestCase> _testCaseRepository;
         private readonly IBaseRepository<UserExercise> _userExerciseRepository;
         private readonly IMapper _mapper;
+        private readonly IValidator<TestCaseSolve> _validatorTestCaseSolve;
 
-        public SolveTestCaseService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, IBaseRepository<TestCase> testCaseRepository, IBaseRepository<UserExercise> userExerciseRepository, IMapper mapper)
+        public SolveTestCaseService(HttpClient httpClient,
+            IHttpContextAccessor httpContextAccessor,
+            IBaseRepository<TestCase> testCaseRepository,
+            IBaseRepository<UserExercise> userExerciseRepository,
+            IMapper mapper,
+            IValidator<TestCaseSolve> validatorTestCaseSolve
+            )
         {
             _testCaseRepository = testCaseRepository;
             _userExerciseRepository = userExerciseRepository;
             _httpClient = httpClient;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            _validatorTestCaseSolve = validatorTestCaseSolve;
         }
         public async Task<ApiResponse<List<bool>>> SolveExerciseProblem(TestCaseSolve testCaseSolve)
         {
             try
             {
-
+                var resultValidation = _validatorTestCaseSolve.Validate(testCaseSolve);
+                if (!resultValidation.IsValid)
+                {
+                    return ApiResponse<List<bool>>.FailtureValidation(resultValidation.Errors);
+                }
                 int currentUserId = _httpContextAccessor.HttpContext.Items["UserId"] == null ? 0 : int.Parse(_httpContextAccessor.HttpContext.Items["UserId"] as string);
                 UserExerciseAddDto userExercises = new UserExerciseAddDto() { ContentCode = testCaseSolve.ContentCode, UserId = currentUserId, ExerciseId = testCaseSolve.ExerciseId, Avatar = testCaseSolve.Avatar, Language = testCaseSolve.Language,Version = testCaseSolve.Version  };
                 List<string> tasks = new List<string>();

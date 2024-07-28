@@ -12,6 +12,7 @@ const navBarMenu = [
     content: [
       { title: "Nhãn dán", link: "/admin/tag-exercise" },
       { title: "Bài tập", link: "/admin/exercises" },
+      { title: "Thêm mới bài tập", link: "/admin/exercises/add" },
     ]
   },
   {
@@ -19,6 +20,7 @@ const navBarMenu = [
     content: [
       { title: "Loại khóa học", link: "/admin/course-type" },
       { title: "Thêm mới khóa học", link: "/admin/course/add" },
+      { title: "Các khóa học", link: "/admin/course" },
     ]
   }
 ]

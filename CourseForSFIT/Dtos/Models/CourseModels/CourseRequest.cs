@@ -9,6 +9,6 @@ namespace Dtos.Models.CourseModels
     public class CourseRequest
     {
         public List<int>? CourseTypeId { get; set; }
-        public string? CourseName { get; set; }
+        public string? Name { get; set; }
     }
 }

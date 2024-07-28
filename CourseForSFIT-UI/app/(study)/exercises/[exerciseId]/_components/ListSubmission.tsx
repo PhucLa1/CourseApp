@@ -65,7 +65,7 @@ export function ListSubmission({ data, onClickPaginate, onCheck,checked }: Props
                     {data.items?.map((item: any, index) => (
                         <TableRow key={index}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
-                            <TableCell>{item.avatar}</TableCell>
+                            <TableCell><img width='50px' src={`https://localhost:7130/Uploads/${item.avatar}`} alt="" /></TableCell>
                             <TableCell>{item.fullName}</TableCell>
                             <TableCell>{moment(item.createdAt).format('dddd, DD-MM-YYYY HH:mm:ss')}</TableCell>
                             <TableCell className={`text-[${item.isSuccess == true ? "#7bc043" : "#faa05e"}] text-right`}>{item.successRate}</TableCell>

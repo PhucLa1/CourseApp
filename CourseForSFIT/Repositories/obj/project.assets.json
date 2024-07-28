@@ -2574,7 +2574,6 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "BCrypt.Net-Next": "4.0.3",
-          "Dtos": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.EntityFrameworkCore": "8.0.6",
@@ -2586,23 +2585,6 @@
         },
         "runtime": {
           "bin/placeholder/Data.dll": {}
-        }
-      },
-      "Dtos/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
-          "BCrypt.Net-Next": "4.0.3",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.6",
-          "Microsoft.EntityFrameworkCore": "8.0.6",
-          "Newtonsoft.Json": "8.0.3"
-        },
-        "compile": {
-          "bin/placeholder/Dtos.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Dtos.dll": {}
         }
       }
     }
@@ -8047,11 +8029,6 @@
       "type": "project",
       "path": "../Data/Data.csproj",
       "msbuildProject": "../Data/Data.csproj"
-    },
-    "Dtos/1.0.0": {
-      "type": "project",
-      "path": "../Dtos/Dtos.csproj",
-      "msbuildProject": "../Dtos/Dtos.csproj"
     }
   },
   "projectFileDependencyGroups": {

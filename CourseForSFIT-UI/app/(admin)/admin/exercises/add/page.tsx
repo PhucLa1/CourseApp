@@ -131,16 +131,20 @@ export default function page() {
                     toast.error("Vui lòng chọn độ khó")
                     reject(new Error("Độ khó không được để trống"));
                     return;
-                } else if (testCase.length == 0 || testCase.every(test => test.output === null)) {
+                } else if (testCase.length == 0 || testCase.every(test => test.output === null && test.input === null && test.isLock === null)) {
                     toast.error("Phải có test case mới hoàn thành xong được bài tập")
                     reject(new Error("Test case không được để trống"));
+                    return;
+                } else if (value.description == "") {
+                    toast.error("Không được để trống phần mô tả bài tập")
+                    reject(new Error("Không được để trống phần mô tả bài tập"));
                     return;
                 }
 
                 const formData = new FormData();
-                formData.append("exerciseName", exerciseName)
+                formData.append("name", exerciseName)
                 formData.append("difficultLevel", difficult.toString())
-                formData.append("contentExercise", JSON.stringify(value))
+                formData.append("content", JSON.stringify(value))
 
                 tagIds.forEach((item, index) => {
                     formData.append(`tagIds[${index}]`, item.toString());
@@ -220,7 +224,7 @@ export default function page() {
                     <div className="grid w-full max-w-sm items-center gap-1.5 ml-4">
                         <Label className='ml-2 mb-2' htmlFor="picture">Lựa chọn nhãn dán</Label>
                         <ReactSelect defaultValue={[]} onHandleTagIds={HandleTagIds} value={data?.data.metadata.map((tag) => ({
-                            label: tag.tagName,
+                            label: tag.name,
                             value: tag.id
                         })) ?? []} />
                     </div>

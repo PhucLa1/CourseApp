@@ -10,7 +10,7 @@ namespace Dtos.Results.CourseTypeResults
     public class CourseTypeDto
     {
         public int Id { get; set; }
-        public string? TypeName { get; set; }
+        public string? Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

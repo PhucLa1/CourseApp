@@ -87,7 +87,7 @@ export default function page() {
         }
 
         setAction(action + 1)
-        toast.success("Xóa nhãn dán thành công")
+        toast.success("Xóa thành công bài tập")
       }
     },
   })
@@ -121,7 +121,7 @@ export default function page() {
               {dataAdminExercise?.data.metadata.items?.map((item: any, index: number) => (
                 <TableRow key={index}>
                   <TableCell className="font-medium">{index + 1}</TableCell>
-                  <TableCell>{item.exerciseName}</TableCell>
+                  <TableCell>{item.name}</TableCell>
                   <TableCell className={`text-[${item.difficultLevel == 1 ? "#7bc043" : item.difficultLevel == 2 ? "#faa05e" : "#e64f4a"}]`}>{item.difficultLevel == 1 ? "Dễ" : item.difficultLevel == 2 ? "Trung bình" : "Khó"}</TableCell>
                   <TableCell>{item.numberParticipants}</TableCell>
                   <TableCell>%{item.successRate}</TableCell>

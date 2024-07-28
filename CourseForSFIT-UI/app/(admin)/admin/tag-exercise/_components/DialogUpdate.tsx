@@ -20,19 +20,21 @@ import { UpdateAdminTagExercises } from '@/apis/exercises.api'
 import Loading from '@/components/Loading'
 import toast from 'react-hot-toast'
 export default function DialogUpdate({ adminTagExercise, onRerender }: { adminTagExercise: AdminTagExercise, onRerender: () => void }) {
-  const [value, setValue] = useState<string>(adminTagExercise.tagName)
+  const [value, setValue] = useState<string>(adminTagExercise.name)
   const { mutate, isPending } = useMutation({
     mutationFn: () => {
       return UpdateAdminTagExercises(
         adminTagExercise.id,
-        { tagName: value }
+        { name: value }
       )
     },
     onSuccess(data) {
-      if (data.data.isSuccess) {
-        onRerender()
+      if (data.data.isSuccess) {  
         toast.success("Chỉnh sửa thành công")
+      }else{
+        toast.error(data.data.message[0])
       }
+      onRerender()
     },
   })
   if (isPending) return <Loading />

@@ -20,15 +20,12 @@ C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\bin\Debug\net8.0\D
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\bin\Debug\net8.0\Data.runtimeconfig.json
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\bin\Debug\net8.0\Data.dll
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\bin\Debug\net8.0\Data.pdb
-C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\bin\Debug\net8.0\Dtos.dll
-C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\bin\Debug\net8.0\Dtos.pdb
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.csproj.AssemblyReference.cache
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.AssemblyInfoInputs.cache
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.AssemblyInfo.cs
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.csproj.CoreCompileInputs.cache
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.sourcelink.json
-C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.csproj.Up2Date
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.dll
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\refint\Data.dll
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Data\obj\Debug\net8.0\Data.pdb

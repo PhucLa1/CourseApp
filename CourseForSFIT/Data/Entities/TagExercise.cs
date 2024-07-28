@@ -12,9 +12,9 @@ namespace Data.Entities
 {
     public class TagExercise : BaseEntities
     {
-        [Column("tag_name")]
+        [Column("name")]
         [Unique]
-        public required string TagName { get; set; }     
+        public required string Name { get; set; }     
         public ICollection<ExerciseHasTag>? ExerciseHasTags { get; set; }
     }
 }

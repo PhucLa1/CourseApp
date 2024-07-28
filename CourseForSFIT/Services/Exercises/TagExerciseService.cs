@@ -3,6 +3,7 @@ using Data.Entities;
 using Dtos.Models.ExerciseModels;
 using Dtos.Results;
 using Dtos.Results.ExerciseResults;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using MimeKit.Tnef;
 using Repositories.Repositories.Base;
@@ -24,10 +25,17 @@ namespace Services.Exercises
     {
         private readonly IBaseRepository<TagExercise> _tagExerciseRepository;
         private readonly IMapper _mapper;
-        public TagExerciseService(IBaseRepository<TagExercise> tagExerciseRepository, IMapper mapper)
+        private readonly IValidator<TagExerciseUpdateDto> _validatorTagExerciseUpdateDto;
+        private readonly IValidator<TagExerciseAddDto> _validatorTagExerciseAddDto;
+        public TagExerciseService(IBaseRepository<TagExercise> tagExerciseRepository, 
+            IMapper mapper,
+            IValidator<TagExerciseUpdateDto> validatorTagExerciseUpdateDto,
+            IValidator<TagExerciseAddDto> validatorTagExerciseAddDto)
         {
             _tagExerciseRepository = tagExerciseRepository;
             _mapper = mapper;
+            _validatorTagExerciseAddDto = validatorTagExerciseAddDto;
+            _validatorTagExerciseUpdateDto = validatorTagExerciseUpdateDto;
         }
         public async Task<ApiResponse<IEnumerable<TagExerciseDto>>> GetAllTagExercise()
         {
@@ -58,17 +66,17 @@ namespace Services.Exercises
             {
                 List<TagExerciseAddDto> exerciseAddDtos = new List<TagExerciseAddDto>
                 {
-                    new TagExerciseAddDto(){ TagName = "Người mới"},
-                        new TagExerciseAddDto() { TagName = "Sắp xếp" },
-                        new TagExerciseAddDto() { TagName = "Tìm kiếm" },
-                        new TagExerciseAddDto() { TagName = "Đệ quy" },
-                        new TagExerciseAddDto() { TagName = "Quy hoạch động" },
-                        new TagExerciseAddDto() { TagName = "Đồ thị" },
-                        new TagExerciseAddDto() { TagName = "Lý thuyết số" },
-                        new TagExerciseAddDto() { TagName = "Thuật toán tham lam" },
-                        new TagExerciseAddDto() { TagName = "Chia để trị" },
-                        new TagExerciseAddDto() { TagName = "Backtracking" },
-                        new TagExerciseAddDto() { TagName = "Duyệt cây" }
+                    new TagExerciseAddDto(){ Name = "Người mới"},
+                        new TagExerciseAddDto() { Name = "Sắp xếp" },
+                        new TagExerciseAddDto() { Name = "Tìm kiếm" },
+                        new TagExerciseAddDto() { Name = "Đệ quy" },
+                        new TagExerciseAddDto() { Name = "Quy hoạch động" },
+                        new TagExerciseAddDto() { Name = "Đồ thị" },
+                        new TagExerciseAddDto() { Name = "Lý thuyết số" },
+                        new TagExerciseAddDto() { Name = "Thuật toán tham lam" },
+                        new TagExerciseAddDto() { Name = "Chia để trị" },
+                        new TagExerciseAddDto() { Name = "Backtracking" },
+                        new TagExerciseAddDto() { Name = "Duyệt cây" }
                 };
                 await _tagExerciseRepository.AddManyAsync(_mapper.Map<List<TagExercise>>(exerciseAddDtos));
                 await _tagExerciseRepository.SaveChangeAsync();
@@ -95,7 +103,7 @@ namespace Services.Exercises
             try
             {
                 TagExercise tagExercise = await _tagExerciseRepository.GetByIdAsync(id);
-                return new ApiResponse<string> { IsSuccess = true, Metadata = tagExercise.TagName };
+                return new ApiResponse<string> { IsSuccess = true, Metadata = tagExercise.Name };
             }
             catch (Exception ex)
             {
@@ -106,8 +114,13 @@ namespace Services.Exercises
         {
             try
             {
+                var resultValidation = _validatorTagExerciseUpdateDto.Validate(tagExerciseUpdateDto);
+                if(!resultValidation.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(resultValidation.Errors);
+                }
                 var res = await _tagExerciseRepository.GetByIdAsync(id);
-                res.TagName = tagExerciseUpdateDto.TagName;
+                res.Name = tagExerciseUpdateDto.Name.Trim();
                 await _tagExerciseRepository.UpdateAsync(id, res);
                 await _tagExerciseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
@@ -134,7 +147,14 @@ namespace Services.Exercises
         {
             try
             {
-                await _tagExerciseRepository.AddAsync(_mapper.Map<TagExercise>(tagExerciseAddDto));
+                var resultValidation = _validatorTagExerciseAddDto.Validate(tagExerciseAddDto);
+                if (!resultValidation.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(resultValidation.Errors);
+                }
+                var tagAdd = _mapper.Map<TagExercise>(tagExerciseAddDto);
+                tagAdd.Name = tagExerciseAddDto.Name.Trim();
+                await _tagExerciseRepository.AddAsync(tagAdd);
                 await _tagExerciseRepository.SaveChangeAsync();
                 return new ApiResponse<bool> { IsSuccess = true };
             }

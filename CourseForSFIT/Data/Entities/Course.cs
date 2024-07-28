@@ -10,8 +10,8 @@ namespace Data.Entities
 {
     public class Course : BaseEntities
     {
-        [Column("course_name")]
-        public required string CourseName { get; set; }
+        [Column("name")]
+        public required string Name { get; set; }
         [Column("description")]
         public required string Description { get; set; }
         [Column("learn_about")]
@@ -21,11 +21,17 @@ namespace Data.Entities
         [Column("thumbnail")]
         public string? Thumbnail { get; set; }
         [Column("status")]
-        public int Status { get; set; } //1: Draft, 2: Public
+        public StatusCourse Status { get; set; } //1: Draft, 2: Public
         [Column("course_type_id")]
         public int CourseTypeId { get; set; }
         public ICollection<CourseUser>? CourseUsers { get; set; }
         public ICollection<CourseComment>? CourseComments { get; set; }
         public ICollection<Chapter>? Chapters { get; set; }
+    }
+
+    public enum StatusCourse
+    {
+        Draft = 1,
+        Public = 2
     }
 }

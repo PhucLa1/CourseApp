@@ -83,10 +83,6 @@ namespace CourseForSFIT.Controllers
         [Route("{exerciseId}/test-cases")]
         public async Task<IActionResult> AddTestCase(int exerciseId, [FromForm] TestCaseExerciseAddDto testCaseExerciseAddDto)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _testCaseService.AddTestCase(exerciseId, testCaseExerciseAddDto));
         }
     }

@@ -20,8 +20,4 @@
     <PackageReference Include="ServiceStack.Interfaces" Version="8.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dtos\Dtos.csproj" />
-  </ItemGroup>
-
 </Project>

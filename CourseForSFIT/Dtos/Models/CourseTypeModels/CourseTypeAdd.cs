@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
 namespace Dtos.Models.CourseTypeModels
 {
     public class CourseTypeAdd
     {
-        public required string TypeName { get; set; }
+        public required string Name { get; set; }
+    }
+    public class CourseTypeAddValidator : AbstractValidator<CourseTypeAdd>
+    {
+        public CourseTypeAddValidator()
+        {
+            RuleFor(x => x.Name.Trim())
+                .NotEmpty()
+                .WithMessage("Không được để trống tên");
+        }
     }
 }

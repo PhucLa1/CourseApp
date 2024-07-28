@@ -32,7 +32,7 @@ export default function ExerciseIntro({exercise} : {exercise : ExerciseDto}) {
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
-                    }} className='text-[#d6d7e4]'>{exercise.exerciseName}</h2>
+                    }} className='text-[#d6d7e4]'>{exercise.name}</h2>
                     <div style={{ gridArea: 'bookmark', alignSelf: 'center' }}>
                         <button onClick={() => setSave(!save)} className={save == false ? 'hover:text-yellow-500 text-white' : 'hover:text-white text-yellow-500'} style={{
                             display: 'inline-flex',

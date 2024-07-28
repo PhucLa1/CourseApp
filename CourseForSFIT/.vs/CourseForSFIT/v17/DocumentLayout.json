@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\courses\\courseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\courses\\courseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\courses\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\courses\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\courseforsfit\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|solutionrelative:courseforsfit\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66798630-D897-4ED7-85C5-4C674E79B516}|Shared\\Shared.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\shared\\handlefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66798630-D897-4ED7-85C5-4C674E79B516}|Shared\\Shared.csproj|solutionrelative:shared\\handlefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\services\\exercises\\exerciseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A0817CA-B789-4799-A5B4-7FB49B33E8C4}|Services\\Services.csproj|solutionrelative:services\\exercises\\exerciseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\courseforsfit\\controllers\\lessonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D2820FE-A2A0-4DE6-990A-D33B720B29F3}|CourseForSFIT\\Apis.csproj|solutionrelative:courseforsfit\\controllers\\lessonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\data\\entities\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|solutionrelative:data\\entities\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|c:\\users\\hong phuc\\desktop\\study\\courseapp\\courseforsfit\\data\\entities\\lesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FD821B6-DFFF-4874-AD11-4CD793715F75}|Data\\Data.csproj|solutionrelative:data\\entities\\lesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +26,62 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ExerciseService.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Exercises\\ExerciseService.cs",
-              "RelativeDocumentMoniker": "Services\\Exercises\\ExerciseService.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Exercises\\ExerciseService.cs",
-              "RelativeToolTip": "Services\\Exercises\\ExerciseService.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAIwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-24T19:03:53.162Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CoursesController.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Controllers\\CoursesController.cs",
-              "RelativeDocumentMoniker": "CourseForSFIT\\Controllers\\CoursesController.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Controllers\\CoursesController.cs",
-              "RelativeToolTip": "CourseForSFIT\\Controllers\\CoursesController.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAIwDQAAAAJAAAA",
+              "Title": "HandleFile.cs",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Shared\\HandleFile.cs",
+              "RelativeDocumentMoniker": "Shared\\HandleFile.cs",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Shared\\HandleFile.cs",
+              "RelativeToolTip": "Shared\\HandleFile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAABrAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-24T08:58:13.918Z",
+              "WhenOpened": "2024-07-28T08:07:58.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LessonsController.cs",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Controllers\\LessonsController.cs",
+              "RelativeDocumentMoniker": "CourseForSFIT\\Controllers\\LessonsController.cs",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\Controllers\\LessonsController.cs",
+              "RelativeToolTip": "CourseForSFIT\\Controllers\\LessonsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-28T06:25:44.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CourseService.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Courses\\CourseService.cs",
-              "RelativeDocumentMoniker": "Services\\Courses\\CourseService.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Courses\\CourseService.cs",
-              "RelativeToolTip": "Services\\Courses\\CourseService.cs",
-              "ViewState": "AQIAAFQAAAAAAAAAAADwv24AAAA3AAAA",
+              "Title": "LessonService.cs",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Courses\\LessonService.cs",
+              "RelativeDocumentMoniker": "Services\\Courses\\LessonService.cs",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Courses\\LessonService.cs",
+              "RelativeToolTip": "Services\\Courses\\LessonService.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAowGMAAABxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-24T08:43:32.532Z",
+              "WhenOpened": "2024-07-28T03:33:04.131Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Course.cs",
-              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\Entities\\Course.cs",
-              "RelativeDocumentMoniker": "Data\\Entities\\Course.cs",
-              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\Entities\\Course.cs",
-              "RelativeToolTip": "Data\\Entities\\Course.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAAIAAAA",
+              "Title": "Lesson.cs",
+              "DocumentMoniker": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\Entities\\Lesson.cs",
+              "RelativeDocumentMoniker": "Data\\Entities\\Lesson.cs",
+              "ToolTip": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Data\\Entities\\Lesson.cs",
+              "RelativeToolTip": "Data\\Entities\\Lesson.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-24T08:30:33.555Z",
+              "WhenOpened": "2024-07-27T16:33:24.406Z",
               "EditorCaption": ""
             }
           ]

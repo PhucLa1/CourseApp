@@ -1,6 +1,6 @@
 export type TagExercise = {
     id: number,
-    tagName: string
+    name: string
 }
 
 export type AdminTagExercise = TagExercise & {
@@ -9,22 +9,22 @@ export type AdminTagExercise = TagExercise & {
 }
 
 export type TagExerciseUpdate = {
-    tagName: string
+    name: string
 }
 export type TagExerciseAdd = {
-    tagName: string
+    name: string
 }
 
 export type Exercise = {
     id: number,
-    exerciseName: string,
+    name: string,
     difficultLevel: number
     numberParticipants: number
     successRate: number
 }
 export type AdminExercise = {
     id: number,
-    exerciseName: string,
+    name: string,
     difficultLevel: number
     numberParticipants: number
     successRate: number,
@@ -87,7 +87,7 @@ export type ContentCodes = {
 
 export type TopicExercise =  {
     topicExercise: ContentExercise
-    exerciseName: string,
+    name: string,
     difficult: number
 }
 

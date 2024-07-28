@@ -150,13 +150,18 @@ export default function page() {
             }
             return;
         }
-        formData.append("courseName", courseName)
+        formData.append("name", courseName)
         formData.append("description", description)
         listLearnAbout.forEach((item, index) => {
-            formData.append(`listLearnAbout[${index}]`, item.toString());
+            if(item != null && item != ""){
+                formData.append(`listLearnAbout[${index}]`, item.toString());
+            }
         });
         listPrepared.forEach((item, index) => {
-            formData.append(`listPrepared[${index}]`, item.toString());
+            if(item != null && item != ""){
+                formData.append(`listPrepared[${index}]`, item.toString());
+            }
+            
         });
         if (selectedFile != null) {
             formData.append("thumbnail", selectedFile)
@@ -248,7 +253,7 @@ export default function page() {
                                         <SelectGroup>
                                             <SelectLabel>Loại khóa học</SelectLabel>
                                             {dataCourseType?.data.metadata.map((item, index) => {
-                                                return <SelectItem key={index} value={item.id.toString()}>{item.typeName}</SelectItem>
+                                                return <SelectItem key={index} value={item.id.toString()}>{item.name}</SelectItem>
                                             })}
                                         </SelectGroup>
                                     </SelectContent>

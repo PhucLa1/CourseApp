@@ -10,8 +10,8 @@ namespace Data.Entities
 {
     public class Contest : BaseEntities
     {
-        [Column("contest_name")]
-        public required string ContestName { get; set; }
+        [Column("name")]
+        public required string Name { get; set; }
         [Column("description")]
         public required string Description { get; set; }
         public ICollection<ContestExercise>? ContestExercises { get; set; }

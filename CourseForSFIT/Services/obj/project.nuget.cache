@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xIocKq5Nk4s=",
+  "dgSpecHash": "HtlvKhlhWhU=",
   "success": true,
   "projectFilePath": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\Services\\Services.csproj",
   "expectedPackageFiles": [
@@ -15,9 +15,11 @@
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\dynamic.core\\2.1.8.2\\dynamic.core.2.1.8.2.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\enums.net\\4.0.1\\enums.net.4.0.1.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\extendednumerics.bigdecimal\\2025.1001.2.129\\extendednumerics.bigdecimal.2025.1001.2.129.nupkg.sha512",
+    "C:\\Users\\Hong Phuc\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\google.apis\\1.68.0\\google.apis.1.68.0.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\google.apis.auth\\1.68.0\\google.apis.auth.1.68.0.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\google.apis.core\\1.68.0\\google.apis.core.1.68.0.nupkg.sha512",
+    "C:\\Users\\Hong Phuc\\.nuget\\packages\\htmlagilitypack\\1.11.61\\htmlagilitypack.1.11.61.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\jetbrains.annotations\\2022.3.1\\jetbrains.annotations.2022.3.1.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\mailkit\\4.7.0\\mailkit.4.7.0.nupkg.sha512",
     "C:\\Users\\Hong Phuc\\.nuget\\packages\\mathnet.numerics.signed\\5.0.0\\mathnet.numerics.signed.5.0.0.nupkg.sha512",

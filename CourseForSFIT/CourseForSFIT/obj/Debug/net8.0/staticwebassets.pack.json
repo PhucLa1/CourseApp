@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\Inputs\\638571779345840819.inInputs"
     },
     {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Inputs\\638576935603904640.inInputs",
+      "PackagePath": "staticwebassets\\Inputs\\638576935603904640.inInputs"
+    },
+    {
       "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638568564750420745.outOutputs",
       "PackagePath": "staticwebassets\\Outputs\\638568564750420745.outOutputs"
     },
@@ -33,16 +37,28 @@
       "PackagePath": "staticwebassets\\Outputs\\638571776211526944.outOutputs"
     },
     {
-      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638572599233876476.png",
-      "PackagePath": "staticwebassets\\Uploads\\638572599233876476.png"
-    },
-    {
-      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638574342839842880.pngUploads",
-      "PackagePath": "staticwebassets\\Uploads\\638574342839842880.pngUploads"
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Outputs\\638576935603847058.outOutputs",
+      "PackagePath": "staticwebassets\\Outputs\\638576935603847058.outOutputs"
     },
     {
       "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638574377654821490.png",
       "PackagePath": "staticwebassets\\Uploads\\638574377654821490.png"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638575008737590835.png",
+      "PackagePath": "staticwebassets\\Uploads\\638575008737590835.png"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638576242454141061.png",
+      "PackagePath": "staticwebassets\\Uploads\\638576242454141061.png"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\Uploads\\638576258513371083.png",
+      "PackagePath": "staticwebassets\\Uploads\\638576258513371083.png"
+    },
+    {
+      "Id": "C:\\Users\\Hong Phuc\\Desktop\\Study\\CourseApp\\CourseForSFIT\\CourseForSFIT\\wwwroot\\VideoUploads\\638577763386434229\\1.mp4",
+      "PackagePath": "staticwebassets\\VideoUploads\\638577763386434229\\1.mp4"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Apis.Microsoft.AspNetCore.StaticWebAssets.props",

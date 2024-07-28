@@ -36,7 +36,7 @@ export default function page() {
         queryKey: ['course', listId, courseName],
         queryFn: () => GetCourseByOptiosnInAdminPage({
             courseTypeId: listId,
-            courseName: courseName
+            name: courseName
         })
     })
     const { data: dataCourseType, isLoading: isLoadingCourseType } = useQuery({
@@ -68,10 +68,9 @@ export default function page() {
                             {dataCourseType?.data.metadata.map((item, index) => {
                                 return <div key={index} className="flex items-center space-x-2 border-b border-gray-500 mt-4">
                                     <Checkbox onCheckedChange={(e) => handleCheck(e as boolean, item.id)} className='mb-2' id="terms" />
-                                    <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 pb-2">{item.typeName}</label>
+                                    <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 pb-2">{item.name}</label>
                                 </div>
                             })}
-
                         </div>
                     </div>
                 </div>
@@ -79,7 +78,7 @@ export default function page() {
                 {dataCourse?.data.metadata.map((item, index) => {
                     return <section key={index}>
                         <div className='flex mt-10 mb-5 items-baseline'>
-                            <h2 style={{ fontSize: '18px', lineHeight: 1.4, fontWeight: 700 }}>{item.typeName}</h2>
+                            <h2 style={{ fontSize: '18px', lineHeight: 1.4, fontWeight: 700 }}>{item.name}</h2>
                         </div>
                         <div style={{ display: 'grid', gap: '40px 50px', gridTemplateColumns: 'repeat(3, 1fr)', paddingBottom: '10px', }}>
                             {item.courseAdminDtos?.map((item, index) => {
