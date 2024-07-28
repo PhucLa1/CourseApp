@@ -179,3 +179,5 @@ C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\CourseForSFIT\obj\Debug
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\CourseForSFIT\obj\Debug\net8.0\Apis.pdb
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\CourseForSFIT\obj\Debug\net8.0\Apis.genruntimeconfig.cache
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\CourseForSFIT\obj\Debug\net8.0\ref\Apis.dll
+C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\CourseForSFIT\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\CourseForSFIT\bin\Debug\net8.0\HtmlAgilityPack.dll

@@ -5,6 +5,7 @@ using Dtos.Models.ExerciseModels;
 using Dtos.Models.TestCaseModels;
 using Dtos.Results;
 using Dtos.Results.ExerciseResults;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -32,13 +33,18 @@ namespace Services.Exercises
         private readonly IBaseRepository<TestCase> _testCaseRepository;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IValidator<ExerciseAddDto> _validatorExerciseAddDto;
+        private readonly IValidator<ExerciseUpdateDto> _validatorExerciseUpdateDto;
         public ExerciseService(
             IBaseRepository<Exercise> exerciseRepository,
             IBaseRepository<TagExercise> tagExerciseRepository,
             IBaseRepository<ExerciseHasTag> exerciseHasTagRepository,
             IBaseRepository<TestCase> testCaseRepository,
             IMapper mapper,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IValidator<ExerciseAddDto> validatorExerciseAddDto,
+            IValidator<ExerciseUpdateDto> validatorExerciseUpdateDto
+            )
         {
             _exerciseRepository = exerciseRepository;
             _tagExerciseRepository = tagExerciseRepository;
@@ -46,16 +52,23 @@ namespace Services.Exercises
             _testCaseRepository = testCaseRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            _validatorExerciseAddDto = validatorExerciseAddDto;
+            _validatorExerciseUpdateDto = validatorExerciseUpdateDto;
         }
 
         public async Task<ApiResponse<bool>> UpdateExercise(int id, ExerciseUpdateDto exerciseUpdateDto)
         {
             try
             {
+                var resultValidation = _validatorExerciseUpdateDto.Validate(exerciseUpdateDto);
+                if (!resultValidation.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(resultValidation.Errors);
+                }
                 var exerciseInDb = await _exerciseRepository.GetAllQueryAble().Where(e => e.Id == id).FirstAsync();
-                exerciseInDb.ExerciseName = exerciseUpdateDto.ExerciseName;
+                exerciseInDb.Name = exerciseUpdateDto.Name;
                 exerciseInDb.DifficultLevel = exerciseUpdateDto.Difficult;
-                exerciseInDb.ContentExercise = JsonConvert.SerializeObject(exerciseUpdateDto.topicExercise);
+                exerciseInDb.Content = JsonConvert.SerializeObject(exerciseUpdateDto.topicExercise);
                 _exerciseRepository.Update(exerciseInDb);
                 var exerciseHasTagsRemove = await _exerciseHasTagRepository.GetAllQueryAble().Where(e => e.ExerciseId == exerciseInDb.Id).ToListAsync();
                 _exerciseHasTagRepository.GetDbSet().RemoveRange(exerciseHasTagsRemove);
@@ -84,7 +97,7 @@ namespace Services.Exercises
                 IQueryable<Exercise> exercises = _exerciseRepository.GetAllQueryAble().Include(e => e.ExerciseHasTags);
                 if (exerciseRequest.TagId != null && exerciseRequest.TagId.Any())
                 {
-                    exercises = exercises.Where(e => e.ExerciseHasTags != null && e.ExerciseHasTags.Select(e => e.TagExerciseId).ToList().Intersect(exerciseRequest.TagId).Any());
+                    exercises = exercises.Where(e => e.ExerciseHasTags != null && e.ExerciseHasTags.Select(e => e.TagExerciseId).AsQueryable().Intersect(exerciseRequest.TagId).Any());
                 }
                 if (exerciseRequest.DifficultLevel != null && exerciseRequest.DifficultLevel.Any())
                 {
@@ -96,7 +109,7 @@ namespace Services.Exercises
                 }
                 if (exerciseRequest.Name != null)
                 {
-                    exercises = exercises.Where(e => e.ExerciseName.Contains(exerciseRequest.Name));
+                    exercises = exercises.Where(e => e.Name.Contains(exerciseRequest.Name));
                 }
                 return new ApiResponse<PagedResult<ExerciseDto>> { IsSuccess = true, Metadata = HandlePagination<ExerciseDto>.PageList(pageNumber, exercises.Count(), pageSize, _mapper.Map<List<ExerciseDto>>(exercises.Skip((pageNumber - 1) * pageSize).Take(pageSize))) };
             }
@@ -142,16 +155,16 @@ namespace Services.Exercises
                 }*/
                 if (exerciseRequest.Name != null)
                 {
-                    exercises = exercises.Where(e => e.ExerciseName.Contains(exerciseRequest.Name));
+                    exercises = exercises.Where(e => e.Name.Contains(exerciseRequest.Name));
                 }
                 IEnumerable<ExerciseAdminDto> exerciseAdminDtos = exercises.Select(e => new ExerciseAdminDto
                 {
                     Id = e.Id,
-                    ExerciseName = e.ExerciseName,
+                    Name = e.Name,
                     DifficultLevel = e.DifficultLevel,
                     NumberParticipants = e.NumberParticipants,
                     SuccessRate = e.SuccessRate,
-                    Tags = e.ExerciseHasTags != null ?_tagExerciseRepository.GetAllQueryAble().Where(c => e.ExerciseHasTags.Select(e => e.TagExerciseId).ToList().Contains(c.Id)).Select(e => e.TagName).ToList() : null
+                    Tags = e.ExerciseHasTags != null ?_tagExerciseRepository.GetAllQueryAble().Where(c => e.ExerciseHasTags.Select(e => e.TagExerciseId).ToList().Contains(c.Id)).Select(e => e.Name).ToList() : null
                 }).Skip((pageNumber - 1) * pageSize).Take(pageSize);
                 return new ApiResponse<PagedResult<ExerciseAdminDto>>
                 {
@@ -168,6 +181,11 @@ namespace Services.Exercises
         {
             try
             {
+                var resultValidation = _validatorExerciseAddDto.Validate(exerciseAddDto);
+                if(!resultValidation.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(resultValidation.Errors);
+                }
                 Exercise exercise = _mapper.Map<Exercise>(exerciseAddDto);
                 await _exerciseRepository.AddAsync(exercise);
                 await _exerciseRepository.SaveChangeAsync();
@@ -212,7 +230,7 @@ namespace Services.Exercises
         {
             try
             {
-                string topicExercise = await _exerciseRepository.GetFieldByIdAsync(id, e => e.ContentExercise);
+                string topicExercise = await _exerciseRepository.GetFieldByIdAsync(id, e => e.Content);
                 var contentExercise = JsonConvert.DeserializeObject<TopicExercise>(topicExercise);
                 return new ApiResponse<TopicExercise> { IsSuccess = true, Metadata = contentExercise };
             }
@@ -226,8 +244,8 @@ namespace Services.Exercises
             try
             {
                 var result = await _exerciseRepository.GetAllQueryAble().Where(e => e.Id == id).FirstOrDefaultAsync();
-                var contentExercise = JsonConvert.DeserializeObject<TopicExercise>(result.ContentExercise);
-                return new ApiResponse<ContentExercise> { IsSuccess = true, Metadata = new ContentExercise { ExerciseName = result.ExerciseName, Difficult = result.DifficultLevel, topicExercise = contentExercise } };
+                var contentExercise = JsonConvert.DeserializeObject<TopicExercise>(result.Content);
+                return new ApiResponse<ContentExercise> { IsSuccess = true, Metadata = new ContentExercise { Name = result.Name, Difficult = result.DifficultLevel, topicExercise = contentExercise } };
             }
             catch (Exception ex)
             {

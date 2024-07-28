@@ -21,16 +21,22 @@ import Loading from '@/components/Loading'
 export default function DialogAdd({ onRerender }: { onRerender: () => void }) {
     const [value, setValue] = useState<string>("")
     const { mutate, isPending } = useMutation({
-        mutationFn: () => {
-            return AddTagExercises({ tagName: value })
+        mutationFn: async () => {
+            if (value === "") {
+                toast.error("Không được để trống tên nhãn dán");
+                return Promise.reject();
+            }
+            return AddTagExercises({ name: value })
         },
         onSuccess(data) {
             if (data.data.isSuccess) {
-                onRerender()
-                setValue("")
                 toast.success("Thêm thành công")
+            }else{
+                toast.error(data.data.message[0])
             }
-        },
+            onRerender()
+            setValue("")
+        }
     })
     if (isPending) return <Loading />
     return (

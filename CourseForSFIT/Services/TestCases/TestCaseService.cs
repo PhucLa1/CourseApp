@@ -4,6 +4,7 @@ using Dtos.Models.ExerciseModels;
 using Dtos.Models.TestCaseModels;
 using Dtos.Results;
 using Dtos.Results.TestCaseResults;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Repositories.Base;
 using Shared;
@@ -22,15 +23,28 @@ namespace Services.TestCases
     {
         private readonly IBaseRepository<TestCase> _testCaseRepository;
         private readonly IMapper _mapper;
-        public TestCaseService(IBaseRepository<TestCase> testCaseRepository, IMapper mapper)
+        private readonly IValidator<TestCaseExerciseUpdateDto> _validatorTestCaseExerciseUpdateDto;
+        private readonly IValidator<TestCaseExerciseAddDto> _validatorTestCaseExerciseAddDto;
+        public TestCaseService(IBaseRepository<TestCase> testCaseRepository, 
+            IMapper mapper, 
+            IValidator<TestCaseExerciseAddDto> validatorTestCaseExerciseAddDto,
+            IValidator<TestCaseExerciseUpdateDto> validatorTestCaseExerciseUpdateDto
+            )
         {
             _testCaseRepository = testCaseRepository;
             _mapper = mapper;
+            _validatorTestCaseExerciseAddDto = validatorTestCaseExerciseAddDto;
+            _validatorTestCaseExerciseUpdateDto = validatorTestCaseExerciseUpdateDto;
         }
         public async Task<ApiResponse<int>> AddTestCase(int exerciseId, TestCaseExerciseAddDto testCaseExerciseAddDto)
         {
             try
             {
+                var resultValidation = _validatorTestCaseExerciseAddDto.Validate(testCaseExerciseAddDto);
+                if (!resultValidation.IsValid)
+                {
+                    return ApiResponse<int>.FailtureValidation(resultValidation.Errors);
+                }
                 TestCase testCase = _mapper.Map<TestCase>(new TestCaseAddDto()
                 {
                     ExerciseId = exerciseId,
@@ -105,6 +119,11 @@ namespace Services.TestCases
         {
             try
             {
+                var resultValidation = _validatorTestCaseExerciseUpdateDto.Validate(testCaseExerciseUpdateDto);
+                if (!resultValidation.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(resultValidation.Errors);
+                }
                 var testCaseInDb = await _testCaseRepository.GetByIdAsync(id);
                 if (testCaseExerciseUpdateDto.InputData != null)
                 {

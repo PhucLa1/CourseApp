@@ -75,7 +75,7 @@ export default function page() {
                         {dataCourseType?.data && dataCourseType?.data.metadata.map((item, index) => {
                             return <TableRow key={index}>
                                 <TableCell className="font-medium">{index + 1}</TableCell>
-                                <TableCell>{item.typeName}</TableCell>
+                                <TableCell>{item.name}</TableCell>
                                 <TableCell>{moment(item.createdAt).format('dddd, DD-MM-YYYY HH:mm:ss')}</TableCell>
                                 <TableCell>{moment(item.updatedAt).format('dddd, DD-MM-YYYY HH:mm:ss')}</TableCell>
                                 <TableCell className="text-center">

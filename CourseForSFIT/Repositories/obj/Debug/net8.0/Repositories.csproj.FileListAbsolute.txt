@@ -20,9 +20,7 @@ C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\net8.0\Repositories.dll
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\net8.0\Repositories.pdb
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\net8.0\Data.dll
-C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\net8.0\Dtos.dll
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\net8.0\Data.pdb
-C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\bin\Debug\net8.0\Dtos.pdb
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache

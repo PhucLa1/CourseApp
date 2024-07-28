@@ -2,6 +2,12 @@
 using Data.Jwt;
 using Data.Mapping;
 using Data.MappingProfile;
+using Dtos.Models.AuthModels;
+using Dtos.Models.CourseModels;
+using Dtos.Models.CourseTypeModels;
+using Dtos.Models.ExerciseModels;
+using Dtos.Models.TestCaseModels;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +48,23 @@ builder.Services.AddCors(options =>
 //Repositories
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
+//Validators
+builder.Services.AddScoped<IValidator<ResetPassword>, ResetPasswordValidator>();
+builder.Services.AddScoped<IValidator<VerifyVerificationCodeRequest>, VerifyVerificationCodeRequestValidator>();
+builder.Services.AddScoped<IValidator<UserLoginDto>, UserLoginDtoValidator>();
+builder.Services.AddScoped<IValidator<UserSignUpDto>, UserSignUpDtoValidator>();
+builder.Services.AddScoped<IValidator<TagExerciseAddDto>, TagExerciseAddDtoValidator>();
+builder.Services.AddScoped<IValidator<TagExerciseUpdateDto>, TagExerciseUpdateDtoValidator>();
+builder.Services.AddScoped<IValidator<CourseTypeAdd>, CourseTypeAddValidator>();
+builder.Services.AddScoped<IValidator<CourseTypeUpdate>, CourseTypeUpdateValidator>();
+builder.Services.AddScoped<IValidator<ExerciseAddDto>, ExerciseAddDtoValidator>();
+builder.Services.AddScoped<IValidator<TestCaseExerciseAddDto>, TestCaseExerciseAddDtoValidator>();
+builder.Services.AddScoped<IValidator<TestCaseExerciseUpdateDto>, TestCaseExerciseUpdateDtoValidator>();
+builder.Services.AddScoped<IValidator<ExerciseUpdateDto>, ExerciseUpdateDtoValidator>();
+builder.Services.AddScoped<IValidator<TestCaseSolve>, TestCaseSolveValidator>();
+builder.Services.AddScoped<IValidator<CourseAddDto>, CourseAddDtoValidator>();
+builder.Services.AddScoped<IValidator<ChapterAdd>, ChapterAddValidator>();
+builder.Services.AddScoped<IValidator<LessonAddDto>, LessonAddDtoValidator>();
 
 //Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -55,12 +78,15 @@ builder.Services.AddScoped<IUserExerciseService, UserExerciseService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICourseTypeService, CourseTypeService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IChapterService, ChapterService>();
+builder.Services.AddScoped<ILessonService, LessonService>();
 
 
 //Mapper
 builder.Services.AddAutoMapper(typeof(UserMapper));
 builder.Services.AddAutoMapper(typeof(ExerciseMapper));
 builder.Services.AddAutoMapper(typeof(TestCaseMapper));
+
 
 
 

@@ -20,10 +20,6 @@ namespace Apis.Controllers
         [Route("")]
         public async Task<IActionResult> AddNewCourse([FromForm] CourseAddDto courseAddDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _courseService.AddNewCourse(courseAddDto));
         }
 
@@ -31,10 +27,6 @@ namespace Apis.Controllers
         [Route("{id}")]
         public async Task<IActionResult> UpdateCourse(int id, [FromForm] CourseUpdateDto courseUpdateDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _courseService.UpdateCourse(id, courseUpdateDto));
         }
 
@@ -43,6 +35,12 @@ namespace Apis.Controllers
         public async Task<IActionResult> GetCourseByOptions(CourseRequest courseRequest)
         {
             return Ok(await _courseService.GetCourseByOptionsAdminPage(courseRequest));
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetCourseById(int id)
+        {
+            return Ok(await _courseService.GetCourseById(id));
         }
 
         [HttpDelete]

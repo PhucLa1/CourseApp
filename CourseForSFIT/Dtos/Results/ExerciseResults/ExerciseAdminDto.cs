@@ -9,7 +9,7 @@ namespace Dtos.Results.ExerciseResults
     public class ExerciseAdminDto
     {
         public int Id { get; set; }
-        public string? ExerciseName { get; set; }
+        public string? Name { get; set; }
         public int DifficultLevel { get; set; }
         public int NumberParticipants { get; set; }
         public double SuccessRate { get; set; }

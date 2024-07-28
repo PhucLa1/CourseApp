@@ -55,15 +55,24 @@ export default function page({ params }: { params: { exerciseId: number } }) {
         queryFn: () => GetTagExerciseByExerciseId(params.exerciseId)
     })
     const { mutate: mutateExercise, isPending: isPendingExercise } = useMutation({
-        mutationFn: () => UpdateExercise(params.exerciseId, {
+        mutationFn: () => {
+            console.log({
+                topicExercise: value,
+                name: exerciseName,
+                difficult: difficult,
+                tagIds: tagIds
+            })
+            return UpdateExercise(params.exerciseId, {
             topicExercise: value,
-            exerciseName: exerciseName,
+            name: exerciseName,
             difficult: difficult,
             tagIds: tagIds
-        }),
+        })},
         onSuccess(data) {
-            if (data.data.isSuccess) {
+            if (data.data.isSuccess == true) {
                 toast.success("Thành công chỉnh sửa bài tập")
+            }else{
+                toast.error(data.data.message[0])
             }
         },
     })
@@ -93,7 +102,7 @@ export default function page({ params }: { params: { exerciseId: number } }) {
     useEffect(() => {
         if (dataTopic) {
             setValue(dataTopic.data.metadata.topicExercise)
-            setExerciseName(dataTopic.data.metadata.exerciseName)
+            setExerciseName(dataTopic.data.metadata.name)
             setDifficult(dataTopic.data.metadata.difficult)
         }
     }, [dataTopic])
@@ -115,6 +124,7 @@ export default function page({ params }: { params: { exerciseId: number } }) {
     }
     return (
         <div>
+            {isPendingExercise ?? <Loading/>}
             <div className='header flex items-center justify-between'>
                 <h2 className='text-[20px] text-slate-50 font-bold'>Chỉnh sửa bài tập</h2>
             </div>
@@ -125,12 +135,12 @@ export default function page({ params }: { params: { exerciseId: number } }) {
                 {isLoadingTag || isLoadingValueTags || isLoadingTopic ? <Loading /> :
                     <FirstArticle defaultValueTag={dataValueTags?.data.metadata.map((tag) => {
                         return {
-                            label: tag.tagName,
+                            label: tag.name,
                             value: tag.id
                         }
                     }) ?? []} tags={dataTag?.data.metadata.map((tag) => {
                         return {
-                            label: tag.tagName,
+                            label: tag.name,
                             value: tag.id
                         }
                     }) ?? []} exerciseName={exerciseName} difficult={difficult} onSetExerciseName={onSetExerciseName} onSetDifficult={onSetDifficult} onHandleTagIds={onHandleTagIds} />}

@@ -10,8 +10,8 @@ namespace Data.Entities
 {
     public class CourseType : BaseEntities
     {
-        [Column("type_name")]
-        public required string TypeName { get; set; }
+        [Column("name")]
+        public required string Name { get; set; }
         public ICollection<Course>? Courses { get; set; }
     }
 }

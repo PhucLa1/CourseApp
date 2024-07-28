@@ -24,3 +24,6 @@ C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\obj\Debug\net8.0\D
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\obj\Debug\net8.0\refint\Dtos.dll
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.pdb
 C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\obj\Debug\net8.0\ref\Dtos.dll
+C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\bin\Debug\net8.0\Data.dll
+C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\bin\Debug\net8.0\Data.pdb
+C:\Users\Hong Phuc\Desktop\Study\CourseApp\CourseForSFIT\Dtos\obj\Debug\net8.0\Dtos.csproj.Up2Date

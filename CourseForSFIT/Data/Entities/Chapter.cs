@@ -10,8 +10,8 @@ namespace Data.Entities
 {
     public class Chapter : BaseEntities
     {
-        [Column("chapter_name")]
-        public required string ChapterName { get; set; }
+        [Column("name")]
+        public required string Name { get; set; }
         [Column("course_id")]
         public int CourseId { get; set; }
         public ICollection<Lesson>? Lessons { get; set; }

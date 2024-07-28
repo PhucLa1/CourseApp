@@ -20,19 +20,21 @@ import { CourseType } from '@/model/Course'
 import { UpdateCourseType } from '@/apis/course.api'
 
 export default function Update({ courseType, onRerender }: { courseType: CourseType, onRerender: () => void }) {
-    const [value, setValue] = useState<string>(courseType.typeName)
+    const [value, setValue] = useState<string>(courseType.name)
     const { mutate, isPending } = useMutation({
         mutationFn: () => {
             return UpdateCourseType(
                 courseType.id,
-                { typeName: value }
+                { name: value }
             )
         },
         onSuccess(data) {
-            if (data.data.isSuccess) {
-                onRerender()
+            if (data.data.isSuccess) {   
                 toast.success("Chỉnh sửa thành công")
+            }else{
+                toast.error(data.data.message[0])
             }
+            onRerender()
         },
     })
     if (isPending) return <Loading />

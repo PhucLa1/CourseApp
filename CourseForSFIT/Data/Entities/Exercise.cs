@@ -10,12 +10,12 @@ namespace Data.Entities
 {
     public class Exercise : BaseEntities
     {
-        [Column("exercise_name")]
-        public required string ExerciseName { get; set; }
+        [Column("name")]
+        public required string Name { get; set; }
         [Column("difficult_level")]
         public int DifficultLevel { get; set; }
-        [Column("content_exercise")]
-        public required string ContentExercise { get; set; }
+        [Column("content")]
+        public required string Content { get; set; }
         [Column("number_participants")]
         public int NumberParticipants { get; set; }
         [Column("success_rate")]

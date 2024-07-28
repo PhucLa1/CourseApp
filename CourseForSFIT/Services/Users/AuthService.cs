@@ -4,6 +4,7 @@ using Dtos.Models.AuthModels;
 using Dtos.Models.EmailModels;
 using Dtos.Results;
 using Dtos.Results.AuthResults;
+using FluentValidation;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +40,10 @@ namespace Services.Users
         private readonly HttpClient _httpClient;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        private readonly IValidator<ResetPassword> _validatorResetPassword;
+        private readonly IValidator<VerifyVerificationCodeRequest> _validatorVerificationCodeRequest;
+        private readonly IValidator<UserLoginDto> _validatorUserLoginDto;
+        private readonly IValidator<UserSignUpDto> _validatorUserSignupDto;
 
         public AuthService(
             IBaseRepository<User> userRepository,
@@ -47,7 +51,11 @@ namespace Services.Users
             IConfiguration configuration,
             HttpClient httpClient,
             IEmailSender emailSender,
-            IHttpContextAccessor httpContextAccessor
+            IHttpContextAccessor httpContextAccessor,
+            IValidator<ResetPassword> validatorResetPassword,
+            IValidator<VerifyVerificationCodeRequest> validatorVerificationCodeRequest,
+            IValidator<UserLoginDto> validatorUserLoginDto,
+            IValidator<UserSignUpDto> validatorUserSignupDto
             )
         {
             _userRepository = userRepository;
@@ -56,17 +64,22 @@ namespace Services.Users
             _httpClient = httpClient;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
+            _validatorResetPassword = validatorResetPassword;
+            _validatorVerificationCodeRequest = validatorVerificationCodeRequest;
+            _validatorUserLoginDto = validatorUserLoginDto;
+            _validatorUserSignupDto = validatorUserSignupDto;
         }
 
         public async Task<ApiResponse<string>> SignUp(UserSignUpDto userSignup)
         {
             try
             {
-                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == userSignup.Email).FirstOrDefaultAsync();
-                if (userSignup.RePassword != userSignup.Password)
+                var validationResult = _validatorUserSignupDto.Validate(userSignup);
+                if (!validationResult.IsValid)
                 {
-                    return new ApiResponse<string> { Message = ["Mật khẩu và nhập lại mật khẩu không giống nhau"] };
+                    return ApiResponse<string>.FailtureValidation(validationResult.Errors);
                 }
+                User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == userSignup.Email).FirstOrDefaultAsync();
                 if (userEmail != null)
                 {
                     return new ApiResponse<string> { Message = ["Tài khoản email này đã tổn tại rồi"] };
@@ -132,7 +145,6 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
         public async Task<ApiResponse<string>> GoogleLogin(string credential)
         {
             try
@@ -166,8 +178,6 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
-
         private async Task<string> JWTGenerator(User Result)
         {
             try
@@ -200,7 +210,6 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
         private async Task SendEmail(String email)
         {
             Email emailSend = new Email()
@@ -211,11 +220,15 @@ namespace Services.Users
             };
             await _emailSender.SendEmail(emailSend);
         }
-
         public async Task<ApiResponse<string>> Login(UserLoginDto userLoginDto)
         {
             try
             {
+                var validationResult = _validatorUserLoginDto.Validate(userLoginDto);
+                if (!validationResult.IsValid)
+                {
+                    return ApiResponse<string>.FailtureValidation(validationResult.Errors);
+                }
                 User? user = await _userRepository.GetAllQueryAble().Where(user => user.Email == userLoginDto.Email).FirstOrDefaultAsync();
                 if (user == null)
                 {
@@ -234,12 +247,15 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
-
         public async Task<ApiResponse<bool>> UpdatePassword(ResetPassword resetPassword)
         {
             try
             {
+                var validationResult = _validatorResetPassword.Validate(resetPassword);
+                if (!validationResult.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(validationResult.Errors);
+                }
                 if (resetPassword.Password != resetPassword.RePassword)
                 {
                     return new ApiResponse<bool> { Message = ["Mật khẩu và mật khẩu nhập lại không đúng"] };
@@ -255,8 +271,6 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
-
         public async Task<ApiResponse<bool>> GenerateVerificationCode(string email)
         {
             try
@@ -297,11 +311,15 @@ namespace Services.Users
                 throw new Exception(ex.Message);
             }
         }
-
         public async Task<ApiResponse<bool>> VerifyVerificationCode(VerifyVerificationCodeRequest verifyVerificationCodeRequest)
         {
             try
             {
+                var validationResult = _validatorVerificationCodeRequest.Validate(verifyVerificationCodeRequest);
+                if (!validationResult.IsValid)
+                {
+                    return ApiResponse<bool>.FailtureValidation(validationResult.Errors);
+                }
                 User? userEmail = await _userRepository.GetAllQueryAble().Where(user => user.Email == verifyVerificationCodeRequest.Email).FirstOrDefaultAsync();
                 if (userEmail.Code != verifyVerificationCodeRequest.Code)
                 {

@@ -12,8 +12,8 @@ namespace Data.Entities
     {
         [Column("title")]
         public required string Title { get; set; }
-        [Column("content_blog")]
-        public required string ContentBlog { get; set; }
+        [Column("content")]
+        public required string Content { get; set; }
         public ICollection<BlogHasTag>? BlogHasTags { get; set; }
         public ICollection<BlogComment>? BlogComments { get; set; }
     }

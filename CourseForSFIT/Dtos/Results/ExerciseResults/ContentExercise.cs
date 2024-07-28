@@ -10,6 +10,6 @@ namespace Dtos.Results.ExerciseResults
     {
         public TopicExercise? topicExercise { get; set; }
         public int Difficult { get; set; }
-        public string? ExerciseName { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -85,7 +85,7 @@ export default function TagFilter({ tagExercises, onChooseFilter, isChecked, onF
                                     <label
                                         htmlFor="terms"
                                         className={`text-2sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70`}>
-                                        {item.tagName}
+                                        {item.name}
                                     </label>
                                 </div>
                             })

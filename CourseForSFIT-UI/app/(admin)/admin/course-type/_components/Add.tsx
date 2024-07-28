@@ -21,14 +21,16 @@ export default function Add({ onRerender }: { onRerender: () => void }) {
     const [value, setValue] = useState<string>("")
     const { mutate, isPending } = useMutation({
         mutationFn: () => {
-            return AddNewCourseType({ typeName: value })
+            return AddNewCourseType({ name: value })
         },
         onSuccess(data) {
             if (data.data.isSuccess) {
-                onRerender()
-                setValue("")
                 toast.success("Thêm thành công")
-            }
+            }else{
+                toast.error(data.data.message[0])
+            }             
+            onRerender()
+            setValue("")
         },
     })
     if (isPending) return <Loading />

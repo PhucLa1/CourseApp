@@ -22,10 +22,6 @@ namespace CourseForSFIT.Controllers
         [Route("sign-up")]
         public async Task<IActionResult> SignUp([FromBody] UserSignUpDto userSignUp)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             ApiResponse<string> result = await _authService.SignUp(userSignUp);
             if (result.IsSuccess)
             {
@@ -37,12 +33,8 @@ namespace CourseForSFIT.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             ApiResponse<string> result = await _authService.Login(userLoginDto);
-            if (result.IsSuccess)
+            if (result.Metadata != null)
             {
                 SetJWT(result.Metadata);
             }
@@ -53,7 +45,7 @@ namespace CourseForSFIT.Controllers
         public async Task<IActionResult> LoginGoogle(string credential)
         {
             ApiResponse<string> result = await _authService.GoogleLogin(credential);
-            if (result.IsSuccess)
+            if (result.Metadata != null)
             {
                 SetJWT(result.Metadata);
             }
@@ -64,65 +56,36 @@ namespace CourseForSFIT.Controllers
         [Route("login-facebook")]
         public async Task<IActionResult> LoginFacebook(string credential)
         {
-            try
+            ApiResponse<string> result = await _authService.FacebookLogin(credential);
+            if (result.Metadata != null)
             {
-                ApiResponse<string> result = await _authService.FacebookLogin(credential);
-                if (result.IsSuccess)
-                {
-                    SetJWT(result.Metadata);
-                }
-                return Ok(result);
+                SetJWT(result.Metadata);
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return Ok(result);
         }
         [HttpDelete]
         [Route("log-out")]
         public async Task<ActionResult> SignOut()
         {
-            try
-            {
-                DeleteJWT();
-                return Ok(new ApiResponse<bool> { IsSuccess = true });
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            DeleteJWT();
+            return Ok(new ApiResponse<bool> { IsSuccess = true });
         }
         [HttpPost]
         [Route("generate-code")]
         public async Task<IActionResult> GenerateVerificationCode([FromBody] string email)
         {
-            try
-            {
-                return Ok(await _authService.GenerateVerificationCode(email));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return Ok(await _authService.GenerateVerificationCode(email));
         }
         [HttpPost]
         [Route("verify-code")]
         public async Task<ActionResult> VerifyVerificationCode([FromBody] VerifyVerificationCodeRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _authService.VerifyVerificationCode(request));
         }
         [HttpPost]
         [Route("change-password")]
         public async Task<ActionResult> ChangePassword([FromBody] ResetPassword resetPassword)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _authService.UpdatePassword(resetPassword));
         }
         [HttpGet]

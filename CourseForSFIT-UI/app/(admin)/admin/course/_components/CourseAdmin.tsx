@@ -18,6 +18,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { DeleteCourse } from '@/apis/course.api'
 import toast from 'react-hot-toast'
 import Loading from '@/components/Loading'
+import Link from 'next/link'
 
 export default function CourseAdmin({ courseInfo }: { courseInfo: CourseAdminDto }) {
     const queryClient = useQueryClient();
@@ -35,14 +36,14 @@ export default function CourseAdmin({ courseInfo }: { courseInfo: CourseAdminDto
     return (
         <div className='transition-all hover:bg-gray-500 bg-[#1f202a] hover:-translate-y-4 hover:shadow-lg hover:cursor-pointer' style={{ border: '1px solid #1f202a', borderRadius: '1rem', boxShadow: 'none', position: 'relative', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxSizing: 'border-box', padding: '30px', minHeight: '183px', justifyContent: 'space-between', alignItems: 'flex-start', transition: 'background 0.1s ease-in-out 0s' }}>
             <h3 style={{ overflow: 'hidden', maxHeight: '72.8px', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, position: 'relative', zIndex: 1, color: 'rgb(14, 20, 30)', fontWeight: 700, fontSize: '20px' }}>
-                <span style={{ paddingRight: '5px', color: '#eef4fc', display: 'inline', verticalAlign: 'middle', lineHeight: '1.4', fontWeight: 600 }}>{courseInfo.courseName}</span>
+                <span style={{ paddingRight: '5px', color: '#eef4fc', display: 'inline', verticalAlign: 'middle', lineHeight: '1.4', fontWeight: 600 }}>{courseInfo.name}</span>
             </h3>
             {isPendingDelete ?? <Loading/>}
             <div style={{ display: 'inline' }}>
                 <h2 style={{ color: '#c9c9cf', marginBottom: '40px', opacity: .75, textTransform: 'uppercase', lineHeight: 1.4, fontWeight: 400, letterSpacing: '.6px', fontSize: '12px' }}>{courseInfo.createdByPerson}</h2>
             </div>
             <div className='flex items-center justify-end'>
-                <FontAwesomeIcon className='hover:text-slate-50 cursor-pointer text-[18px] mr-2' icon={faPen} />
+                <Link href={`course/${courseInfo.id}`}><FontAwesomeIcon className='hover:text-slate-50 cursor-pointer text-[18px] mr-2' icon={faPen} /></Link>
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
                         <FontAwesomeIcon className='hover:text-slate-50 cursor-pointer text-[18px] ml-2' icon={faTrash} />

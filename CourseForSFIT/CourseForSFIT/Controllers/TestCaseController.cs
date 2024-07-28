@@ -52,10 +52,6 @@ namespace CourseForSFIT.Controllers
         [Route("{id}")]
         public async Task<IActionResult> UpdateTestCase(int id, [FromForm] TestCaseExerciseUpdateDto testCaseExerciseUpdateDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _testCaseService.UpdateTestCase(id, testCaseExerciseUpdateDto));
         }
     }
